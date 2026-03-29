@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# The repo is for our Spring 2026 stuff…
+# This repo is for our Spring 2026 stuff…
 
 <!-- badges: start -->
 

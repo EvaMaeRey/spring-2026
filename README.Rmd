@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 ```
 
-# The repo is for our Spring 2026 stuff...
+# This repo is for our Spring 2026 stuff...
  
 <!-- badges: start -->
 <!-- badges: end -->  
@@ -29,7 +29,7 @@ library(magrittr)
 webpages <- fs::dir_ls(type = "file", 
                        recurse = T, 
                        glob = "*.html|*.pdf") %>% 
-  rev()
+  rev() # reverse
 
 file_name_wo_extension <- webpages %>% 
   stringr::str_remove(".html|.pdf")
