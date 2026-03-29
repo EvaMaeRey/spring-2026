@@ -21,9 +21,9 @@ class: inverse, bottom
 background-image: url(https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80)
 background-size: cover
 
-# .Large[Supporting a new wave of ggplot2 extenders]
-## .small[New points of entry for ggplot2 super-users]
-## .small[https://bit.ly/ggextend-cowy]
+# .Large[Data Science for IR: Introductions]
+## .small[Korbel School of International Studies]
+## .small[bit.ly/spring-2026-du]
 #### .tiny[Dr. Evangeline Reynolds | 2026-03-30 | DU, Image credit: Silas Baisch, Upsplash]
 
 
@@ -36,109 +36,48 @@ Title slide
 
 # Hi!
 
---
-
-This 'minimal flipbook' template has a couple of classic examples to get you building your first flipbooks!
-
---
-
-flipbooks are code-movies.  The frames of the movies are slides. Here we use the R package {xaringan} to create a remark.js slideshow. 
-
---
-
-Slide breaks are indicated with `---` (be careful trailing white space is not allowed)
-
---
-
-flipbookr's `chunk_reveal()` disassembles a single code chunk and creates the "build" of multiple partial-code chunks on different slides (the --- is automatically generated for you too).  
-
---
-
-We use `chunk_reveal()` it 'inline', not in a code chunk. 
-
---
-
-Let's start!
 
 
+``` r
+us_states_ref &lt;- usmapdata::us_map() |&gt;
+  rename(geometry = geom,
+         state_name = full,
+         state_abbr = abbr) |&gt;
+  select(state_name, everything())
+  
+library(ggregions)
+geom_us_state &lt;- write_geom_region_locale(us_states_ref)
+stamp_us_state &lt;- write_stamp_region_locale(us_states_ref)
+geom_us_state_text &lt;- write_geom_region_text_locale(us_states_ref)
+stamp_us_states_text &lt;- write_stamp_region_text_locale(us_states_ref)
+```
 
----
-class: inverse, middle, center
-
-
-# First up: classic flipbook, using defaults to walk through code pipeline
-
-
-
-
-
-&lt;!-- get a flipbook version of the my_cars code chunk - pauses are where parentheses are balanced --&gt;
 ---
 
 count: false
  
 
-.panel1-my_cars-auto[
+.panel1-us-auto[
 
 ``` r
-*cars
+*tribble(~state, ~span,
+*       "Illinois", .6,
+*       "Virginia", .1 ,
+*       "Colorado", .4,
+*       "New York", .15)
 ```
 ]
  
-.panel2-my_cars-auto[
+.panel2-us-auto[
 
 ```
-   speed dist
-1      4    2
-2      4   10
-3      7    4
-4      7   22
-5      8   16
-6      9   10
-7     10   18
-8     10   26
-9     10   34
-10    11   17
-11    11   28
-12    12   14
-13    12   20
-14    12   24
-15    12   28
-16    13   26
-17    13   34
-18    13   34
-19    13   46
-20    14   26
-21    14   36
-22    14   60
-23    14   80
-24    15   20
-25    15   26
-26    15   54
-27    16   32
-28    16   40
-29    17   32
-30    17   40
-31    17   50
-32    18   42
-33    18   56
-34    18   76
-35    18   84
-36    19   36
-37    19   46
-38    19   68
-39    20   32
-40    20   48
-41    20   52
-42    20   56
-43    20   64
-44    22   66
-45    23   54
-46    24   70
-47    24   92
-48    24   93
-49    24  120
-50    25   85
+# A tibble: 4 × 2
+  state     span
+  &lt;chr&gt;    &lt;dbl&gt;
+1 Illinois  0.6 
+2 Virginia  0.1 
+3 Colorado  0.4 
+4 New York  0.15
 ```
 ]
 
@@ -146,172 +85,145 @@ count: false
 count: false
  
 
-.panel1-my_cars-auto[
+.panel1-us-auto[
 
 ``` r
-cars %&gt;%
-* filter(speed &gt; 4)
-```
-]
- 
-.panel2-my_cars-auto[
-
-```
-   speed dist
-1      7    4
-2      7   22
-3      8   16
-4      9   10
-5     10   18
-6     10   26
-7     10   34
-8     11   17
-9     11   28
-10    12   14
-11    12   20
-12    12   24
-13    12   28
-14    13   26
-15    13   34
-16    13   34
-17    13   46
-18    14   26
-19    14   36
-20    14   60
-21    14   80
-22    15   20
-23    15   26
-24    15   54
-25    16   32
-26    16   40
-27    17   32
-28    17   40
-29    17   50
-30    18   42
-31    18   56
-32    18   76
-33    18   84
-34    19   36
-35    19   46
-36    19   68
-37    20   32
-38    20   48
-39    20   52
-40    20   56
-41    20   64
-42    22   66
-43    23   54
-44    24   70
-45    24   92
-46    24   93
-47    24  120
-48    25   85
-```
-]
-
----
-count: false
- 
-
-.panel1-my_cars-auto[
-
-``` r
-cars %&gt;%
-  filter(speed &gt; 4) %&gt;%
+tribble(~state, ~span,
+        "Illinois", .6,
+        "Virginia", .1 ,
+        "Colorado", .4,
+        "New York", .15) |&gt;
 * ggplot()
 ```
 ]
  
-.panel2-my_cars-auto[
-![](introduction_files/figure-html/my_cars_auto_03_output-1.png)&lt;!-- --&gt;
+.panel2-us-auto[
+![](introduction_files/figure-html/us_auto_02_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
 
-.panel1-my_cars-auto[
+.panel1-us-auto[
 
 ``` r
-cars %&gt;%
-  filter(speed &gt; 4) %&gt;%
+tribble(~state, ~span,
+        "Illinois", .6,
+        "Virginia", .1 ,
+        "Colorado", .4,
+        "New York", .15) |&gt;
   ggplot() +
-* aes(x = speed)
+* aes(state_name = state,
+*     fill = span)
 ```
 ]
  
-.panel2-my_cars-auto[
-![](introduction_files/figure-html/my_cars_auto_04_output-1.png)&lt;!-- --&gt;
+.panel2-us-auto[
+![](introduction_files/figure-html/us_auto_03_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
 
-.panel1-my_cars-auto[
+.panel1-us-auto[
 
 ``` r
-cars %&gt;%
-  filter(speed &gt; 4) %&gt;%
+tribble(~state, ~span,
+        "Illinois", .6,
+        "Virginia", .1 ,
+        "Colorado", .4,
+        "New York", .15) |&gt;
   ggplot() +
-  aes(x = speed) +
-* aes(y = dist)
+  aes(state_name = state,
+      fill = span) +
+* stamp_us_state()
 ```
 ]
  
-.panel2-my_cars-auto[
-![](introduction_files/figure-html/my_cars_auto_05_output-1.png)&lt;!-- --&gt;
+.panel2-us-auto[
+![](introduction_files/figure-html/us_auto_04_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
 
-.panel1-my_cars-auto[
+.panel1-us-auto[
 
 ``` r
-cars %&gt;%
-  filter(speed &gt; 4) %&gt;%
+tribble(~state, ~span,
+        "Illinois", .6,
+        "Virginia", .1 ,
+        "Colorado", .4,
+        "New York", .15) |&gt;
   ggplot() +
-  aes(x = speed) +
-  aes(y = dist) +
-* geom_point(
-*   alpha = .8,
-*   color = "blue"
-*   )
+  aes(state_name = state,
+      fill = span) +
+  stamp_us_state() +
+* geom_us_state()
 ```
 ]
  
-.panel2-my_cars-auto[
-![](introduction_files/figure-html/my_cars_auto_06_output-1.png)&lt;!-- --&gt;
+.panel2-us-auto[
+![](introduction_files/figure-html/us_auto_05_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
 
-.panel1-my_cars-auto[
+.panel1-us-auto[
 
 ``` r
-cars %&gt;%
-  filter(speed &gt; 4) %&gt;%
+tribble(~state, ~span,
+        "Illinois", .6,
+        "Virginia", .1 ,
+        "Colorado", .4,
+        "New York", .15) |&gt;
   ggplot() +
-  aes(x = speed) +
-  aes(y = dist) +
-  geom_point(
-    alpha = .8,
-    color = "blue"
-    ) +
-* aes(size = speed)
+  aes(state_name = state,
+      fill = span) +
+  stamp_us_state() +
+  geom_us_state() +
+* scale_fill_viridis_c()
 ```
 ]
  
-.panel2-my_cars-auto[
-![](introduction_files/figure-html/my_cars_auto_07_output-1.png)&lt;!-- --&gt;
+.panel2-us-auto[
+![](introduction_files/figure-html/us_auto_06_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-us-auto[
+
+``` r
+tribble(~state, ~span,
+        "Illinois", .6,
+        "Virginia", .1 ,
+        "Colorado", .4,
+        "New York", .15) |&gt;
+  ggplot() +
+  aes(state_name = state,
+      fill = span) +
+  stamp_us_state() +
+  geom_us_state() +
+  scale_fill_viridis_c() +
+* scale_fill_viridis_c(end = .8,
+*                      begin = .3)
+```
+]
+ 
+.panel2-us-auto[
+![](introduction_files/figure-html/us_auto_07_output-1.png)&lt;!-- --&gt;
 ]
 
 &lt;style&gt;
-.panel1-my_cars-auto {
+.panel1-us-auto {
   color: black;
   width: 38.6060606060606%;
   hight: 32%;
@@ -319,7 +231,7 @@ cars %&gt;%
   padding-left: 1%;
   font-size: 80%
 }
-.panel2-my_cars-auto {
+.panel2-us-auto {
   color: black;
   width: 59.3939393939394%;
   hight: 32%;
@@ -327,177 +239,7 @@ cars %&gt;%
   padding-left: 1%;
   font-size: 80%
 }
-.panel3-my_cars-auto {
-  color: black;
-  width: NA%;
-  hight: 33%;
-  float: left;
-  padding-left: 1%;
-  font-size: 80%
-}
-&lt;/style&gt;
-
-
-
-
-
----
-class: inverse, center, middle
-
-
-# Next up:  refer to same chunk, but use user defined breakpoints, and display output only
-
-
-
-
-
-
-&lt;!-- get another flipbook version of the my_cars code chunk, this time at the defined breaks and only showing output --&gt;
----
-
-count: false
-### user defined break! using #BREAK message
-![](introduction_files/figure-html/my_cars_user_01_output-1.png)&lt;!-- --&gt;
-
----
-count: false
-### user defined break! using #BREAK message
-![](introduction_files/figure-html/my_cars_user_02_output-1.png)&lt;!-- --&gt;
-
----
-count: false
-### user defined break! using #BREAK message
-![](introduction_files/figure-html/my_cars_user_03_output-1.png)&lt;!-- --&gt;
-
-&lt;style&gt;
-.panel1-my_cars-user {
-  color: black;
-  width: 99%;
-  hight: 32%;
-  float: left;
-  padding-left: 1%;
-  font-size: 80%
-}
-.panel2-my_cars-user {
-  color: black;
-  width: NA%;
-  hight: 32%;
-  float: left;
-  padding-left: 1%;
-  font-size: 80%
-}
-.panel3-my_cars-user {
-  color: black;
-  width: NA%;
-  hight: 33%;
-  float: left;
-  padding-left: 1%;
-  font-size: 80%
-}
-&lt;/style&gt;
-
-
-
-
-
----
-class: inverse, center, middle
-
-# Next up:  cycle through different lines of code
-
-
-
-
-
-&lt;!-- get flipbook that rotates through lines, my_fill --&gt;
----
-
-count: false
- 
-### cycle through lines of code marked #ROTATE
-.panel1-my_fill-rotate[
-
-``` r
-ggplot(data = cars) +
-  aes(x = speed) +
-  aes(y = dist) +
-  geom_point(size = 8,
-             shape = 21,
-             alpha = .9,
-             color = "snow") +
-  aes(fill = speed) +
-* scale_fill_viridis_c(option = "magma")
-```
-]
- 
-.panel2-my_fill-rotate[
-![](introduction_files/figure-html/my_fill_rotate_01_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### cycle through lines of code marked #ROTATE
-.panel1-my_fill-rotate[
-
-``` r
-ggplot(data = cars) +
-  aes(x = speed) +
-  aes(y = dist) +
-  geom_point(size = 8,
-             shape = 21,
-             alpha = .9,
-             color = "snow") +
-  aes(fill = speed) +
-* scale_fill_viridis_c(option = "cividis")
-```
-]
- 
-.panel2-my_fill-rotate[
-![](introduction_files/figure-html/my_fill_rotate_02_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-### cycle through lines of code marked #ROTATE
-.panel1-my_fill-rotate[
-
-``` r
-ggplot(data = cars) +
-  aes(x = speed) +
-  aes(y = dist) +
-  geom_point(size = 8,
-             shape = 21,
-             alpha = .9,
-             color = "snow") +
-  aes(fill = speed) +
-* scale_fill_viridis_c(option = "plasma")
-```
-]
- 
-.panel2-my_fill-rotate[
-![](introduction_files/figure-html/my_fill_rotate_03_output-1.png)&lt;!-- --&gt;
-]
-
-&lt;style&gt;
-.panel1-my_fill-rotate {
-  color: black;
-  width: 49%;
-  hight: 32%;
-  float: left;
-  padding-left: 1%;
-  font-size: 80%
-}
-.panel2-my_fill-rotate {
-  color: black;
-  width: 49%;
-  hight: 32%;
-  float: left;
-  padding-left: 1%;
-  font-size: 80%
-}
-.panel3-my_fill-rotate {
+.panel3-us-auto {
   color: black;
   width: NA%;
   hight: 33%;
@@ -512,159 +254,167 @@ ggplot(data = cars) +
 
 
 
+
 ---
-class: inverse, center, middle
-
-# Next up:  look at multiple realizations of same code
 
 
 
 
+``` r
+library(rnaturalearth)
 
-&lt;!-- get flipbook that shows multiple realizations of the same code --&gt;
+natural_earth_ref &lt;- rnaturalearth::ne_countries(scale = "small") |&gt; 
+  select(country_name = name_en,
+    iso3c = iso_a3)
+
+library(ggregions)
+geom_country &lt;- write_geom_region_locale(natural_earth_ref)
+stamp_country &lt;- write_stamp_region_locale(natural_earth_ref)
+geom_country_text &lt;- write_geom_region_text_locale(natural_earth_ref)
+stamp_country_text &lt;- write_stamp_region_text_locale(natural_earth_ref)
+```
+
 ---
 
 count: false
  
-### see multiple realizations of code
-.panel1-cars_multi-5[
+
+.panel1-world-auto[
 
 ``` r
-cars %&gt;%
-  sample_frac(size = 1, replace = TRUE) %&gt;%
-  ggplot() +
-  aes(x = speed) +
-  aes(y = dist) +
-  geom_count(
-    alpha = .7,
-    color = "blue",
-    size = 4
-    ) +
-  geom_smooth(method = lm, se = FALSE) +
-  coord_cartesian(xlim = range(cars$speed),
-                  ylim = range(cars$dist)) +
-  theme(legend.position = c(.9, .2))
+*tribble(~state, ~time_span,
+*       "United States of America", 4,
+*       "Germany", 2 ,
+*       "Brazil", 2,
+*       "Argentina", 2)
 ```
 ]
  
-.panel2-cars_multi-5[
-![](introduction_files/figure-html/cars_multi_5_01_output-1.png)&lt;!-- --&gt;
-]
+.panel2-world-auto[
 
----
-count: false
- 
-### see multiple realizations of code
-.panel1-cars_multi-5[
-
-``` r
-cars %&gt;%
-  sample_frac(size = 1, replace = TRUE) %&gt;%
-  ggplot() +
-  aes(x = speed) +
-  aes(y = dist) +
-  geom_count(
-    alpha = .7,
-    color = "blue",
-    size = 4
-    ) +
-  geom_smooth(method = lm, se = FALSE) +
-  coord_cartesian(xlim = range(cars$speed),
-                  ylim = range(cars$dist)) +
-  theme(legend.position = c(.9, .2))
 ```
-]
- 
-.panel2-cars_multi-5[
-![](introduction_files/figure-html/cars_multi_5_02_output-1.png)&lt;!-- --&gt;
+# A tibble: 4 × 2
+  state                    time_span
+  &lt;chr&gt;                        &lt;dbl&gt;
+1 United States of America         4
+2 Germany                          2
+3 Brazil                           2
+4 Argentina                        2
+```
 ]
 
 ---
 count: false
  
-### see multiple realizations of code
-.panel1-cars_multi-5[
+
+.panel1-world-auto[
 
 ``` r
-cars %&gt;%
-  sample_frac(size = 1, replace = TRUE) %&gt;%
-  ggplot() +
-  aes(x = speed) +
-  aes(y = dist) +
-  geom_count(
-    alpha = .7,
-    color = "blue",
-    size = 4
-    ) +
-  geom_smooth(method = lm, se = FALSE) +
-  coord_cartesian(xlim = range(cars$speed),
-                  ylim = range(cars$dist)) +
-  theme(legend.position = c(.9, .2))
+tribble(~state, ~time_span,
+        "United States of America", 4,
+        "Germany", 2 ,
+        "Brazil", 2,
+        "Argentina", 2) |&gt;
+* ggplot()
 ```
 ]
  
-.panel2-cars_multi-5[
-![](introduction_files/figure-html/cars_multi_5_03_output-1.png)&lt;!-- --&gt;
+.panel2-world-auto[
+![](introduction_files/figure-html/world_auto_02_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
-### see multiple realizations of code
-.panel1-cars_multi-5[
+
+.panel1-world-auto[
 
 ``` r
-cars %&gt;%
-  sample_frac(size = 1, replace = TRUE) %&gt;%
+tribble(~state, ~time_span,
+        "United States of America", 4,
+        "Germany", 2 ,
+        "Brazil", 2,
+        "Argentina", 2) |&gt;
   ggplot() +
-  aes(x = speed) +
-  aes(y = dist) +
-  geom_count(
-    alpha = .7,
-    color = "blue",
-    size = 4
-    ) +
-  geom_smooth(method = lm, se = FALSE) +
-  coord_cartesian(xlim = range(cars$speed),
-                  ylim = range(cars$dist)) +
-  theme(legend.position = c(.9, .2))
+* aes(country_name = state)
 ```
 ]
  
-.panel2-cars_multi-5[
-![](introduction_files/figure-html/cars_multi_5_04_output-1.png)&lt;!-- --&gt;
+.panel2-world-auto[
+![](introduction_files/figure-html/world_auto_03_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
-### see multiple realizations of code
-.panel1-cars_multi-5[
+
+.panel1-world-auto[
 
 ``` r
-cars %&gt;%
-  sample_frac(size = 1, replace = TRUE) %&gt;%
+tribble(~state, ~time_span,
+        "United States of America", 4,
+        "Germany", 2 ,
+        "Brazil", 2,
+        "Argentina", 2) |&gt;
   ggplot() +
-  aes(x = speed) +
-  aes(y = dist) +
-  geom_count(
-    alpha = .7,
-    color = "blue",
-    size = 4
-    ) +
-  geom_smooth(method = lm, se = FALSE) +
-  coord_cartesian(xlim = range(cars$speed),
-                  ylim = range(cars$dist)) +
-  theme(legend.position = c(.9, .2))
+  aes(country_name = state) +
+* stamp_country(drop = "Antarctica")
 ```
 ]
  
-.panel2-cars_multi-5[
-![](introduction_files/figure-html/cars_multi_5_05_output-1.png)&lt;!-- --&gt;
+.panel2-world-auto[
+![](introduction_files/figure-html/world_auto_04_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-world-auto[
+
+``` r
+tribble(~state, ~time_span,
+        "United States of America", 4,
+        "Germany", 2 ,
+        "Brazil", 2,
+        "Argentina", 2) |&gt;
+  ggplot() +
+  aes(country_name = state) +
+  stamp_country(drop = "Antarctica") +
+* geom_country()
+```
+]
+ 
+.panel2-world-auto[
+![](introduction_files/figure-html/world_auto_05_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-world-auto[
+
+``` r
+tribble(~state, ~time_span,
+        "United States of America", 4,
+        "Germany", 2 ,
+        "Brazil", 2,
+        "Argentina", 2) |&gt;
+  ggplot() +
+  aes(country_name = state) +
+  stamp_country(drop = "Antarctica") +
+  geom_country() +
+* aes(fill = time_span)
+```
+]
+ 
+.panel2-world-auto[
+![](introduction_files/figure-html/world_auto_06_output-1.png)&lt;!-- --&gt;
 ]
 
 &lt;style&gt;
-.panel1-cars_multi-5 {
+.panel1-world-auto {
   color: black;
   width: 38.6060606060606%;
   hight: 32%;
@@ -672,7 +422,7 @@ cars %&gt;%
   padding-left: 1%;
   font-size: 80%
 }
-.panel2-cars_multi-5 {
+.panel2-world-auto {
   color: black;
   width: 59.3939393939394%;
   hight: 32%;
@@ -680,7 +430,1277 @@ cars %&gt;%
   padding-left: 1%;
   font-size: 80%
 }
-.panel3-cars_multi-5 {
+.panel3-world-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+
+
+
+
+---
+
+count: false
+ 
+
+.panel1-tidyverse-auto[
+
+``` r
+*library(tidyverse)
+```
+]
+ 
+.panel2-tidyverse-auto[
+
+]
+
+---
+count: false
+ 
+
+.panel1-tidyverse-auto[
+
+``` r
+library(tidyverse)
+*library(ggraph)
+```
+]
+ 
+.panel2-tidyverse-auto[
+
+]
+
+---
+count: false
+ 
+
+.panel1-tidyverse-auto[
+
+``` r
+library(tidyverse)
+library(ggraph)
+
+# data cleaning
+*as_tibble(tools::CRAN_package_db())
+```
+]
+ 
+.panel2-tidyverse-auto[
+
+```
+# A tibble: 23,483 × 69
+   Package  Version Priority Depends Imports LinkingTo Suggests Enhances License
+   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;  
+ 1 a5R      0.3.1   &lt;NA&gt;     R (&gt;= … cli, r… &lt;NA&gt;      "arrow,… &lt;NA&gt;     Apache…
+ 2 aae.pop  0.2.0   &lt;NA&gt;     R (&gt;= … stats,… &lt;NA&gt;      "knitr,… &lt;NA&gt;     Apache…
+ 3 AalenJo… 1.0     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;      "knitr,… &lt;NA&gt;     GPL (&gt;…
+ 4 aamatch  0.4.5   &lt;NA&gt;     R (&gt;= … iTOS, … &lt;NA&gt;      "DOS2, … &lt;NA&gt;     GPL-2  
+ 5 AATtools 0.0.3   &lt;NA&gt;     R (&gt;= … magrit… &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;     GPL-3  
+ 6 ABACUS   1.0.0   &lt;NA&gt;     R (&gt;= … ggplot… &lt;NA&gt;      "rmarkd… &lt;NA&gt;     GPL-3  
+ 7 abasequ… 0.1.0   &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;     GPL-3  
+ 8 abbrevi… 0.1     &lt;NA&gt;     &lt;NA&gt;    &lt;NA&gt;    &lt;NA&gt;      "testth… &lt;NA&gt;     GPL-3  
+ 9 abc      2.2.2   &lt;NA&gt;     R (&gt;= … &lt;NA&gt;    &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;     GPL (&gt;…
+10 abc.data 1.1     &lt;NA&gt;     R (&gt;= … &lt;NA&gt;    &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;     GPL (&gt;…
+# ℹ 23,473 more rows
+# ℹ 60 more variables: License_is_FOSS &lt;chr&gt;, License_restricts_use &lt;chr&gt;,
+#   OS_type &lt;chr&gt;, Archs &lt;chr&gt;, MD5sum &lt;chr&gt;, NeedsCompilation &lt;chr&gt;,
+#   Additional_repositories &lt;chr&gt;, Author &lt;chr&gt;, `Authors@R` &lt;chr&gt;,
+#   Biarch &lt;chr&gt;, BugReports &lt;chr&gt;, BuildKeepEmpty &lt;chr&gt;, BuildManual &lt;chr&gt;,
+#   BuildResaveData &lt;chr&gt;, BuildVignettes &lt;chr&gt;, Built &lt;chr&gt;,
+#   ByteCompile &lt;chr&gt;, `Classification/ACM` &lt;chr&gt;, …
+```
+]
+
+---
+count: false
+ 
+
+.panel1-tidyverse-auto[
+
+``` r
+library(tidyverse)
+library(ggraph)
+
+# data cleaning
+as_tibble(tools::CRAN_package_db()) |&gt;
+* filter(Package %in% c("dplyr", "ggplot2", "ellmer",
+*                       "tidyr", "tidymodels", "recipes",
+*                       "readr", "tibble", "stringr", "forcats",
+*                       "purrr", "lubridate"))
+```
+]
+ 
+.panel2-tidyverse-auto[
+
+```
+# A tibble: 12 × 69
+   Package  Version Priority Depends Imports LinkingTo Suggests Enhances License
+   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;  
+ 1 dplyr    1.2.0   &lt;NA&gt;     R (&gt;= … "cli (… &lt;NA&gt;      "broom,… &lt;NA&gt;     MIT + …
+ 2 ellmer   0.4.0   &lt;NA&gt;     R (&gt;= … "cli, … &lt;NA&gt;      "connec… &lt;NA&gt;     MIT + …
+ 3 forcats  1.0.1   &lt;NA&gt;     R (&gt;= … "cli (… &lt;NA&gt;      "covr, … &lt;NA&gt;     MIT + …
+ 4 ggplot2  4.0.2   &lt;NA&gt;     R (&gt;= … "cli, … &lt;NA&gt;      "broom,… sp       MIT + …
+ 5 lubrida… 1.9.5   &lt;NA&gt;     method… "gener… &lt;NA&gt;      "covr, … chron, … MIT + …
+ 6 purrr    1.2.1   &lt;NA&gt;     R (&gt;= … "cli (… cli       "carrie… &lt;NA&gt;     MIT + …
+ 7 readr    2.2.0   &lt;NA&gt;     R (&gt;= … "cli, … cpp11, t… "covr, … &lt;NA&gt;     MIT + …
+ 8 recipes  1.3.1   &lt;NA&gt;     dplyr … "cli, … &lt;NA&gt;      "covr, … &lt;NA&gt;     MIT + …
+ 9 stringr  1.6.0   &lt;NA&gt;     R (&gt;= … "cli, … &lt;NA&gt;      "covr, … &lt;NA&gt;     MIT + …
+10 tibble   3.3.1   &lt;NA&gt;     R (&gt;= … "cli, … &lt;NA&gt;      "bench,… &lt;NA&gt;     MIT + …
+11 tidymod… 1.4.1   &lt;NA&gt;     R (&gt;= … "broom… &lt;NA&gt;      "covr, … &lt;NA&gt;     MIT + …
+12 tidyr    1.3.2   &lt;NA&gt;     R (&gt;= … "cli (… cpp11 (&gt;… "covr, … &lt;NA&gt;     MIT + …
+# ℹ 60 more variables: License_is_FOSS &lt;chr&gt;, License_restricts_use &lt;chr&gt;,
+#   OS_type &lt;chr&gt;, Archs &lt;chr&gt;, MD5sum &lt;chr&gt;, NeedsCompilation &lt;chr&gt;,
+#   Additional_repositories &lt;chr&gt;, Author &lt;chr&gt;, `Authors@R` &lt;chr&gt;,
+#   Biarch &lt;chr&gt;, BugReports &lt;chr&gt;, BuildKeepEmpty &lt;chr&gt;, BuildManual &lt;chr&gt;,
+#   BuildResaveData &lt;chr&gt;, BuildVignettes &lt;chr&gt;, Built &lt;chr&gt;,
+#   ByteCompile &lt;chr&gt;, `Classification/ACM` &lt;chr&gt;,
+#   `Classification/ACM-2012` &lt;chr&gt;, `Classification/JEL` &lt;chr&gt;, …
+```
+]
+
+---
+count: false
+ 
+
+.panel1-tidyverse-auto[
+
+``` r
+library(tidyverse)
+library(ggraph)
+
+# data cleaning
+as_tibble(tools::CRAN_package_db()) |&gt;
+  filter(Package %in% c("dplyr", "ggplot2", "ellmer",
+                        "tidyr", "tidymodels", "recipes",
+                        "readr", "tibble", "stringr", "forcats",
+                        "purrr", "lubridate")) |&gt;
+* mutate(Author = str_replace_all(Author, ' \\[|\\]', "*" ))
+```
+]
+ 
+.panel2-tidyverse-auto[
+
+```
+# A tibble: 12 × 69
+   Package  Version Priority Depends Imports LinkingTo Suggests Enhances License
+   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;  
+ 1 dplyr    1.2.0   &lt;NA&gt;     R (&gt;= … "cli (… &lt;NA&gt;      "broom,… &lt;NA&gt;     MIT + …
+ 2 ellmer   0.4.0   &lt;NA&gt;     R (&gt;= … "cli, … &lt;NA&gt;      "connec… &lt;NA&gt;     MIT + …
+ 3 forcats  1.0.1   &lt;NA&gt;     R (&gt;= … "cli (… &lt;NA&gt;      "covr, … &lt;NA&gt;     MIT + …
+ 4 ggplot2  4.0.2   &lt;NA&gt;     R (&gt;= … "cli, … &lt;NA&gt;      "broom,… sp       MIT + …
+ 5 lubrida… 1.9.5   &lt;NA&gt;     method… "gener… &lt;NA&gt;      "covr, … chron, … MIT + …
+ 6 purrr    1.2.1   &lt;NA&gt;     R (&gt;= … "cli (… cli       "carrie… &lt;NA&gt;     MIT + …
+ 7 readr    2.2.0   &lt;NA&gt;     R (&gt;= … "cli, … cpp11, t… "covr, … &lt;NA&gt;     MIT + …
+ 8 recipes  1.3.1   &lt;NA&gt;     dplyr … "cli, … &lt;NA&gt;      "covr, … &lt;NA&gt;     MIT + …
+ 9 stringr  1.6.0   &lt;NA&gt;     R (&gt;= … "cli, … &lt;NA&gt;      "covr, … &lt;NA&gt;     MIT + …
+10 tibble   3.3.1   &lt;NA&gt;     R (&gt;= … "cli, … &lt;NA&gt;      "bench,… &lt;NA&gt;     MIT + …
+11 tidymod… 1.4.1   &lt;NA&gt;     R (&gt;= … "broom… &lt;NA&gt;      "covr, … &lt;NA&gt;     MIT + …
+12 tidyr    1.3.2   &lt;NA&gt;     R (&gt;= … "cli (… cpp11 (&gt;… "covr, … &lt;NA&gt;     MIT + …
+# ℹ 60 more variables: License_is_FOSS &lt;chr&gt;, License_restricts_use &lt;chr&gt;,
+#   OS_type &lt;chr&gt;, Archs &lt;chr&gt;, MD5sum &lt;chr&gt;, NeedsCompilation &lt;chr&gt;,
+#   Additional_repositories &lt;chr&gt;, Author &lt;chr&gt;, `Authors@R` &lt;chr&gt;,
+#   Biarch &lt;chr&gt;, BugReports &lt;chr&gt;, BuildKeepEmpty &lt;chr&gt;, BuildManual &lt;chr&gt;,
+#   BuildResaveData &lt;chr&gt;, BuildVignettes &lt;chr&gt;, Built &lt;chr&gt;,
+#   ByteCompile &lt;chr&gt;, `Classification/ACM` &lt;chr&gt;,
+#   `Classification/ACM-2012` &lt;chr&gt;, `Classification/JEL` &lt;chr&gt;, …
+```
+]
+
+---
+count: false
+ 
+
+.panel1-tidyverse-auto[
+
+``` r
+library(tidyverse)
+library(ggraph)
+
+# data cleaning
+as_tibble(tools::CRAN_package_db()) |&gt;
+  filter(Package %in% c("dplyr", "ggplot2", "ellmer",
+                        "tidyr", "tidymodels", "recipes",
+                        "readr", "tibble", "stringr", "forcats",
+                        "purrr", "lubridate")) |&gt;
+  mutate(Author = str_replace_all(Author, ' \\[|\\]', "*" )) |&gt;
+* select(Package, Author)
+```
+]
+ 
+.panel2-tidyverse-auto[
+
+```
+# A tibble: 12 × 2
+   Package    Author                                                            
+   &lt;chr&gt;      &lt;chr&gt;                                                             
+ 1 dplyr      "Hadley Wickham*aut, cre* (ORCID:\n    &lt;https://orcid.org/0000-00…
+ 2 ellmer     "Hadley Wickham*aut, cre* (ORCID:\n    &lt;https://orcid.org/0000-00…
+ 3 forcats    "Hadley Wickham*aut, cre*,\n  Posit Software, PBC*cph, fnd* (ROR:…
+ 4 ggplot2    "Hadley Wickham*aut* (ORCID: &lt;https://orcid.org/0000-0003-4757-11…
+ 5 lubridate  "Vitalie Spinu*aut, cre*,\n  Garrett Grolemund*aut*,\n  Hadley Wi…
+ 6 purrr      "Hadley Wickham*aut, cre* (ORCID:\n    &lt;https://orcid.org/0000-00…
+ 7 readr      "Hadley Wickham*aut*,\n  Jim Hester*aut*,\n  Romain Francois*ctb*…
+ 8 recipes    "Max Kuhn*aut, cre*,\n  Hadley Wickham*aut*,\n  Emil Hvitfeldt*au…
+ 9 stringr    "Hadley Wickham*aut, cre, cph*,\n  Posit Software, PBC*cph, fnd*" 
+10 tibble     "Kirill Müller*aut, cre* (ORCID:\n    &lt;https://orcid.org/0000-000…
+11 tidymodels "Max Kuhn*aut, cre* (ORCID: &lt;https://orcid.org/0000-0003-2402-136…
+12 tidyr      "Hadley Wickham*aut, cre*,\n  Davis Vaughan*aut*,\n  Maximilian G…
+```
+]
+
+---
+count: false
+ 
+
+.panel1-tidyverse-auto[
+
+``` r
+library(tidyverse)
+library(ggraph)
+
+# data cleaning
+as_tibble(tools::CRAN_package_db()) |&gt;
+  filter(Package %in% c("dplyr", "ggplot2", "ellmer",
+                        "tidyr", "tidymodels", "recipes",
+                        "readr", "tibble", "stringr", "forcats",
+                        "purrr", "lubridate")) |&gt;
+  mutate(Author = str_replace_all(Author, ' \\[|\\]', "*" )) |&gt;
+  select(Package, Author) |&gt;
+* mutate(Author = map(Author, ~ str_split_1(.x,"\n")))
+```
+]
+ 
+.panel2-tidyverse-auto[
+
+```
+# A tibble: 12 × 2
+   Package    Author    
+   &lt;chr&gt;      &lt;list&gt;    
+ 1 dplyr      &lt;chr [7]&gt; 
+ 2 ellmer     &lt;chr [8]&gt; 
+ 3 forcats    &lt;chr [2]&gt; 
+ 4 ggplot2    &lt;chr [13]&gt;
+ 5 lubridate  &lt;chr [11]&gt;
+ 6 purrr      &lt;chr [4]&gt; 
+ 7 readr      &lt;chr [10]&gt;
+ 8 recipes    &lt;chr [4]&gt; 
+ 9 stringr    &lt;chr [2]&gt; 
+10 tibble     &lt;chr [6]&gt; 
+11 tidymodels &lt;chr [3]&gt; 
+12 tidyr      &lt;chr [5]&gt; 
+```
+]
+
+---
+count: false
+ 
+
+.panel1-tidyverse-auto[
+
+``` r
+library(tidyverse)
+library(ggraph)
+
+# data cleaning
+as_tibble(tools::CRAN_package_db()) |&gt;
+  filter(Package %in% c("dplyr", "ggplot2", "ellmer",
+                        "tidyr", "tidymodels", "recipes",
+                        "readr", "tibble", "stringr", "forcats",
+                        "purrr", "lubridate")) |&gt;
+  mutate(Author = str_replace_all(Author, ' \\[|\\]', "*" )) |&gt;
+  select(Package, Author) |&gt;
+  mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
+* unnest()
+```
+]
+ 
+.panel2-tidyverse-auto[
+
+```
+# A tibble: 75 × 2
+   Package Author                                                               
+   &lt;chr&gt;   &lt;chr&gt;                                                                
+ 1 dplyr   "Hadley Wickham*aut, cre* (ORCID:"                                   
+ 2 dplyr   "    &lt;https://orcid.org/0000-0003-4757-117X&gt;),"                      
+ 3 dplyr   "  Romain François*aut* (ORCID: &lt;https://orcid.org/0000-0002-2444-42…
+ 4 dplyr   "  Lionel Henry*aut*,"                                               
+ 5 dplyr   "  Kirill Müller*aut* (ORCID: &lt;https://orcid.org/0000-0002-1416-3412…
+ 6 dplyr   "  Davis Vaughan*aut* (ORCID: &lt;https://orcid.org/0000-0003-4777-038X…
+ 7 dplyr   "  Posit Software, PBC*cph, fnd*"                                    
+ 8 ellmer  "Hadley Wickham*aut, cre* (ORCID:"                                   
+ 9 ellmer  "    &lt;https://orcid.org/0000-0003-4757-117X&gt;),"                      
+10 ellmer  "  Joe Cheng*aut*,"                                                  
+# ℹ 65 more rows
+```
+]
+
+---
+count: false
+ 
+
+.panel1-tidyverse-auto[
+
+``` r
+library(tidyverse)
+library(ggraph)
+
+# data cleaning
+as_tibble(tools::CRAN_package_db()) |&gt;
+  filter(Package %in% c("dplyr", "ggplot2", "ellmer",
+                        "tidyr", "tidymodels", "recipes",
+                        "readr", "tibble", "stringr", "forcats",
+                        "purrr", "lubridate")) |&gt;
+  mutate(Author = str_replace_all(Author, ' \\[|\\]', "*" )) |&gt;
+  select(Package, Author) |&gt;
+  mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
+  unnest() |&gt;
+* mutate(Author = str_remove(Author, '\\*.+' ) |&gt; str_trim())
+```
+]
+ 
+.panel2-tidyverse-auto[
+
+```
+# A tibble: 75 × 2
+   Package Author                                   
+   &lt;chr&gt;   &lt;chr&gt;                                    
+ 1 dplyr   Hadley Wickham                           
+ 2 dplyr   &lt;https://orcid.org/0000-0003-4757-117X&gt;),
+ 3 dplyr   Romain François                          
+ 4 dplyr   Lionel Henry                             
+ 5 dplyr   Kirill Müller                            
+ 6 dplyr   Davis Vaughan                            
+ 7 dplyr   Posit Software, PBC                      
+ 8 ellmer  Hadley Wickham                           
+ 9 ellmer  &lt;https://orcid.org/0000-0003-4757-117X&gt;),
+10 ellmer  Joe Cheng                                
+# ℹ 65 more rows
+```
+]
+
+---
+count: false
+ 
+
+.panel1-tidyverse-auto[
+
+``` r
+library(tidyverse)
+library(ggraph)
+
+# data cleaning
+as_tibble(tools::CRAN_package_db()) |&gt;
+  filter(Package %in% c("dplyr", "ggplot2", "ellmer",
+                        "tidyr", "tidymodels", "recipes",
+                        "readr", "tibble", "stringr", "forcats",
+                        "purrr", "lubridate")) |&gt;
+  mutate(Author = str_replace_all(Author, ' \\[|\\]', "*" )) |&gt;
+  select(Package, Author) |&gt;
+  mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
+  unnest() |&gt;
+  mutate(Author = str_remove(Author, '\\*.+' ) |&gt; str_trim()) |&gt;
+* filter_out(Author |&gt; str_detect("orcid.org"))
+```
+]
+ 
+.panel2-tidyverse-auto[
+
+```
+# A tibble: 67 × 2
+   Package Author             
+   &lt;chr&gt;   &lt;chr&gt;              
+ 1 dplyr   Hadley Wickham     
+ 2 dplyr   Romain François    
+ 3 dplyr   Lionel Henry       
+ 4 dplyr   Kirill Müller      
+ 5 dplyr   Davis Vaughan      
+ 6 dplyr   Posit Software, PBC
+ 7 ellmer  Hadley Wickham     
+ 8 ellmer  Joe Cheng          
+ 9 ellmer  Aaron Jacobs       
+10 ellmer  Garrick Aden-Buie  
+# ℹ 57 more rows
+```
+]
+
+---
+count: false
+ 
+
+.panel1-tidyverse-auto[
+
+``` r
+library(tidyverse)
+library(ggraph)
+
+# data cleaning
+as_tibble(tools::CRAN_package_db()) |&gt;
+  filter(Package %in% c("dplyr", "ggplot2", "ellmer",
+                        "tidyr", "tidymodels", "recipes",
+                        "readr", "tibble", "stringr", "forcats",
+                        "purrr", "lubridate")) |&gt;
+  mutate(Author = str_replace_all(Author, ' \\[|\\]', "*" )) |&gt;
+  select(Package, Author) |&gt;
+  mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
+  unnest() |&gt;
+  mutate(Author = str_remove(Author, '\\*.+' ) |&gt; str_trim()) |&gt;
+  filter_out(Author |&gt; str_detect("orcid.org")) |&gt;
+* filter_out(Author == "Posit Software, PBC")
+```
+]
+ 
+.panel2-tidyverse-auto[
+
+```
+# A tibble: 57 × 2
+   Package Author           
+   &lt;chr&gt;   &lt;chr&gt;            
+ 1 dplyr   Hadley Wickham   
+ 2 dplyr   Romain François  
+ 3 dplyr   Lionel Henry     
+ 4 dplyr   Kirill Müller    
+ 5 dplyr   Davis Vaughan    
+ 6 ellmer  Hadley Wickham   
+ 7 ellmer  Joe Cheng        
+ 8 ellmer  Aaron Jacobs     
+ 9 ellmer  Garrick Aden-Buie
+10 ellmer  Barret Schloerke 
+# ℹ 47 more rows
+```
+]
+
+---
+count: false
+ 
+
+.panel1-tidyverse-auto[
+
+``` r
+library(tidyverse)
+library(ggraph)
+
+# data cleaning
+as_tibble(tools::CRAN_package_db()) |&gt;
+  filter(Package %in% c("dplyr", "ggplot2", "ellmer",
+                        "tidyr", "tidymodels", "recipes",
+                        "readr", "tibble", "stringr", "forcats",
+                        "purrr", "lubridate")) |&gt;
+  mutate(Author = str_replace_all(Author, ' \\[|\\]', "*" )) |&gt;
+  select(Package, Author) |&gt;
+  mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
+  unnest() |&gt;
+  mutate(Author = str_remove(Author, '\\*.+' ) |&gt; str_trim()) |&gt;
+  filter_out(Author |&gt; str_detect("orcid.org")) |&gt;
+  filter_out(Author == "Posit Software, PBC") |&gt;
+* filter_out(Author == "Posit, PBC")
+```
+]
+ 
+.panel2-tidyverse-auto[
+
+```
+# A tibble: 56 × 2
+   Package Author           
+   &lt;chr&gt;   &lt;chr&gt;            
+ 1 dplyr   Hadley Wickham   
+ 2 dplyr   Romain François  
+ 3 dplyr   Lionel Henry     
+ 4 dplyr   Kirill Müller    
+ 5 dplyr   Davis Vaughan    
+ 6 ellmer  Hadley Wickham   
+ 7 ellmer  Joe Cheng        
+ 8 ellmer  Aaron Jacobs     
+ 9 ellmer  Garrick Aden-Buie
+10 ellmer  Barret Schloerke 
+# ℹ 46 more rows
+```
+]
+
+---
+count: false
+ 
+
+.panel1-tidyverse-auto[
+
+``` r
+library(tidyverse)
+library(ggraph)
+
+# data cleaning
+as_tibble(tools::CRAN_package_db()) |&gt;
+  filter(Package %in% c("dplyr", "ggplot2", "ellmer",
+                        "tidyr", "tidymodels", "recipes",
+                        "readr", "tibble", "stringr", "forcats",
+                        "purrr", "lubridate")) |&gt;
+  mutate(Author = str_replace_all(Author, ' \\[|\\]', "*" )) |&gt;
+  select(Package, Author) |&gt;
+  mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
+  unnest() |&gt;
+  mutate(Author = str_remove(Author, '\\*.+' ) |&gt; str_trim()) |&gt;
+  filter_out(Author |&gt; str_detect("orcid.org")) |&gt;
+  filter_out(Author == "Posit Software, PBC") |&gt;
+  filter_out(Author == "Posit, PBC") -&gt;
+*package_author_data
+```
+]
+ 
+.panel2-tidyverse-auto[
+
+]
+
+---
+count: false
+ 
+
+.panel1-tidyverse-auto[
+
+``` r
+library(tidyverse)
+library(ggraph)
+
+# data cleaning
+as_tibble(tools::CRAN_package_db()) |&gt;
+  filter(Package %in% c("dplyr", "ggplot2", "ellmer",
+                        "tidyr", "tidymodels", "recipes",
+                        "readr", "tibble", "stringr", "forcats",
+                        "purrr", "lubridate")) |&gt;
+  mutate(Author = str_replace_all(Author, ' \\[|\\]', "*" )) |&gt;
+  select(Package, Author) |&gt;
+  mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
+  unnest() |&gt;
+  mutate(Author = str_remove(Author, '\\*.+' ) |&gt; str_trim()) |&gt;
+  filter_out(Author |&gt; str_detect("orcid.org")) |&gt;
+  filter_out(Author == "Posit Software, PBC") |&gt;
+  filter_out(Author == "Posit, PBC") -&gt;
+package_author_data
+
+# network visualization
+*package_author_data
+```
+]
+ 
+.panel2-tidyverse-auto[
+
+```
+# A tibble: 56 × 2
+   Package Author           
+   &lt;chr&gt;   &lt;chr&gt;            
+ 1 dplyr   Hadley Wickham   
+ 2 dplyr   Romain François  
+ 3 dplyr   Lionel Henry     
+ 4 dplyr   Kirill Müller    
+ 5 dplyr   Davis Vaughan    
+ 6 ellmer  Hadley Wickham   
+ 7 ellmer  Joe Cheng        
+ 8 ellmer  Aaron Jacobs     
+ 9 ellmer  Garrick Aden-Buie
+10 ellmer  Barret Schloerke 
+# ℹ 46 more rows
+```
+]
+
+---
+count: false
+ 
+
+.panel1-tidyverse-auto[
+
+``` r
+library(tidyverse)
+library(ggraph)
+
+# data cleaning
+as_tibble(tools::CRAN_package_db()) |&gt;
+  filter(Package %in% c("dplyr", "ggplot2", "ellmer",
+                        "tidyr", "tidymodels", "recipes",
+                        "readr", "tibble", "stringr", "forcats",
+                        "purrr", "lubridate")) |&gt;
+  mutate(Author = str_replace_all(Author, ' \\[|\\]', "*" )) |&gt;
+  select(Package, Author) |&gt;
+  mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
+  unnest() |&gt;
+  mutate(Author = str_remove(Author, '\\*.+' ) |&gt; str_trim()) |&gt;
+  filter_out(Author |&gt; str_detect("orcid.org")) |&gt;
+  filter_out(Author == "Posit Software, PBC") |&gt;
+  filter_out(Author == "Posit, PBC") -&gt;
+package_author_data
+
+# network visualization
+package_author_data |&gt;
+* ggraph(layout = "kk")
+```
+]
+ 
+.panel2-tidyverse-auto[
+![](introduction_files/figure-html/tidyverse_auto_15_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-tidyverse-auto[
+
+``` r
+library(tidyverse)
+library(ggraph)
+
+# data cleaning
+as_tibble(tools::CRAN_package_db()) |&gt;
+  filter(Package %in% c("dplyr", "ggplot2", "ellmer",
+                        "tidyr", "tidymodels", "recipes",
+                        "readr", "tibble", "stringr", "forcats",
+                        "purrr", "lubridate")) |&gt;
+  mutate(Author = str_replace_all(Author, ' \\[|\\]', "*" )) |&gt;
+  select(Package, Author) |&gt;
+  mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
+  unnest() |&gt;
+  mutate(Author = str_remove(Author, '\\*.+' ) |&gt; str_trim()) |&gt;
+  filter_out(Author |&gt; str_detect("orcid.org")) |&gt;
+  filter_out(Author == "Posit Software, PBC") |&gt;
+  filter_out(Author == "Posit, PBC") -&gt;
+package_author_data
+
+# network visualization
+package_author_data |&gt;
+  ggraph(layout = "kk") +
+* geom_edge_link()
+```
+]
+ 
+.panel2-tidyverse-auto[
+![](introduction_files/figure-html/tidyverse_auto_16_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-tidyverse-auto[
+
+``` r
+library(tidyverse)
+library(ggraph)
+
+# data cleaning
+as_tibble(tools::CRAN_package_db()) |&gt;
+  filter(Package %in% c("dplyr", "ggplot2", "ellmer",
+                        "tidyr", "tidymodels", "recipes",
+                        "readr", "tibble", "stringr", "forcats",
+                        "purrr", "lubridate")) |&gt;
+  mutate(Author = str_replace_all(Author, ' \\[|\\]', "*" )) |&gt;
+  select(Package, Author) |&gt;
+  mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
+  unnest() |&gt;
+  mutate(Author = str_remove(Author, '\\*.+' ) |&gt; str_trim()) |&gt;
+  filter_out(Author |&gt; str_detect("orcid.org")) |&gt;
+  filter_out(Author == "Posit Software, PBC") |&gt;
+  filter_out(Author == "Posit, PBC") -&gt;
+package_author_data
+
+# network visualization
+package_author_data |&gt;
+  ggraph(layout = "kk") +
+  geom_edge_link() +
+* geom_node_point()
+```
+]
+ 
+.panel2-tidyverse-auto[
+![](introduction_files/figure-html/tidyverse_auto_17_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-tidyverse-auto[
+
+``` r
+library(tidyverse)
+library(ggraph)
+
+# data cleaning
+as_tibble(tools::CRAN_package_db()) |&gt;
+  filter(Package %in% c("dplyr", "ggplot2", "ellmer",
+                        "tidyr", "tidymodels", "recipes",
+                        "readr", "tibble", "stringr", "forcats",
+                        "purrr", "lubridate")) |&gt;
+  mutate(Author = str_replace_all(Author, ' \\[|\\]', "*" )) |&gt;
+  select(Package, Author) |&gt;
+  mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
+  unnest() |&gt;
+  mutate(Author = str_remove(Author, '\\*.+' ) |&gt; str_trim()) |&gt;
+  filter_out(Author |&gt; str_detect("orcid.org")) |&gt;
+  filter_out(Author == "Posit Software, PBC") |&gt;
+  filter_out(Author == "Posit, PBC") -&gt;
+package_author_data
+
+# network visualization
+package_author_data |&gt;
+  ggraph(layout = "kk") +
+  geom_edge_link() +
+  geom_node_point() +
+* geom_node_label(aes(label = name))
+```
+]
+ 
+.panel2-tidyverse-auto[
+![](introduction_files/figure-html/tidyverse_auto_18_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-tidyverse-auto[
+
+``` r
+library(tidyverse)
+library(ggraph)
+
+# data cleaning
+as_tibble(tools::CRAN_package_db()) |&gt;
+  filter(Package %in% c("dplyr", "ggplot2", "ellmer",
+                        "tidyr", "tidymodels", "recipes",
+                        "readr", "tibble", "stringr", "forcats",
+                        "purrr", "lubridate")) |&gt;
+  mutate(Author = str_replace_all(Author, ' \\[|\\]', "*" )) |&gt;
+  select(Package, Author) |&gt;
+  mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
+  unnest() |&gt;
+  mutate(Author = str_remove(Author, '\\*.+' ) |&gt; str_trim()) |&gt;
+  filter_out(Author |&gt; str_detect("orcid.org")) |&gt;
+  filter_out(Author == "Posit Software, PBC") |&gt;
+  filter_out(Author == "Posit, PBC") -&gt;
+package_author_data
+
+# network visualization
+package_author_data |&gt;
+  ggraph(layout = "kk") +
+  geom_edge_link() +
+  geom_node_point() +
+  geom_node_label(aes(label = name)) +
+* labs(title = "The Tidyverse, and Authors")
+```
+]
+ 
+.panel2-tidyverse-auto[
+![](introduction_files/figure-html/tidyverse_auto_19_output-1.png)&lt;!-- --&gt;
+]
+
+&lt;style&gt;
+.panel1-tidyverse-auto {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-tidyverse-auto {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-tidyverse-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+
+
+---
+
+count: false
+ 
+
+.panel1-ggdims-auto[
+
+``` r
+*package_author_data
+```
+]
+ 
+.panel2-ggdims-auto[
+
+```
+# A tibble: 56 × 2
+   Package Author           
+   &lt;chr&gt;   &lt;chr&gt;            
+ 1 dplyr   Hadley Wickham   
+ 2 dplyr   Romain François  
+ 3 dplyr   Lionel Henry     
+ 4 dplyr   Kirill Müller    
+ 5 dplyr   Davis Vaughan    
+ 6 ellmer  Hadley Wickham   
+ 7 ellmer  Joe Cheng        
+ 8 ellmer  Aaron Jacobs     
+ 9 ellmer  Garrick Aden-Buie
+10 ellmer  Barret Schloerke 
+# ℹ 46 more rows
+```
+]
+
+---
+count: false
+ 
+
+.panel1-ggdims-auto[
+
+``` r
+package_author_data |&gt;
+*             filter(Author == "Hadley Wickham")
+```
+]
+ 
+.panel2-ggdims-auto[
+
+```
+# A tibble: 12 × 2
+   Package    Author        
+   &lt;chr&gt;      &lt;chr&gt;         
+ 1 dplyr      Hadley Wickham
+ 2 ellmer     Hadley Wickham
+ 3 forcats    Hadley Wickham
+ 4 ggplot2    Hadley Wickham
+ 5 lubridate  Hadley Wickham
+ 6 purrr      Hadley Wickham
+ 7 readr      Hadley Wickham
+ 8 recipes    Hadley Wickham
+ 9 stringr    Hadley Wickham
+10 tibble     Hadley Wickham
+11 tidymodels Hadley Wickham
+12 tidyr      Hadley Wickham
+```
+]
+
+---
+count: false
+ 
+
+.panel1-ggdims-auto[
+
+``` r
+package_author_data |&gt;
+              filter(Author == "Hadley Wickham") |&gt;
+* bind_rows(tribble(~Package, ~Author,
+*       "ggdims", "ggplot2",
+*       "ggdims", "tidymodels"))
+```
+]
+ 
+.panel2-ggdims-auto[
+
+```
+# A tibble: 14 × 2
+   Package    Author        
+   &lt;chr&gt;      &lt;chr&gt;         
+ 1 dplyr      Hadley Wickham
+ 2 ellmer     Hadley Wickham
+ 3 forcats    Hadley Wickham
+ 4 ggplot2    Hadley Wickham
+ 5 lubridate  Hadley Wickham
+ 6 purrr      Hadley Wickham
+ 7 readr      Hadley Wickham
+ 8 recipes    Hadley Wickham
+ 9 stringr    Hadley Wickham
+10 tibble     Hadley Wickham
+11 tidymodels Hadley Wickham
+12 tidyr      Hadley Wickham
+13 ggdims     ggplot2       
+14 ggdims     tidymodels    
+```
+]
+
+---
+count: false
+ 
+
+.panel1-ggdims-auto[
+
+``` r
+package_author_data |&gt;
+              filter(Author == "Hadley Wickham") |&gt;
+  bind_rows(tribble(~Package, ~Author,
+        "ggdims", "ggplot2",
+        "ggdims", "tidymodels")) |&gt;
+* bind_rows()
+```
+]
+ 
+.panel2-ggdims-auto[
+
+```
+# A tibble: 14 × 2
+   Package    Author        
+   &lt;chr&gt;      &lt;chr&gt;         
+ 1 dplyr      Hadley Wickham
+ 2 ellmer     Hadley Wickham
+ 3 forcats    Hadley Wickham
+ 4 ggplot2    Hadley Wickham
+ 5 lubridate  Hadley Wickham
+ 6 purrr      Hadley Wickham
+ 7 readr      Hadley Wickham
+ 8 recipes    Hadley Wickham
+ 9 stringr    Hadley Wickham
+10 tibble     Hadley Wickham
+11 tidymodels Hadley Wickham
+12 tidyr      Hadley Wickham
+13 ggdims     ggplot2       
+14 ggdims     tidymodels    
+```
+]
+
+---
+count: false
+ 
+
+.panel1-ggdims-auto[
+
+``` r
+package_author_data |&gt;
+              filter(Author == "Hadley Wickham") |&gt;
+  bind_rows(tribble(~Package, ~Author,
+        "ggdims", "ggplot2",
+        "ggdims", "tidymodels")) |&gt;
+  bind_rows() |&gt;
+* ggraph(layout = "kk")
+```
+]
+ 
+.panel2-ggdims-auto[
+![](introduction_files/figure-html/ggdims_auto_05_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-ggdims-auto[
+
+``` r
+package_author_data |&gt;
+              filter(Author == "Hadley Wickham") |&gt;
+  bind_rows(tribble(~Package, ~Author,
+        "ggdims", "ggplot2",
+        "ggdims", "tidymodels")) |&gt;
+  bind_rows() |&gt;
+  ggraph(layout = "kk") +
+* geom_edge_link()
+```
+]
+ 
+.panel2-ggdims-auto[
+![](introduction_files/figure-html/ggdims_auto_06_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-ggdims-auto[
+
+``` r
+package_author_data |&gt;
+              filter(Author == "Hadley Wickham") |&gt;
+  bind_rows(tribble(~Package, ~Author,
+        "ggdims", "ggplot2",
+        "ggdims", "tidymodels")) |&gt;
+  bind_rows() |&gt;
+  ggraph(layout = "kk") +
+  geom_edge_link() +
+* geom_node_point()
+```
+]
+ 
+.panel2-ggdims-auto[
+![](introduction_files/figure-html/ggdims_auto_07_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-ggdims-auto[
+
+``` r
+package_author_data |&gt;
+              filter(Author == "Hadley Wickham") |&gt;
+  bind_rows(tribble(~Package, ~Author,
+        "ggdims", "ggplot2",
+        "ggdims", "tidymodels")) |&gt;
+  bind_rows() |&gt;
+  ggraph(layout = "kk") +
+  geom_edge_link() +
+  geom_node_point() +
+* geom_node_label(aes(label = name))
+```
+]
+ 
+.panel2-ggdims-auto[
+![](introduction_files/figure-html/ggdims_auto_08_output-1.png)&lt;!-- --&gt;
+]
+
+&lt;style&gt;
+.panel1-ggdims-auto {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-ggdims-auto {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-ggdims-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+
+
+---
+
+count: false
+ 
+
+.panel1-ggregions-auto[
+
+``` r
+*tribble(~Package, ~Author,
+*       "ggregions", "ggplot2",
+*       "ggregions", "sf")
+```
+]
+ 
+.panel2-ggregions-auto[
+
+```
+# A tibble: 2 × 2
+  Package   Author 
+  &lt;chr&gt;     &lt;chr&gt;  
+1 ggregions ggplot2
+2 ggregions sf     
+```
+]
+
+---
+count: false
+ 
+
+.panel1-ggregions-auto[
+
+``` r
+tribble(~Package, ~Author,
+        "ggregions", "ggplot2",
+        "ggregions", "sf") |&gt;
+* bind_rows(package_author_data |&gt;
+*             filter(Author == "Hadley Wickham"))
+```
+]
+ 
+.panel2-ggregions-auto[
+
+```
+# A tibble: 14 × 2
+   Package    Author        
+   &lt;chr&gt;      &lt;chr&gt;         
+ 1 ggregions  ggplot2       
+ 2 ggregions  sf            
+ 3 dplyr      Hadley Wickham
+ 4 ellmer     Hadley Wickham
+ 5 forcats    Hadley Wickham
+ 6 ggplot2    Hadley Wickham
+ 7 lubridate  Hadley Wickham
+ 8 purrr      Hadley Wickham
+ 9 readr      Hadley Wickham
+10 recipes    Hadley Wickham
+11 stringr    Hadley Wickham
+12 tibble     Hadley Wickham
+13 tidymodels Hadley Wickham
+14 tidyr      Hadley Wickham
+```
+]
+
+---
+count: false
+ 
+
+.panel1-ggregions-auto[
+
+``` r
+tribble(~Package, ~Author,
+        "ggregions", "ggplot2",
+        "ggregions", "sf") |&gt;
+  bind_rows(package_author_data |&gt;
+              filter(Author == "Hadley Wickham")) |&gt;
+* bind_rows()
+```
+]
+ 
+.panel2-ggregions-auto[
+
+```
+# A tibble: 14 × 2
+   Package    Author        
+   &lt;chr&gt;      &lt;chr&gt;         
+ 1 ggregions  ggplot2       
+ 2 ggregions  sf            
+ 3 dplyr      Hadley Wickham
+ 4 ellmer     Hadley Wickham
+ 5 forcats    Hadley Wickham
+ 6 ggplot2    Hadley Wickham
+ 7 lubridate  Hadley Wickham
+ 8 purrr      Hadley Wickham
+ 9 readr      Hadley Wickham
+10 recipes    Hadley Wickham
+11 stringr    Hadley Wickham
+12 tibble     Hadley Wickham
+13 tidymodels Hadley Wickham
+14 tidyr      Hadley Wickham
+```
+]
+
+---
+count: false
+ 
+
+.panel1-ggregions-auto[
+
+``` r
+tribble(~Package, ~Author,
+        "ggregions", "ggplot2",
+        "ggregions", "sf") |&gt;
+  bind_rows(package_author_data |&gt;
+              filter(Author == "Hadley Wickham")) |&gt;
+  bind_rows() |&gt;
+* ggraph(layout = "kk")
+```
+]
+ 
+.panel2-ggregions-auto[
+![](introduction_files/figure-html/ggregions_auto_04_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-ggregions-auto[
+
+``` r
+tribble(~Package, ~Author,
+        "ggregions", "ggplot2",
+        "ggregions", "sf") |&gt;
+  bind_rows(package_author_data |&gt;
+              filter(Author == "Hadley Wickham")) |&gt;
+  bind_rows() |&gt;
+  ggraph(layout = "kk") +
+* geom_edge_link()
+```
+]
+ 
+.panel2-ggregions-auto[
+![](introduction_files/figure-html/ggregions_auto_05_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-ggregions-auto[
+
+``` r
+tribble(~Package, ~Author,
+        "ggregions", "ggplot2",
+        "ggregions", "sf") |&gt;
+  bind_rows(package_author_data |&gt;
+              filter(Author == "Hadley Wickham")) |&gt;
+  bind_rows() |&gt;
+  ggraph(layout = "kk") +
+  geom_edge_link() +
+* geom_node_point()
+```
+]
+ 
+.panel2-ggregions-auto[
+![](introduction_files/figure-html/ggregions_auto_06_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-ggregions-auto[
+
+``` r
+tribble(~Package, ~Author,
+        "ggregions", "ggplot2",
+        "ggregions", "sf") |&gt;
+  bind_rows(package_author_data |&gt;
+              filter(Author == "Hadley Wickham")) |&gt;
+  bind_rows() |&gt;
+  ggraph(layout = "kk") +
+  geom_edge_link() +
+  geom_node_point() +
+* geom_node_label(aes(label = name))
+```
+]
+ 
+.panel2-ggregions-auto[
+![](introduction_files/figure-html/ggregions_auto_07_output-1.png)&lt;!-- --&gt;
+]
+
+&lt;style&gt;
+.panel1-ggregions-auto {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-ggregions-auto {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-ggregions-auto {
   color: black;
   width: NA%;
   hight: 33%;
@@ -700,25 +1720,195 @@ cars %&gt;%
 count: false
  
 
-.panel1-test-auto[
+.panel1-ggplyr-auto[
 
 ``` r
-# hello
-*jam &lt;- "hi"
-
-jam
+*tribble(~Package, ~Author,
+*       "ggplyr", "ggplot2",
+*       "ggplyr", "dplyr")
 ```
 ]
  
-.panel2-test-auto[
+.panel2-ggplyr-auto[
 
 ```
-[1] "hi"
+# A tibble: 2 × 2
+  Package Author 
+  &lt;chr&gt;   &lt;chr&gt;  
+1 ggplyr  ggplot2
+2 ggplyr  dplyr  
 ```
 ]
 
+---
+count: false
+ 
+
+.panel1-ggplyr-auto[
+
+``` r
+tribble(~Package, ~Author,
+        "ggplyr", "ggplot2",
+        "ggplyr", "dplyr") |&gt;
+* bind_rows(package_author_data |&gt;
+*             filter(Author == "Hadley Wickham"))
+```
+]
+ 
+.panel2-ggplyr-auto[
+
+```
+# A tibble: 14 × 2
+   Package    Author        
+   &lt;chr&gt;      &lt;chr&gt;         
+ 1 ggplyr     ggplot2       
+ 2 ggplyr     dplyr         
+ 3 dplyr      Hadley Wickham
+ 4 ellmer     Hadley Wickham
+ 5 forcats    Hadley Wickham
+ 6 ggplot2    Hadley Wickham
+ 7 lubridate  Hadley Wickham
+ 8 purrr      Hadley Wickham
+ 9 readr      Hadley Wickham
+10 recipes    Hadley Wickham
+11 stringr    Hadley Wickham
+12 tibble     Hadley Wickham
+13 tidymodels Hadley Wickham
+14 tidyr      Hadley Wickham
+```
+]
+
+---
+count: false
+ 
+
+.panel1-ggplyr-auto[
+
+``` r
+tribble(~Package, ~Author,
+        "ggplyr", "ggplot2",
+        "ggplyr", "dplyr") |&gt;
+  bind_rows(package_author_data |&gt;
+              filter(Author == "Hadley Wickham")) |&gt;
+* bind_rows()
+```
+]
+ 
+.panel2-ggplyr-auto[
+
+```
+# A tibble: 14 × 2
+   Package    Author        
+   &lt;chr&gt;      &lt;chr&gt;         
+ 1 ggplyr     ggplot2       
+ 2 ggplyr     dplyr         
+ 3 dplyr      Hadley Wickham
+ 4 ellmer     Hadley Wickham
+ 5 forcats    Hadley Wickham
+ 6 ggplot2    Hadley Wickham
+ 7 lubridate  Hadley Wickham
+ 8 purrr      Hadley Wickham
+ 9 readr      Hadley Wickham
+10 recipes    Hadley Wickham
+11 stringr    Hadley Wickham
+12 tibble     Hadley Wickham
+13 tidymodels Hadley Wickham
+14 tidyr      Hadley Wickham
+```
+]
+
+---
+count: false
+ 
+
+.panel1-ggplyr-auto[
+
+``` r
+tribble(~Package, ~Author,
+        "ggplyr", "ggplot2",
+        "ggplyr", "dplyr") |&gt;
+  bind_rows(package_author_data |&gt;
+              filter(Author == "Hadley Wickham")) |&gt;
+  bind_rows() |&gt;
+* ggraph(layout = "kk")
+```
+]
+ 
+.panel2-ggplyr-auto[
+![](introduction_files/figure-html/ggplyr_auto_04_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-ggplyr-auto[
+
+``` r
+tribble(~Package, ~Author,
+        "ggplyr", "ggplot2",
+        "ggplyr", "dplyr") |&gt;
+  bind_rows(package_author_data |&gt;
+              filter(Author == "Hadley Wickham")) |&gt;
+  bind_rows() |&gt;
+  ggraph(layout = "kk") +
+* geom_edge_link()
+```
+]
+ 
+.panel2-ggplyr-auto[
+![](introduction_files/figure-html/ggplyr_auto_05_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-ggplyr-auto[
+
+``` r
+tribble(~Package, ~Author,
+        "ggplyr", "ggplot2",
+        "ggplyr", "dplyr") |&gt;
+  bind_rows(package_author_data |&gt;
+              filter(Author == "Hadley Wickham")) |&gt;
+  bind_rows() |&gt;
+  ggraph(layout = "kk") +
+  geom_edge_link() +
+* geom_node_point()
+```
+]
+ 
+.panel2-ggplyr-auto[
+![](introduction_files/figure-html/ggplyr_auto_06_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-ggplyr-auto[
+
+``` r
+tribble(~Package, ~Author,
+        "ggplyr", "ggplot2",
+        "ggplyr", "dplyr") |&gt;
+  bind_rows(package_author_data |&gt;
+              filter(Author == "Hadley Wickham")) |&gt;
+  bind_rows() |&gt;
+  ggraph(layout = "kk") +
+  geom_edge_link() +
+  geom_node_point() +
+* geom_node_label(aes(label = name))
+```
+]
+ 
+.panel2-ggplyr-auto[
+![](introduction_files/figure-html/ggplyr_auto_07_output-1.png)&lt;!-- --&gt;
+]
+
 &lt;style&gt;
-.panel1-test-auto {
+.panel1-ggplyr-auto {
   color: black;
   width: 38.6060606060606%;
   hight: 32%;
@@ -726,7 +1916,7 @@ jam
   padding-left: 1%;
   font-size: 80%
 }
-.panel2-test-auto {
+.panel2-ggplyr-auto {
   color: black;
   width: 59.3939393939394%;
   hight: 32%;
@@ -734,7 +1924,7 @@ jam
   padding-left: 1%;
   font-size: 80%
 }
-.panel3-test-auto {
+.panel3-ggplyr-auto {
   color: black;
   width: NA%;
   hight: 33%;
@@ -743,6 +1933,64 @@ jam
   font-size: 80%
 }
 &lt;/style&gt;
+
+
+
+
+
+---
+
+count: false
+ 
+
+.panel1-ggtab-user[
+
+``` r
+*tribble(~Package, ~Author,
+*       "ggtab", "ggplot2",
+*       "ggtab", "tidyr",
+*       "ggtab", "dplyr") |&gt;
+* bind_rows(package_author_data |&gt;
+*             filter(Author == "Hadley Wickham")) |&gt;
+* bind_rows() |&gt;
+* ggraph(layout = "kk") +
+* geom_edge_link() +
+* geom_node_point() +
+* geom_node_label(aes(label = name))
+```
+]
+ 
+.panel2-ggtab-user[
+![](introduction_files/figure-html/ggtab_user_01_output-1.png)&lt;!-- --&gt;
+]
+
+&lt;style&gt;
+.panel1-ggtab-user {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-ggtab-user {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-ggtab-user {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
 
 
 
