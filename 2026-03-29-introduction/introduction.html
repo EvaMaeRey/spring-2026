@@ -1268,7 +1268,7 @@ count: false
 
 ``` r
 package_author_data |&gt;
-*             filter(Author == "Hadley Wickham")
+* filter(Author == "Hadley Wickham")
 ```
 ]
  
@@ -1301,10 +1301,45 @@ count: false
 
 ``` r
 package_author_data |&gt;
-              filter(Author == "Hadley Wickham") |&gt;
+  filter(Author == "Hadley Wickham") |&gt;
+* mutate(Author = "Tidyverse")
+```
+]
+ 
+.panel2-ggdims-auto[
+
+```
+# A tibble: 12 × 2
+   Package    Author   
+   &lt;chr&gt;      &lt;chr&gt;    
+ 1 dplyr      Tidyverse
+ 2 ellmer     Tidyverse
+ 3 forcats    Tidyverse
+ 4 ggplot2    Tidyverse
+ 5 lubridate  Tidyverse
+ 6 purrr      Tidyverse
+ 7 readr      Tidyverse
+ 8 recipes    Tidyverse
+ 9 stringr    Tidyverse
+10 tibble     Tidyverse
+11 tidymodels Tidyverse
+12 tidyr      Tidyverse
+```
+]
+
+---
+count: false
+ 
+
+.panel1-ggdims-auto[
+
+``` r
+package_author_data |&gt;
+  filter(Author == "Hadley Wickham") |&gt;
+  mutate(Author = "Tidyverse") |&gt;
 * bind_rows(tribble(~Package, ~Author,
-*       "ggdims", "ggplot2",
-*       "ggdims", "tidymodels"))
+*                   "ggdims", "ggplot2",
+*                   "ggdims", "tidymodels"))
 ```
 ]
  
@@ -1312,22 +1347,22 @@ package_author_data |&gt;
 
 ```
 # A tibble: 14 × 2
-   Package    Author        
-   &lt;chr&gt;      &lt;chr&gt;         
- 1 dplyr      Hadley Wickham
- 2 ellmer     Hadley Wickham
- 3 forcats    Hadley Wickham
- 4 ggplot2    Hadley Wickham
- 5 lubridate  Hadley Wickham
- 6 purrr      Hadley Wickham
- 7 readr      Hadley Wickham
- 8 recipes    Hadley Wickham
- 9 stringr    Hadley Wickham
-10 tibble     Hadley Wickham
-11 tidymodels Hadley Wickham
-12 tidyr      Hadley Wickham
-13 ggdims     ggplot2       
-14 ggdims     tidymodels    
+   Package    Author    
+   &lt;chr&gt;      &lt;chr&gt;     
+ 1 dplyr      Tidyverse 
+ 2 ellmer     Tidyverse 
+ 3 forcats    Tidyverse 
+ 4 ggplot2    Tidyverse 
+ 5 lubridate  Tidyverse 
+ 6 purrr      Tidyverse 
+ 7 readr      Tidyverse 
+ 8 recipes    Tidyverse 
+ 9 stringr    Tidyverse 
+10 tibble     Tidyverse 
+11 tidymodels Tidyverse 
+12 tidyr      Tidyverse 
+13 ggdims     ggplot2   
+14 ggdims     tidymodels
 ```
 ]
 
@@ -1339,50 +1374,11 @@ count: false
 
 ``` r
 package_author_data |&gt;
-              filter(Author == "Hadley Wickham") |&gt;
+  filter(Author == "Hadley Wickham") |&gt;
+  mutate(Author = "Tidyverse") |&gt;
   bind_rows(tribble(~Package, ~Author,
-        "ggdims", "ggplot2",
-        "ggdims", "tidymodels")) |&gt;
-* bind_rows()
-```
-]
- 
-.panel2-ggdims-auto[
-
-```
-# A tibble: 14 × 2
-   Package    Author        
-   &lt;chr&gt;      &lt;chr&gt;         
- 1 dplyr      Hadley Wickham
- 2 ellmer     Hadley Wickham
- 3 forcats    Hadley Wickham
- 4 ggplot2    Hadley Wickham
- 5 lubridate  Hadley Wickham
- 6 purrr      Hadley Wickham
- 7 readr      Hadley Wickham
- 8 recipes    Hadley Wickham
- 9 stringr    Hadley Wickham
-10 tibble     Hadley Wickham
-11 tidymodels Hadley Wickham
-12 tidyr      Hadley Wickham
-13 ggdims     ggplot2       
-14 ggdims     tidymodels    
-```
-]
-
----
-count: false
- 
-
-.panel1-ggdims-auto[
-
-``` r
-package_author_data |&gt;
-              filter(Author == "Hadley Wickham") |&gt;
-  bind_rows(tribble(~Package, ~Author,
-        "ggdims", "ggplot2",
-        "ggdims", "tidymodels")) |&gt;
-  bind_rows() |&gt;
+                    "ggdims", "ggplot2",
+                    "ggdims", "tidymodels")) |&gt;
 * ggraph(layout = "kk")
 ```
 ]
@@ -1399,11 +1395,11 @@ count: false
 
 ``` r
 package_author_data |&gt;
-              filter(Author == "Hadley Wickham") |&gt;
+  filter(Author == "Hadley Wickham") |&gt;
+  mutate(Author = "Tidyverse") |&gt;
   bind_rows(tribble(~Package, ~Author,
-        "ggdims", "ggplot2",
-        "ggdims", "tidymodels")) |&gt;
-  bind_rows() |&gt;
+                    "ggdims", "ggplot2",
+                    "ggdims", "tidymodels")) |&gt;
   ggraph(layout = "kk") +
 * geom_edge_link()
 ```
@@ -1421,11 +1417,11 @@ count: false
 
 ``` r
 package_author_data |&gt;
-              filter(Author == "Hadley Wickham") |&gt;
+  filter(Author == "Hadley Wickham") |&gt;
+  mutate(Author = "Tidyverse") |&gt;
   bind_rows(tribble(~Package, ~Author,
-        "ggdims", "ggplot2",
-        "ggdims", "tidymodels")) |&gt;
-  bind_rows() |&gt;
+                    "ggdims", "ggplot2",
+                    "ggdims", "tidymodels")) |&gt;
   ggraph(layout = "kk") +
   geom_edge_link() +
 * geom_node_point()
@@ -1444,11 +1440,11 @@ count: false
 
 ``` r
 package_author_data |&gt;
-              filter(Author == "Hadley Wickham") |&gt;
+  filter(Author == "Hadley Wickham") |&gt;
+  mutate(Author = "Tidyverse") |&gt;
   bind_rows(tribble(~Package, ~Author,
-        "ggdims", "ggplot2",
-        "ggdims", "tidymodels")) |&gt;
-  bind_rows() |&gt;
+                    "ggdims", "ggplot2",
+                    "ggdims", "tidymodels")) |&gt;
   ggraph(layout = "kk") +
   geom_edge_link() +
   geom_node_point() +
@@ -1496,195 +1492,58 @@ package_author_data |&gt;
 count: false
  
 
-.panel1-ggregions-auto[
+.panel1-ggregions-2[
 
 ``` r
-*tribble(~Package, ~Author,
-*       "ggregions", "ggplot2",
-*       "ggregions", "sf")
-```
-]
- 
-.panel2-ggregions-auto[
-
-```
-# A tibble: 2 × 2
-  Package   Author 
-  &lt;chr&gt;     &lt;chr&gt;  
-1 ggregions ggplot2
-2 ggregions sf     
-```
-]
-
----
-count: false
- 
-
-.panel1-ggregions-auto[
-
-``` r
-tribble(~Package, ~Author,
-        "ggregions", "ggplot2",
-        "ggregions", "sf") |&gt;
-* bind_rows(package_author_data |&gt;
-*             filter(Author == "Hadley Wickham"))
-```
-]
- 
-.panel2-ggregions-auto[
-
-```
-# A tibble: 14 × 2
-   Package    Author        
-   &lt;chr&gt;      &lt;chr&gt;         
- 1 ggregions  ggplot2       
- 2 ggregions  sf            
- 3 dplyr      Hadley Wickham
- 4 ellmer     Hadley Wickham
- 5 forcats    Hadley Wickham
- 6 ggplot2    Hadley Wickham
- 7 lubridate  Hadley Wickham
- 8 purrr      Hadley Wickham
- 9 readr      Hadley Wickham
-10 recipes    Hadley Wickham
-11 stringr    Hadley Wickham
-12 tibble     Hadley Wickham
-13 tidymodels Hadley Wickham
-14 tidyr      Hadley Wickham
-```
-]
-
----
-count: false
- 
-
-.panel1-ggregions-auto[
-
-``` r
-tribble(~Package, ~Author,
-        "ggregions", "ggplot2",
-        "ggregions", "sf") |&gt;
-  bind_rows(package_author_data |&gt;
-              filter(Author == "Hadley Wickham")) |&gt;
-* bind_rows()
-```
-]
- 
-.panel2-ggregions-auto[
-
-```
-# A tibble: 14 × 2
-   Package    Author        
-   &lt;chr&gt;      &lt;chr&gt;         
- 1 ggregions  ggplot2       
- 2 ggregions  sf            
- 3 dplyr      Hadley Wickham
- 4 ellmer     Hadley Wickham
- 5 forcats    Hadley Wickham
- 6 ggplot2    Hadley Wickham
- 7 lubridate  Hadley Wickham
- 8 purrr      Hadley Wickham
- 9 readr      Hadley Wickham
-10 recipes    Hadley Wickham
-11 stringr    Hadley Wickham
-12 tibble     Hadley Wickham
-13 tidymodels Hadley Wickham
-14 tidyr      Hadley Wickham
-```
-]
-
----
-count: false
- 
-
-.panel1-ggregions-auto[
-
-``` r
-tribble(~Package, ~Author,
-        "ggregions", "ggplot2",
-        "ggregions", "sf") |&gt;
-  bind_rows(package_author_data |&gt;
-              filter(Author == "Hadley Wickham")) |&gt;
-  bind_rows() |&gt;
-* ggraph(layout = "kk")
-```
-]
- 
-.panel2-ggregions-auto[
-![](introduction_files/figure-html/ggregions_auto_04_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-ggregions-auto[
-
-``` r
-tribble(~Package, ~Author,
-        "ggregions", "ggplot2",
-        "ggregions", "sf") |&gt;
-  bind_rows(package_author_data |&gt;
-              filter(Author == "Hadley Wickham")) |&gt;
-  bind_rows() |&gt;
-  ggraph(layout = "kk") +
-* geom_edge_link()
-```
-]
- 
-.panel2-ggregions-auto[
-![](introduction_files/figure-html/ggregions_auto_05_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-ggregions-auto[
-
-``` r
-tribble(~Package, ~Author,
-        "ggregions", "ggplot2",
-        "ggregions", "sf") |&gt;
-  bind_rows(package_author_data |&gt;
-              filter(Author == "Hadley Wickham")) |&gt;
-  bind_rows() |&gt;
-  ggraph(layout = "kk") +
-  geom_edge_link() +
-* geom_node_point()
-```
-]
- 
-.panel2-ggregions-auto[
-![](introduction_files/figure-html/ggregions_auto_06_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-ggregions-auto[
-
-``` r
-tribble(~Package, ~Author,
-        "ggregions", "ggplot2",
-        "ggregions", "sf") |&gt;
-  bind_rows(package_author_data |&gt;
-              filter(Author == "Hadley Wickham")) |&gt;
+package_author_data |&gt;
+  filter(Author == "Hadley Wickham") |&gt;
+  mutate(Author = "Tidyverse") |&gt;
+  bind_rows(tribble(~Package, ~Author,
+                    "ggdims", "ggplot2",
+                    "ggdims", "tidymodels",
+                    "ggregions", "ggplot2",
+                    "ggregions", "sf")) |&gt;
   bind_rows() |&gt;
   ggraph(layout = "kk") +
   geom_edge_link() +
   geom_node_point() +
-* geom_node_label(aes(label = name))
+  geom_node_label(aes(label = name))
 ```
 ]
  
-.panel2-ggregions-auto[
-![](introduction_files/figure-html/ggregions_auto_07_output-1.png)&lt;!-- --&gt;
+.panel2-ggregions-2[
+![](introduction_files/figure-html/ggregions_2_01_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-ggregions-2[
+
+``` r
+package_author_data |&gt;
+  filter(Author == "Hadley Wickham") |&gt;
+  mutate(Author = "Tidyverse") |&gt;
+  bind_rows(tribble(~Package, ~Author,
+                    "ggdims", "ggplot2",
+                    "ggdims", "tidymodels",
+                    "ggregions", "ggplot2",
+                    "ggregions", "sf")) |&gt;
+  bind_rows() |&gt;
+  ggraph(layout = "kk") +
+  geom_edge_link() +
+  geom_node_point() +
+  geom_node_label(aes(label = name))
+```
+]
+ 
+.panel2-ggregions-2[
+![](introduction_files/figure-html/ggregions_2_02_output-1.png)&lt;!-- --&gt;
 ]
 
 &lt;style&gt;
-.panel1-ggregions-auto {
+.panel1-ggregions-2 {
   color: black;
   width: 38.6060606060606%;
   hight: 32%;
@@ -1692,7 +1551,7 @@ tribble(~Package, ~Author,
   padding-left: 1%;
   font-size: 80%
 }
-.panel2-ggregions-auto {
+.panel2-ggregions-2 {
   color: black;
   width: 59.3939393939394%;
   hight: 32%;
@@ -1700,7 +1559,7 @@ tribble(~Package, ~Author,
   padding-left: 1%;
   font-size: 80%
 }
-.panel3-ggregions-auto {
+.panel3-ggregions-2 {
   color: black;
   width: NA%;
   hight: 33%;
@@ -1720,195 +1579,60 @@ tribble(~Package, ~Author,
 count: false
  
 
-.panel1-ggplyr-auto[
+.panel1-ggplyr-2[
 
 ``` r
-*tribble(~Package, ~Author,
-*       "ggplyr", "ggplot2",
-*       "ggplyr", "dplyr")
-```
-]
- 
-.panel2-ggplyr-auto[
-
-```
-# A tibble: 2 × 2
-  Package Author 
-  &lt;chr&gt;   &lt;chr&gt;  
-1 ggplyr  ggplot2
-2 ggplyr  dplyr  
-```
-]
-
----
-count: false
- 
-
-.panel1-ggplyr-auto[
-
-``` r
-tribble(~Package, ~Author,
+package_author_data |&gt;
+  filter(Author == "Hadley Wickham") |&gt;
+  mutate(Author = "Tidyverse") |&gt;
+  bind_rows(tribble(~Package, ~Author,
+                    "ggdims", "ggplot2",
+                    "ggdims", "tidymodels",
+                    "ggregions", "ggplot2",
+                    "ggregions", "sf",
         "ggplyr", "ggplot2",
-        "ggplyr", "dplyr") |&gt;
-* bind_rows(package_author_data |&gt;
-*             filter(Author == "Hadley Wickham"))
-```
-]
- 
-.panel2-ggplyr-auto[
-
-```
-# A tibble: 14 × 2
-   Package    Author        
-   &lt;chr&gt;      &lt;chr&gt;         
- 1 ggplyr     ggplot2       
- 2 ggplyr     dplyr         
- 3 dplyr      Hadley Wickham
- 4 ellmer     Hadley Wickham
- 5 forcats    Hadley Wickham
- 6 ggplot2    Hadley Wickham
- 7 lubridate  Hadley Wickham
- 8 purrr      Hadley Wickham
- 9 readr      Hadley Wickham
-10 recipes    Hadley Wickham
-11 stringr    Hadley Wickham
-12 tibble     Hadley Wickham
-13 tidymodels Hadley Wickham
-14 tidyr      Hadley Wickham
-```
-]
-
----
-count: false
- 
-
-.panel1-ggplyr-auto[
-
-``` r
-tribble(~Package, ~Author,
-        "ggplyr", "ggplot2",
-        "ggplyr", "dplyr") |&gt;
-  bind_rows(package_author_data |&gt;
-              filter(Author == "Hadley Wickham")) |&gt;
-* bind_rows()
-```
-]
- 
-.panel2-ggplyr-auto[
-
-```
-# A tibble: 14 × 2
-   Package    Author        
-   &lt;chr&gt;      &lt;chr&gt;         
- 1 ggplyr     ggplot2       
- 2 ggplyr     dplyr         
- 3 dplyr      Hadley Wickham
- 4 ellmer     Hadley Wickham
- 5 forcats    Hadley Wickham
- 6 ggplot2    Hadley Wickham
- 7 lubridate  Hadley Wickham
- 8 purrr      Hadley Wickham
- 9 readr      Hadley Wickham
-10 recipes    Hadley Wickham
-11 stringr    Hadley Wickham
-12 tibble     Hadley Wickham
-13 tidymodels Hadley Wickham
-14 tidyr      Hadley Wickham
-```
-]
-
----
-count: false
- 
-
-.panel1-ggplyr-auto[
-
-``` r
-tribble(~Package, ~Author,
-        "ggplyr", "ggplot2",
-        "ggplyr", "dplyr") |&gt;
-  bind_rows(package_author_data |&gt;
-              filter(Author == "Hadley Wickham")) |&gt;
-  bind_rows() |&gt;
-* ggraph(layout = "kk")
-```
-]
- 
-.panel2-ggplyr-auto[
-![](introduction_files/figure-html/ggplyr_auto_04_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-ggplyr-auto[
-
-``` r
-tribble(~Package, ~Author,
-        "ggplyr", "ggplot2",
-        "ggplyr", "dplyr") |&gt;
-  bind_rows(package_author_data |&gt;
-              filter(Author == "Hadley Wickham")) |&gt;
-  bind_rows() |&gt;
-  ggraph(layout = "kk") +
-* geom_edge_link()
-```
-]
- 
-.panel2-ggplyr-auto[
-![](introduction_files/figure-html/ggplyr_auto_05_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-ggplyr-auto[
-
-``` r
-tribble(~Package, ~Author,
-        "ggplyr", "ggplot2",
-        "ggplyr", "dplyr") |&gt;
-  bind_rows(package_author_data |&gt;
-              filter(Author == "Hadley Wickham")) |&gt;
-  bind_rows() |&gt;
-  ggraph(layout = "kk") +
-  geom_edge_link() +
-* geom_node_point()
-```
-]
- 
-.panel2-ggplyr-auto[
-![](introduction_files/figure-html/ggplyr_auto_06_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-ggplyr-auto[
-
-``` r
-tribble(~Package, ~Author,
-        "ggplyr", "ggplot2",
-        "ggplyr", "dplyr") |&gt;
-  bind_rows(package_author_data |&gt;
-              filter(Author == "Hadley Wickham")) |&gt;
-  bind_rows() |&gt;
+        "ggplyr", "dplyr"))  |&gt;
   ggraph(layout = "kk") +
   geom_edge_link() +
   geom_node_point() +
-* geom_node_label(aes(label = name))
+  geom_node_label(aes(label = name))
 ```
 ]
  
-.panel2-ggplyr-auto[
-![](introduction_files/figure-html/ggplyr_auto_07_output-1.png)&lt;!-- --&gt;
+.panel2-ggplyr-2[
+![](introduction_files/figure-html/ggplyr_2_01_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-ggplyr-2[
+
+``` r
+package_author_data |&gt;
+  filter(Author == "Hadley Wickham") |&gt;
+  mutate(Author = "Tidyverse") |&gt;
+  bind_rows(tribble(~Package, ~Author,
+                    "ggdims", "ggplot2",
+                    "ggdims", "tidymodels",
+                    "ggregions", "ggplot2",
+                    "ggregions", "sf",
+        "ggplyr", "ggplot2",
+        "ggplyr", "dplyr"))  |&gt;
+  ggraph(layout = "kk") +
+  geom_edge_link() +
+  geom_node_point() +
+  geom_node_label(aes(label = name))
+```
+]
+ 
+.panel2-ggplyr-2[
+![](introduction_files/figure-html/ggplyr_2_02_output-1.png)&lt;!-- --&gt;
 ]
 
 &lt;style&gt;
-.panel1-ggplyr-auto {
+.panel1-ggplyr-2 {
   color: black;
   width: 38.6060606060606%;
   hight: 32%;
@@ -1916,7 +1640,7 @@ tribble(~Package, ~Author,
   padding-left: 1%;
   font-size: 80%
 }
-.panel2-ggplyr-auto {
+.panel2-ggplyr-2 {
   color: black;
   width: 59.3939393939394%;
   hight: 32%;
@@ -1924,7 +1648,7 @@ tribble(~Package, ~Author,
   padding-left: 1%;
   font-size: 80%
 }
-.panel3-ggplyr-auto {
+.panel3-ggplyr-2 {
   color: black;
   width: NA%;
   hight: 33%;
@@ -1943,29 +1667,68 @@ tribble(~Package, ~Author,
 count: false
  
 
-.panel1-ggtab-user[
+.panel1-ggtab-2[
 
 ``` r
-*tribble(~Package, ~Author,
-*       "ggtab", "ggplot2",
-*       "ggtab", "tidyr",
-*       "ggtab", "dplyr") |&gt;
-* bind_rows(package_author_data |&gt;
-*             filter(Author == "Hadley Wickham")) |&gt;
-* bind_rows() |&gt;
-* ggraph(layout = "kk") +
-* geom_edge_link() +
-* geom_node_point() +
-* geom_node_label(aes(label = name))
+package_author_data |&gt;
+  filter(Author == "Hadley Wickham") |&gt;
+  mutate(Author = "Tidyverse") |&gt;
+  bind_rows(tribble(~Package, ~Author,
+                    "ggdims", "ggplot2",
+                    "ggdims", "tidymodels",
+                    "ggregions", "ggplot2",
+                    "ggregions", "sf",
+        "ggplyr", "ggplot2",
+        "ggplyr", "dplyr",
+        "ggtab", "ggplot2",
+        "ggtab", "tidyr",
+        "ggtab", "dplyr")) |&gt;
+  bind_rows() |&gt;
+  ggraph(layout = "kk") +
+  geom_edge_link() +
+  geom_node_point() +
+  geom_node_label(aes(label = name))
 ```
 ]
  
-.panel2-ggtab-user[
-![](introduction_files/figure-html/ggtab_user_01_output-1.png)&lt;!-- --&gt;
+.panel2-ggtab-2[
+![](introduction_files/figure-html/ggtab_2_01_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-ggtab-2[
+
+``` r
+package_author_data |&gt;
+  filter(Author == "Hadley Wickham") |&gt;
+  mutate(Author = "Tidyverse") |&gt;
+  bind_rows(tribble(~Package, ~Author,
+                    "ggdims", "ggplot2",
+                    "ggdims", "tidymodels",
+                    "ggregions", "ggplot2",
+                    "ggregions", "sf",
+        "ggplyr", "ggplot2",
+        "ggplyr", "dplyr",
+        "ggtab", "ggplot2",
+        "ggtab", "tidyr",
+        "ggtab", "dplyr")) |&gt;
+  bind_rows() |&gt;
+  ggraph(layout = "kk") +
+  geom_edge_link() +
+  geom_node_point() +
+  geom_node_label(aes(label = name))
+```
+]
+ 
+.panel2-ggtab-2[
+![](introduction_files/figure-html/ggtab_2_02_output-1.png)&lt;!-- --&gt;
 ]
 
 &lt;style&gt;
-.panel1-ggtab-user {
+.panel1-ggtab-2 {
   color: black;
   width: 38.6060606060606%;
   hight: 32%;
@@ -1973,7 +1736,7 @@ count: false
   padding-left: 1%;
   font-size: 80%
 }
-.panel2-ggtab-user {
+.panel2-ggtab-2 {
   color: black;
   width: 59.3939393939394%;
   hight: 32%;
@@ -1981,7 +1744,7 @@ count: false
   padding-left: 1%;
   font-size: 80%
 }
-.panel3-ggtab-user {
+.panel3-ggtab-2 {
   color: black;
   width: NA%;
   hight: 33%;

@@ -163,11 +163,11 @@ package_author_data |>
 
 ```{r ggdims, include=F}
 package_author_data |> 
-              filter(Author == "Hadley Wickham") |> 
+  filter(Author == "Hadley Wickham") |> 
+  mutate(Author = "Tidyverse") |>
   bind_rows(tribble(~Package, ~Author,
-        "ggdims", "ggplot2",
-        "ggdims", "tidymodels")) |> 
-  bind_rows() |>
+                    "ggdims", "ggplot2", 
+                    "ggdims", "tidymodels")) |> 
   ggraph(layout = "kk") +
   geom_edge_link() +
   geom_node_point() +
@@ -176,14 +176,17 @@ package_author_data |>
 
 ---
 
-`r chunk_reveal("ggregions")`
+`r chunk_reveal("ggregions", break_type = 2)`
 
 ```{r ggregions, include=F}
-tribble(~Package, ~Author,
-        "ggregions", "ggplot2",
-        "ggregions", "sf") |> 
-  bind_rows(package_author_data |> 
-              filter(Author == "Hadley Wickham")) |>
+package_author_data |> 
+  filter(Author == "Hadley Wickham") |> 
+  mutate(Author = "Tidyverse") |>
+  bind_rows(tribble(~Package, ~Author,
+                    "ggdims", "ggplot2", 
+                    "ggdims", "tidymodels", 
+                    "ggregions", "ggplot2",
+                    "ggregions", "sf")) |>
   bind_rows() |>
   ggraph(layout = "kk") +
   geom_edge_link() +
@@ -194,15 +197,19 @@ tribble(~Package, ~Author,
 
 ---
 
-`r chunk_reveal("ggplyr", )`
+`r chunk_reveal("ggplyr", break_type = 2)`
 
 ```{r ggplyr, include=F}
-tribble(~Package, ~Author,
+package_author_data |> 
+  filter(Author == "Hadley Wickham") |> 
+  mutate(Author = "Tidyverse") |>
+  bind_rows(tribble(~Package, ~Author,
+                    "ggdims", "ggplot2", 
+                    "ggdims", "tidymodels", 
+                    "ggregions", "ggplot2",
+                    "ggregions", "sf",
         "ggplyr", "ggplot2",
-        "ggplyr", "dplyr") |> 
-  bind_rows(package_author_data |> 
-              filter(Author == "Hadley Wickham")) |>
-  bind_rows() |>
+        "ggplyr", "dplyr"))  |>
   ggraph(layout = "kk") +
   geom_edge_link() +
   geom_node_point() +
@@ -211,15 +218,22 @@ tribble(~Package, ~Author,
 
 ---
 
-`r chunk_reveal("ggtab", break_type = "user")`
+`r chunk_reveal("ggtab", break_type = 2)`
 
 ```{r ggtab, include=F}
-tribble(~Package, ~Author,
+package_author_data |> 
+  filter(Author == "Hadley Wickham") |> 
+  mutate(Author = "Tidyverse") |>
+  bind_rows(tribble(~Package, ~Author,
+                    "ggdims", "ggplot2", 
+                    "ggdims", "tidymodels", 
+                    "ggregions", "ggplot2",
+                    "ggregions", "sf",
+        "ggplyr", "ggplot2",
+        "ggplyr", "dplyr",
         "ggtab", "ggplot2",
         "ggtab", "tidyr",
-        "ggtab", "dplyr") |> 
-  bind_rows(package_author_data |> 
-              filter(Author == "Hadley Wickham")) |>
+        "ggtab", "dplyr")) |> 
   bind_rows() |>
   ggraph(layout = "kk") +
   geom_edge_link() +
