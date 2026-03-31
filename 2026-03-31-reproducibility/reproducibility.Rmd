@@ -25,13 +25,14 @@ options(tidyverse.quiet = TRUE)
 
 
 class: inverse, bottom
-background-image: url(https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80)
+background-image: url(https://images.unsplash.com/photo-1488655980602-a2d28399df6c?q=80&w=3348&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
 background-size: cover
 
-# .Large[Data Science for IR: Introductions]
+# .Large[Data Science for IR: Reproducibility]
 ## .small[Korbel School of International Studies]
 ## .small[bit.ly/spring-2026-du]
-#### .tiny[Dr. Evangeline Reynolds | `r Sys.Date()` | DU, Image credit: Silas Baisch, Upsplash]
+#### .tiny[Dr. Evangeline Reynolds | `r Sys.Date()` | DU, Image credit: 
+Jeffrey Betts, Upsplash]
 
 
 ???
@@ -78,7 +79,7 @@ And being able to compose moves to create coherent, robust, reproducible data pr
 
 
 ```{r, out.width="90%", echo = F}
-knitr::include_graphics("images_for_lecture/replication_crisis_psych.png")
+# knitr::include_graphics("images_for_lecture/replication_crisis_psych.png")
 ```
 
 
@@ -89,7 +90,7 @@ knitr::include_graphics("images_for_lecture/replication_crisis_psych.png")
 Klein, R. A. "Investigating Variation in Replicability: A 'Many Labs' Replication Project (vol 45, pg 142, 2014)." SOCIAL PSYCHOLOGY 50.3 (2019): 211-213.
 
 ```{r, out.width="90%", echo = F}
-knitr::include_graphics("images_for_lecture/many_labs_result.png")
+# knitr::include_graphics("images_for_lecture/many_labs_result.png")
 ```
 
 ---
