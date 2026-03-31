@@ -142,7 +142,8 @@ as_tibble(tools::CRAN_package_db()) |>
   select(Package, Author) |>
   mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |>
   unnest() |> 
-  mutate(Author = str_remove(Author, '\\*.+' ) |> str_trim()) |>
+  mutate(Author = Author |> str_remove('\\*.+' )) |>
+  mutate(Author = Author |> str_trim()) |>
   filter_out(Author |> str_detect("orcid.org")) |>
   filter_out(Author == "Posit Software, PBC") |>
   filter_out(Author == "Posit, PBC") ->
@@ -159,15 +160,30 @@ package_author_data |>
 
 ---
 
-`r chunk_reveal("ggdims")`
+`r chunk_reveal("hadleyverse")`
+
+```{r hadleyverse, include=F}
+package_author_data |> 
+  filter(Author == "Hadley Wickham") |> 
+  mutate(Author = "Tidyverse") |>
+  ggraph(layout = "kk") +
+  geom_edge_link() +
+  geom_node_point() +
+  geom_node_label(aes(label = name)) 
+```
+
+
+---
+
+`r chunk_reveal("ggdims", break_type = 2)`
 
 ```{r ggdims, include=F}
 package_author_data |> 
   filter(Author == "Hadley Wickham") |> 
   mutate(Author = "Tidyverse") |>
   bind_rows(tribble(~Package, ~Author,
-                    "ggdims", "ggplot2", 
-                    "ggdims", "tidymodels")) |> 
+                    "ggdims", "ggplot2", #<<
+                    "ggdims", "tidymodels")) |> #<<
   ggraph(layout = "kk") +
   geom_edge_link() +
   geom_node_point() +
@@ -185,8 +201,8 @@ package_author_data |>
   bind_rows(tribble(~Package, ~Author,
                     "ggdims", "ggplot2", 
                     "ggdims", "tidymodels", 
-                    "ggregions", "ggplot2",
-                    "ggregions", "sf")) |>
+                    "ggregions", "ggplot2", #<<
+                    "ggregions", "sf")) |>  #<<
   bind_rows() |>
   ggraph(layout = "kk") +
   geom_edge_link() +
@@ -208,8 +224,8 @@ package_author_data |>
                     "ggdims", "tidymodels", 
                     "ggregions", "ggplot2",
                     "ggregions", "sf",
-        "ggplyr", "ggplot2",
-        "ggplyr", "dplyr"))  |>
+                    "ggplyr", "ggplot2", #<<
+                    "ggplyr", "dplyr")) |> #<<
   ggraph(layout = "kk") +
   geom_edge_link() +
   geom_node_point() +
@@ -229,17 +245,41 @@ package_author_data |>
                     "ggdims", "tidymodels", 
                     "ggregions", "ggplot2",
                     "ggregions", "sf",
-        "ggplyr", "ggplot2",
-        "ggplyr", "dplyr",
-        "ggtab", "ggplot2",
-        "ggtab", "tidyr",
-        "ggtab", "dplyr")) |> 
+                    "ggplyr", "ggplot2",
+                    "ggplyr", "dplyr",
+                    "ggtab", "ggplot2", #<<
+                    "ggtab", "tidyr",  #<<
+                    "ggtab", "dplyr")) |> #<<
   bind_rows() |>
   ggraph(layout = "kk") +
   geom_edge_link() +
   geom_node_point() + #BREAK1
-  geom_node_label(aes(label = name)) #BREAK2
+  geom_node_label(aes(label = name)) + #BREAK2
+  labs(title = "My areas of interest...")
 ```
+
+
+---
+
+Data science in 2026...
+
+--
+
+Fluent with code? 
+
+--
+
+Fluent with 'moves'
+
+--
+
+Able to express yourself about moves you've seen and performed, (or can imagine)
+--
+(be it in code or w/ LLM assistance)
+
+--
+
+And being able to compose moves to create coherent, robust data products.
 
 
 

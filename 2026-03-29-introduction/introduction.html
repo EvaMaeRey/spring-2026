@@ -762,7 +762,52 @@ as_tibble(tools::CRAN_package_db()) |&gt;
   select(Package, Author) |&gt;
   mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
   unnest() |&gt;
-* mutate(Author = str_remove(Author, '\\*.+' ) |&gt; str_trim())
+* mutate(Author = Author |&gt; str_remove('\\*.+' ))
+```
+]
+ 
+.panel2-tidyverse-auto[
+
+```
+# A tibble: 75 × 2
+   Package Author                                         
+   &lt;chr&gt;   &lt;chr&gt;                                          
+ 1 dplyr   "Hadley Wickham"                               
+ 2 dplyr   "    &lt;https://orcid.org/0000-0003-4757-117X&gt;),"
+ 3 dplyr   "  Romain François"                            
+ 4 dplyr   "  Lionel Henry"                               
+ 5 dplyr   "  Kirill Müller"                              
+ 6 dplyr   "  Davis Vaughan"                              
+ 7 dplyr   "  Posit Software, PBC"                        
+ 8 ellmer  "Hadley Wickham"                               
+ 9 ellmer  "    &lt;https://orcid.org/0000-0003-4757-117X&gt;),"
+10 ellmer  "  Joe Cheng"                                  
+# ℹ 65 more rows
+```
+]
+
+---
+count: false
+ 
+
+.panel1-tidyverse-auto[
+
+``` r
+library(tidyverse)
+library(ggraph)
+
+# data cleaning
+as_tibble(tools::CRAN_package_db()) |&gt;
+  filter(Package %in% c("dplyr", "ggplot2", "ellmer",
+                        "tidyr", "tidymodels", "recipes",
+                        "readr", "tibble", "stringr", "forcats",
+                        "purrr", "lubridate")) |&gt;
+  mutate(Author = str_replace_all(Author, ' \\[|\\]', "*" )) |&gt;
+  select(Package, Author) |&gt;
+  mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
+  unnest() |&gt;
+  mutate(Author = Author |&gt; str_remove('\\*.+' )) |&gt;
+* mutate(Author = Author |&gt; str_trim())
 ```
 ]
  
@@ -806,7 +851,8 @@ as_tibble(tools::CRAN_package_db()) |&gt;
   select(Package, Author) |&gt;
   mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
   unnest() |&gt;
-  mutate(Author = str_remove(Author, '\\*.+' ) |&gt; str_trim()) |&gt;
+  mutate(Author = Author |&gt; str_remove('\\*.+' )) |&gt;
+  mutate(Author = Author |&gt; str_trim()) |&gt;
 * filter_out(Author |&gt; str_detect("orcid.org"))
 ```
 ]
@@ -851,7 +897,8 @@ as_tibble(tools::CRAN_package_db()) |&gt;
   select(Package, Author) |&gt;
   mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
   unnest() |&gt;
-  mutate(Author = str_remove(Author, '\\*.+' ) |&gt; str_trim()) |&gt;
+  mutate(Author = Author |&gt; str_remove('\\*.+' )) |&gt;
+  mutate(Author = Author |&gt; str_trim()) |&gt;
   filter_out(Author |&gt; str_detect("orcid.org")) |&gt;
 * filter_out(Author == "Posit Software, PBC")
 ```
@@ -897,7 +944,8 @@ as_tibble(tools::CRAN_package_db()) |&gt;
   select(Package, Author) |&gt;
   mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
   unnest() |&gt;
-  mutate(Author = str_remove(Author, '\\*.+' ) |&gt; str_trim()) |&gt;
+  mutate(Author = Author |&gt; str_remove('\\*.+' )) |&gt;
+  mutate(Author = Author |&gt; str_trim()) |&gt;
   filter_out(Author |&gt; str_detect("orcid.org")) |&gt;
   filter_out(Author == "Posit Software, PBC") |&gt;
 * filter_out(Author == "Posit, PBC")
@@ -944,7 +992,8 @@ as_tibble(tools::CRAN_package_db()) |&gt;
   select(Package, Author) |&gt;
   mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
   unnest() |&gt;
-  mutate(Author = str_remove(Author, '\\*.+' ) |&gt; str_trim()) |&gt;
+  mutate(Author = Author |&gt; str_remove('\\*.+' )) |&gt;
+  mutate(Author = Author |&gt; str_trim()) |&gt;
   filter_out(Author |&gt; str_detect("orcid.org")) |&gt;
   filter_out(Author == "Posit Software, PBC") |&gt;
   filter_out(Author == "Posit, PBC") -&gt;
@@ -976,7 +1025,8 @@ as_tibble(tools::CRAN_package_db()) |&gt;
   select(Package, Author) |&gt;
   mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
   unnest() |&gt;
-  mutate(Author = str_remove(Author, '\\*.+' ) |&gt; str_trim()) |&gt;
+  mutate(Author = Author |&gt; str_remove('\\*.+' )) |&gt;
+  mutate(Author = Author |&gt; str_trim()) |&gt;
   filter_out(Author |&gt; str_detect("orcid.org")) |&gt;
   filter_out(Author == "Posit Software, PBC") |&gt;
   filter_out(Author == "Posit, PBC") -&gt;
@@ -1027,7 +1077,8 @@ as_tibble(tools::CRAN_package_db()) |&gt;
   select(Package, Author) |&gt;
   mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
   unnest() |&gt;
-  mutate(Author = str_remove(Author, '\\*.+' ) |&gt; str_trim()) |&gt;
+  mutate(Author = Author |&gt; str_remove('\\*.+' )) |&gt;
+  mutate(Author = Author |&gt; str_trim()) |&gt;
   filter_out(Author |&gt; str_detect("orcid.org")) |&gt;
   filter_out(Author == "Posit Software, PBC") |&gt;
   filter_out(Author == "Posit, PBC") -&gt;
@@ -1036,43 +1087,6 @@ package_author_data
 # network visualization
 package_author_data |&gt;
 * ggraph(layout = "kk")
-```
-]
- 
-.panel2-tidyverse-auto[
-![](introduction_files/figure-html/tidyverse_auto_15_output-1.png)&lt;!-- --&gt;
-]
-
----
-count: false
- 
-
-.panel1-tidyverse-auto[
-
-``` r
-library(tidyverse)
-library(ggraph)
-
-# data cleaning
-as_tibble(tools::CRAN_package_db()) |&gt;
-  filter(Package %in% c("dplyr", "ggplot2", "ellmer",
-                        "tidyr", "tidymodels", "recipes",
-                        "readr", "tibble", "stringr", "forcats",
-                        "purrr", "lubridate")) |&gt;
-  mutate(Author = str_replace_all(Author, ' \\[|\\]', "*" )) |&gt;
-  select(Package, Author) |&gt;
-  mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
-  unnest() |&gt;
-  mutate(Author = str_remove(Author, '\\*.+' ) |&gt; str_trim()) |&gt;
-  filter_out(Author |&gt; str_detect("orcid.org")) |&gt;
-  filter_out(Author == "Posit Software, PBC") |&gt;
-  filter_out(Author == "Posit, PBC") -&gt;
-package_author_data
-
-# network visualization
-package_author_data |&gt;
-  ggraph(layout = "kk") +
-* geom_edge_link()
 ```
 ]
  
@@ -1100,7 +1114,8 @@ as_tibble(tools::CRAN_package_db()) |&gt;
   select(Package, Author) |&gt;
   mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
   unnest() |&gt;
-  mutate(Author = str_remove(Author, '\\*.+' ) |&gt; str_trim()) |&gt;
+  mutate(Author = Author |&gt; str_remove('\\*.+' )) |&gt;
+  mutate(Author = Author |&gt; str_trim()) |&gt;
   filter_out(Author |&gt; str_detect("orcid.org")) |&gt;
   filter_out(Author == "Posit Software, PBC") |&gt;
   filter_out(Author == "Posit, PBC") -&gt;
@@ -1109,8 +1124,7 @@ package_author_data
 # network visualization
 package_author_data |&gt;
   ggraph(layout = "kk") +
-  geom_edge_link() +
-* geom_node_point()
+* geom_edge_link()
 ```
 ]
  
@@ -1138,7 +1152,8 @@ as_tibble(tools::CRAN_package_db()) |&gt;
   select(Package, Author) |&gt;
   mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
   unnest() |&gt;
-  mutate(Author = str_remove(Author, '\\*.+' ) |&gt; str_trim()) |&gt;
+  mutate(Author = Author |&gt; str_remove('\\*.+' )) |&gt;
+  mutate(Author = Author |&gt; str_trim()) |&gt;
   filter_out(Author |&gt; str_detect("orcid.org")) |&gt;
   filter_out(Author == "Posit Software, PBC") |&gt;
   filter_out(Author == "Posit, PBC") -&gt;
@@ -1148,8 +1163,7 @@ package_author_data
 package_author_data |&gt;
   ggraph(layout = "kk") +
   geom_edge_link() +
-  geom_node_point() +
-* geom_node_label(aes(label = name))
+* geom_node_point()
 ```
 ]
  
@@ -1177,7 +1191,48 @@ as_tibble(tools::CRAN_package_db()) |&gt;
   select(Package, Author) |&gt;
   mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
   unnest() |&gt;
-  mutate(Author = str_remove(Author, '\\*.+' ) |&gt; str_trim()) |&gt;
+  mutate(Author = Author |&gt; str_remove('\\*.+' )) |&gt;
+  mutate(Author = Author |&gt; str_trim()) |&gt;
+  filter_out(Author |&gt; str_detect("orcid.org")) |&gt;
+  filter_out(Author == "Posit Software, PBC") |&gt;
+  filter_out(Author == "Posit, PBC") -&gt;
+package_author_data
+
+# network visualization
+package_author_data |&gt;
+  ggraph(layout = "kk") +
+  geom_edge_link() +
+  geom_node_point() +
+* geom_node_label(aes(label = name))
+```
+]
+ 
+.panel2-tidyverse-auto[
+![](introduction_files/figure-html/tidyverse_auto_19_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-tidyverse-auto[
+
+``` r
+library(tidyverse)
+library(ggraph)
+
+# data cleaning
+as_tibble(tools::CRAN_package_db()) |&gt;
+  filter(Package %in% c("dplyr", "ggplot2", "ellmer",
+                        "tidyr", "tidymodels", "recipes",
+                        "readr", "tibble", "stringr", "forcats",
+                        "purrr", "lubridate")) |&gt;
+  mutate(Author = str_replace_all(Author, ' \\[|\\]', "*" )) |&gt;
+  select(Package, Author) |&gt;
+  mutate(Author = map(Author, ~ str_split_1(.x,"\n"))) |&gt;
+  unnest() |&gt;
+  mutate(Author = Author |&gt; str_remove('\\*.+' )) |&gt;
+  mutate(Author = Author |&gt; str_trim()) |&gt;
   filter_out(Author |&gt; str_detect("orcid.org")) |&gt;
   filter_out(Author == "Posit Software, PBC") |&gt;
   filter_out(Author == "Posit, PBC") -&gt;
@@ -1194,7 +1249,7 @@ package_author_data |&gt;
 ]
  
 .panel2-tidyverse-auto[
-![](introduction_files/figure-html/tidyverse_auto_19_output-1.png)&lt;!-- --&gt;
+![](introduction_files/figure-html/tidyverse_auto_20_output-1.png)&lt;!-- --&gt;
 ]
 
 &lt;style&gt;
@@ -1233,14 +1288,14 @@ package_author_data |&gt;
 count: false
  
 
-.panel1-ggdims-auto[
+.panel1-hadleyverse-auto[
 
 ``` r
 *package_author_data
 ```
 ]
  
-.panel2-ggdims-auto[
+.panel2-hadleyverse-auto[
 
 ```
 # A tibble: 56 × 2
@@ -1264,7 +1319,7 @@ count: false
 count: false
  
 
-.panel1-ggdims-auto[
+.panel1-hadleyverse-auto[
 
 ``` r
 package_author_data |&gt;
@@ -1272,7 +1327,7 @@ package_author_data |&gt;
 ```
 ]
  
-.panel2-ggdims-auto[
+.panel2-hadleyverse-auto[
 
 ```
 # A tibble: 12 × 2
@@ -1297,7 +1352,7 @@ package_author_data |&gt;
 count: false
  
 
-.panel1-ggdims-auto[
+.panel1-hadleyverse-auto[
 
 ``` r
 package_author_data |&gt;
@@ -1306,7 +1361,7 @@ package_author_data |&gt;
 ```
 ]
  
-.panel2-ggdims-auto[
+.panel2-hadleyverse-auto[
 
 ```
 # A tibble: 12 × 2
@@ -1331,120 +1386,69 @@ package_author_data |&gt;
 count: false
  
 
-.panel1-ggdims-auto[
+.panel1-hadleyverse-auto[
 
 ``` r
 package_author_data |&gt;
   filter(Author == "Hadley Wickham") |&gt;
   mutate(Author = "Tidyverse") |&gt;
-* bind_rows(tribble(~Package, ~Author,
-*                   "ggdims", "ggplot2",
-*                   "ggdims", "tidymodels"))
-```
-]
- 
-.panel2-ggdims-auto[
-
-```
-# A tibble: 14 × 2
-   Package    Author    
-   &lt;chr&gt;      &lt;chr&gt;     
- 1 dplyr      Tidyverse 
- 2 ellmer     Tidyverse 
- 3 forcats    Tidyverse 
- 4 ggplot2    Tidyverse 
- 5 lubridate  Tidyverse 
- 6 purrr      Tidyverse 
- 7 readr      Tidyverse 
- 8 recipes    Tidyverse 
- 9 stringr    Tidyverse 
-10 tibble     Tidyverse 
-11 tidymodels Tidyverse 
-12 tidyr      Tidyverse 
-13 ggdims     ggplot2   
-14 ggdims     tidymodels
-```
-]
-
----
-count: false
- 
-
-.panel1-ggdims-auto[
-
-``` r
-package_author_data |&gt;
-  filter(Author == "Hadley Wickham") |&gt;
-  mutate(Author = "Tidyverse") |&gt;
-  bind_rows(tribble(~Package, ~Author,
-                    "ggdims", "ggplot2",
-                    "ggdims", "tidymodels")) |&gt;
 * ggraph(layout = "kk")
 ```
 ]
  
-.panel2-ggdims-auto[
-![](introduction_files/figure-html/ggdims_auto_05_output-1.png)&lt;!-- --&gt;
+.panel2-hadleyverse-auto[
+![](introduction_files/figure-html/hadleyverse_auto_04_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
 
-.panel1-ggdims-auto[
+.panel1-hadleyverse-auto[
 
 ``` r
 package_author_data |&gt;
   filter(Author == "Hadley Wickham") |&gt;
   mutate(Author = "Tidyverse") |&gt;
-  bind_rows(tribble(~Package, ~Author,
-                    "ggdims", "ggplot2",
-                    "ggdims", "tidymodels")) |&gt;
   ggraph(layout = "kk") +
 * geom_edge_link()
 ```
 ]
  
-.panel2-ggdims-auto[
-![](introduction_files/figure-html/ggdims_auto_06_output-1.png)&lt;!-- --&gt;
+.panel2-hadleyverse-auto[
+![](introduction_files/figure-html/hadleyverse_auto_05_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
 
-.panel1-ggdims-auto[
+.panel1-hadleyverse-auto[
 
 ``` r
 package_author_data |&gt;
   filter(Author == "Hadley Wickham") |&gt;
   mutate(Author = "Tidyverse") |&gt;
-  bind_rows(tribble(~Package, ~Author,
-                    "ggdims", "ggplot2",
-                    "ggdims", "tidymodels")) |&gt;
   ggraph(layout = "kk") +
   geom_edge_link() +
 * geom_node_point()
 ```
 ]
  
-.panel2-ggdims-auto[
-![](introduction_files/figure-html/ggdims_auto_07_output-1.png)&lt;!-- --&gt;
+.panel2-hadleyverse-auto[
+![](introduction_files/figure-html/hadleyverse_auto_06_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
 count: false
  
 
-.panel1-ggdims-auto[
+.panel1-hadleyverse-auto[
 
 ``` r
 package_author_data |&gt;
   filter(Author == "Hadley Wickham") |&gt;
   mutate(Author = "Tidyverse") |&gt;
-  bind_rows(tribble(~Package, ~Author,
-                    "ggdims", "ggplot2",
-                    "ggdims", "tidymodels")) |&gt;
   ggraph(layout = "kk") +
   geom_edge_link() +
   geom_node_point() +
@@ -1452,12 +1456,12 @@ package_author_data |&gt;
 ```
 ]
  
-.panel2-ggdims-auto[
-![](introduction_files/figure-html/ggdims_auto_08_output-1.png)&lt;!-- --&gt;
+.panel2-hadleyverse-auto[
+![](introduction_files/figure-html/hadleyverse_auto_07_output-1.png)&lt;!-- --&gt;
 ]
 
 &lt;style&gt;
-.panel1-ggdims-auto {
+.panel1-hadleyverse-auto {
   color: black;
   width: 38.6060606060606%;
   hight: 32%;
@@ -1465,7 +1469,7 @@ package_author_data |&gt;
   padding-left: 1%;
   font-size: 80%
 }
-.panel2-ggdims-auto {
+.panel2-hadleyverse-auto {
   color: black;
   width: 59.3939393939394%;
   hight: 32%;
@@ -1473,7 +1477,88 @@ package_author_data |&gt;
   padding-left: 1%;
   font-size: 80%
 }
-.panel3-ggdims-auto {
+.panel3-hadleyverse-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+
+
+
+---
+
+count: false
+ 
+
+.panel1-ggdims-2[
+
+``` r
+package_author_data |&gt;
+  filter(Author == "Hadley Wickham") |&gt;
+  mutate(Author = "Tidyverse") |&gt;
+  bind_rows(tribble(~Package, ~Author,
+*                   "ggdims", "ggplot2",
+*                   "ggdims", "tidymodels")) |&gt;
+  ggraph(layout = "kk") +
+  geom_edge_link() +
+  geom_node_point() +
+  geom_node_label(aes(label = name))
+```
+]
+ 
+.panel2-ggdims-2[
+![](introduction_files/figure-html/ggdims_2_01_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-ggdims-2[
+
+``` r
+package_author_data |&gt;
+  filter(Author == "Hadley Wickham") |&gt;
+  mutate(Author = "Tidyverse") |&gt;
+  bind_rows(tribble(~Package, ~Author,
+*                   "ggdims", "ggplot2",
+*                   "ggdims", "tidymodels")) |&gt;
+  ggraph(layout = "kk") +
+  geom_edge_link() +
+  geom_node_point() +
+  geom_node_label(aes(label = name))
+```
+]
+ 
+.panel2-ggdims-2[
+![](introduction_files/figure-html/ggdims_2_02_output-1.png)&lt;!-- --&gt;
+]
+
+&lt;style&gt;
+.panel1-ggdims-2 {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-ggdims-2 {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-ggdims-2 {
   color: black;
   width: NA%;
   hight: 33%;
@@ -1501,8 +1586,8 @@ package_author_data |&gt;
   bind_rows(tribble(~Package, ~Author,
                     "ggdims", "ggplot2",
                     "ggdims", "tidymodels",
-                    "ggregions", "ggplot2",
-                    "ggregions", "sf")) |&gt;
+*                   "ggregions", "ggplot2",
+*                   "ggregions", "sf")) |&gt;
   bind_rows() |&gt;
   ggraph(layout = "kk") +
   geom_edge_link() +
@@ -1528,8 +1613,8 @@ package_author_data |&gt;
   bind_rows(tribble(~Package, ~Author,
                     "ggdims", "ggplot2",
                     "ggdims", "tidymodels",
-                    "ggregions", "ggplot2",
-                    "ggregions", "sf")) |&gt;
+*                   "ggregions", "ggplot2",
+*                   "ggregions", "sf")) |&gt;
   bind_rows() |&gt;
   ggraph(layout = "kk") +
   geom_edge_link() +
@@ -1590,8 +1675,8 @@ package_author_data |&gt;
                     "ggdims", "tidymodels",
                     "ggregions", "ggplot2",
                     "ggregions", "sf",
-        "ggplyr", "ggplot2",
-        "ggplyr", "dplyr"))  |&gt;
+*                   "ggplyr", "ggplot2",
+*                   "ggplyr", "dplyr")) |&gt;
   ggraph(layout = "kk") +
   geom_edge_link() +
   geom_node_point() +
@@ -1618,8 +1703,8 @@ package_author_data |&gt;
                     "ggdims", "tidymodels",
                     "ggregions", "ggplot2",
                     "ggregions", "sf",
-        "ggplyr", "ggplot2",
-        "ggplyr", "dplyr"))  |&gt;
+*                   "ggplyr", "ggplot2",
+*                   "ggplyr", "dplyr")) |&gt;
   ggraph(layout = "kk") +
   geom_edge_link() +
   geom_node_point() +
@@ -1678,16 +1763,17 @@ package_author_data |&gt;
                     "ggdims", "tidymodels",
                     "ggregions", "ggplot2",
                     "ggregions", "sf",
-        "ggplyr", "ggplot2",
-        "ggplyr", "dplyr",
-        "ggtab", "ggplot2",
-        "ggtab", "tidyr",
-        "ggtab", "dplyr")) |&gt;
+                    "ggplyr", "ggplot2",
+                    "ggplyr", "dplyr",
+*                   "ggtab", "ggplot2",
+*                   "ggtab", "tidyr",
+*                   "ggtab", "dplyr")) |&gt;
   bind_rows() |&gt;
   ggraph(layout = "kk") +
   geom_edge_link() +
   geom_node_point() +
-  geom_node_label(aes(label = name))
+  geom_node_label(aes(label = name)) +
+  labs(title = "My areas of interest...")
 ```
 ]
  
@@ -1710,16 +1796,17 @@ package_author_data |&gt;
                     "ggdims", "tidymodels",
                     "ggregions", "ggplot2",
                     "ggregions", "sf",
-        "ggplyr", "ggplot2",
-        "ggplyr", "dplyr",
-        "ggtab", "ggplot2",
-        "ggtab", "tidyr",
-        "ggtab", "dplyr")) |&gt;
+                    "ggplyr", "ggplot2",
+                    "ggplyr", "dplyr",
+*                   "ggtab", "ggplot2",
+*                   "ggtab", "tidyr",
+*                   "ggtab", "dplyr")) |&gt;
   bind_rows() |&gt;
   ggraph(layout = "kk") +
   geom_edge_link() +
   geom_node_point() +
-  geom_node_label(aes(label = name))
+  geom_node_label(aes(label = name)) +
+  labs(title = "My areas of interest...")
 ```
 ]
  
@@ -1757,6 +1844,29 @@ package_author_data |&gt;
 
 
 
+
+
+---
+
+Data science in 2026...
+
+--
+
+Fluent with code? 
+
+--
+
+Fluent with 'moves'
+
+--
+
+Able to express yourself about moves you've seen and performed, (or can imagine)
+--
+(be it in code or w/ LLM assistance)
+
+--
+
+And being able to compose moves to create coherent, robust data products.
 
 
 
