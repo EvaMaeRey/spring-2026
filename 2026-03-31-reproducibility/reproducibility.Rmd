@@ -1,0 +1,223 @@
+---
+title: "Spring 2026 Slides"
+author: "Evangeline 'Gina' Reynolds"
+output:
+  xaringan::moon_reader:
+    seal: FALSE
+    lib_dir: libs
+    css: [default, hygge, ninjutsu]
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+
+```{r setup, include = F}
+# This is the recommended set up for flipbooks
+# you might think about setting cache to TRUE as you gain practice --- building flipbooks from scratch can be time consuming
+knitr::opts_chunk$set(fig.width = 6, message = FALSE, warning = FALSE, comment = "", cache = T)
+library(flipbookr)
+library(tidyverse)
+options(tidyverse.quiet = TRUE)
+```
+
+
+class: inverse, bottom
+background-image: url(https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80)
+background-size: cover
+
+# .Large[Data Science for IR: Introductions]
+## .small[Korbel School of International Studies]
+## .small[bit.ly/spring-2026-du]
+#### .tiny[Dr. Evangeline Reynolds | `r Sys.Date()` | DU, Image credit: Silas Baisch, Upsplash]
+
+
+???
+
+Title slide
+```{r, include = F}
+# This is the recommended set up for flipbooks
+# you might think about setting cache to TRUE as you gain practice --- building flipbooks from scratch can be time consuming
+knitr::opts_chunk$set(fig.width = 6, fig.height = 4.5, message = FALSE, warning = FALSE, comment = "", cache = T, error = T)
+library(flipbookr)
+
+```
+
+
+---
+
+Data science in 2026...
+
+--
+
+Fluent with code? 
+
+--
+
+Fluent with 'moves'
+
+--
+
+Being able to express yourself about moves you've seen and performed, (or can imagine!) 
+--
+(be it in code or w/ LLM assistance)
+
+--
+
+And being able to compose moves to create coherent, robust, reproducible data products.
+
+
+
+
+---
+
+## "Replication Crisis"
+
+
+
+```{r, out.width="90%", echo = F}
+knitr::include_graphics("images_for_lecture/replication_crisis_psych.png")
+```
+
+
+---
+
+## "Many labs"  project
+
+Klein, R. A. "Investigating Variation in Replicability: A 'Many Labs' Replication Project (vol 45, pg 142, 2014)." SOCIAL PSYCHOLOGY 50.3 (2019): 211-213.
+
+```{r, out.width="90%", echo = F}
+knitr::include_graphics("images_for_lecture/many_labs_result.png")
+```
+
+---
+
+background-image: url(images_for_lecture/many_labs_result.png)
+background-size: contain
+
+
+
+
+
+
+---
+
+# Related: Reproducibility
+
+Replicable -> new subjects, new data
+
+--
+
+Reproducible -> same underlying data, reanalyzed
+
+
+---
+
+background-image: url(images_for_lecture/cookies_good_joyfoodsunshine.jpg)
+background-size: cover 
+
+
+
+
+---
+
+
+background-image: url(images_for_lecture/cookies_burnt.jpg)
+background-size: cover 
+
+
+---
+
+## Reproducibility
+
+- Exact record of steps in an analysis
+
+
+
+---
+
+## Why bother?
+
+--
+
+- Transparency
+
+    - Precision in documentation of steps
+  
+--
+
+- Efficiency
+
+    - adding new data
+    - making small modifications to analysis
+
+
+
+
+
+
+
+---
+
+## Tools 
+
+- Literate programming (Donald Knuth)
+  - Abundant annotation of code in plain language
+  - Scripts with comment character (.R)
+
+
+- Dynamic documents
+    - Jupiter Notebooks
+    - Sweave
+    - **R markdown**
+
+
+---
+
+# Dynamic Documents
+
+Prose (plain text) 
+
+--
+
+\+ code
+
+--
+
+\+ output
+
+
+---
+
+
+
+---
+
+
+<!-- adjust font size in this css code chunk, currently 80 -->
+
+```{css, eval = TRUE, echo = FALSE}
+.remark-code{line-height: 1.5; font-size: 80%}
+
+@media print {
+  .has-continuation {
+    display: block;
+  }
+}
+
+code.r.hljs.remark-code{
+  position: relative;
+  overflow-x: hidden;
+}
+
+
+code.r.hljs.remark-code:hover{
+  overflow-x:visible;
+  width: 500px;
+  border-style: solid;
+}
+```
+
+

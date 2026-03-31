@@ -14,159 +14,77 @@ output:
 ---
 
 
+```{r setup, include = F}
+# This is the recommended set up for flipbooks
+# you might think about setting cache to TRUE as you gain practice --- building flipbooks from scratch can be time consuming
+knitr::opts_chunk$set(fig.width = 6, message = FALSE, warning = FALSE, comment = "", cache = T)
+library(flipbookr)
+library(tidyverse)
+options(tidyverse.quiet = TRUE)
+```
+
+
+class: inverse, bottom
+background-image: url(https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80)
+background-size: cover
+
+# .Large[Data Science for IR: Introductions]
+## .small[Korbel School of International Studies]
+## .small[bit.ly/spring-2026-du]
+#### .tiny[Dr. Evangeline Reynolds | `r Sys.Date()` | DU, Image credit: Silas Baisch, Upsplash]
+
+
+???
+
+Title slide
 ```{r, include = F}
 # This is the recommended set up for flipbooks
 # you might think about setting cache to TRUE as you gain practice --- building flipbooks from scratch can be time consuming
-knitr::opts_chunk$set(fig.width = 6, message = FALSE, warning = FALSE, comment = "", cache = F)
+knitr::opts_chunk$set(fig.width = 6, fig.height = 4.5, message = FALSE, warning = FALSE, comment = "", cache = T)
 library(flipbookr)
-library(tidyverse)
+
 ```
 
 
 
 # Hi!
 
---
 
-This 'minimal flipbook' template has a couple of classic examples to get you building your first flipbooks!
-
---
-
-flipbooks are code-movies.  The frames of the movies are slides. Here we use the R package {xaringan} to create a remark.js slideshow. 
-
---
-
-Slide breaks are indicated with `---` (be careful trailing white space is not allowed)
-
---
-
-flipbookr's `chunk_reveal()` disassembles a single code chunk and creates the "build" of multiple partial-code chunks on different slides (the --- is automatically generated for you too).  
-
---
-
-We use `chunk_reveal()` it 'inline', not in a code chunk. 
-
---
-
-Let's start!
-
-
-
----
-class: inverse, middle, center
-
-
-# First up: classic flipbook, using defaults to walk through code pipeline
-
-
-
-
-
-<!-- get a flipbook version of the my_cars code chunk - pauses are where parentheses are balanced -->
----
-
-`r chunk_reveal("my_cars")`
-
-```{r my_cars, include = FALSE}
-cars %>%
-  filter(speed > 4) %>%
-  ggplot() +
-  aes(x = speed) + #BREAK
-  aes(y = dist) + #BREAK
-  geom_point(
-    alpha = .8, 
-    color = "blue" 
-    ) + 
-  aes(size = speed) #BREAK
+```{r}
+us_states_ref <- usmapdata::us_map() |>
+  rename(geometry = geom,
+         state_name = full,
+         state_abbr = abbr) |>
+  select(state_name, everything())
+  
+library(ggregions)
+geom_us_state <- write_geom_region_locale(us_states_ref)
+stamp_us_state <- write_stamp_region_locale(us_states_ref)
+geom_us_state_text <- write_geom_region_text_locale(us_states_ref)
+stamp_us_states_text <- write_stamp_region_text_locale(us_states_ref)
 ```
 
 ---
-class: inverse, center, middle
 
+`r chunk_reveal("us")`
 
-# Next up:  refer to same chunk, but use user defined breakpoints, and display output only
+```{r us, include = F}
 
-
-
-
-
-
-<!-- get another flipbook version of the my_cars code chunk, this time at the defined breaks and only showing output -->
----
-
-`r chunk_reveal("my_cars", break_type = "user", display_type = "output", title = "### user defined break! using #BREAK message")`
-
-
-
----
-class: inverse, center, middle
-
-# Next up:  cycle through different lines of code
-
-
-
-
-
-<!-- get flipbook that rotates through lines, my_fill -->
----
-
-`r chunk_reveal("my_fill", break_type = "rotate", widths = c(1,1), title = "### cycle through lines of code marked #ROTATE")`
-
-```{r my_fill, eval = F, echo = F}
-ggplot(data = cars) +
-  aes(x = speed) +
-  aes(y = dist) +
-  geom_point(size = 8,
-             shape = 21,
-             alpha = .9,
-             color = "snow") +
-  aes(fill = speed) +
-  scale_fill_viridis_c(option = "magma") + #ROTATE
-  scale_fill_viridis_c(option = "cividis") + #ROTATE
-  scale_fill_viridis_c(option = "plasma") #ROTATE
+tribble(~state, ~span, 
+        "Illinois", .6,
+        "Virginia", .1 ,
+        "Colorado", .4,
+        "New York", .15) |>
+  ggplot() + 
+  aes(state_name = state,
+      fill = span) + 
+  stamp_us_state() + 
+  geom_us_state() + 
+  scale_fill_viridis_c() + 
+  scale_fill_viridis_c(end = .8,
+                       begin = .3)
 ```
 
-
----
-class: inverse, center, middle
-
-# Next up:  look at multiple realizations of same code
-
-
-
-
-
-<!-- get flipbook that shows multiple realizations of the same code -->
----
-
-`r chunk_reveal("cars_multi", break_type = 5, title = "### see multiple realizations of code")`
-
-```{r cars_multi, include = FALSE}
-cars %>% 
-  sample_frac(size = 1, replace = TRUE) %>%      
-  ggplot() +              
-  aes(x = speed) +
-  aes(y = dist) +
-  geom_count(
-    alpha = .7,
-    color = "blue",
-    size = 4
-    ) + 
-  geom_smooth(method = lm, se = FALSE) +
-  coord_cartesian(xlim = range(cars$speed),
-                  ylim = range(cars$dist)) +
-  theme(legend.position = c(.9, .2))
-```
-
-
----
-
-`r chunk_reveal("test", left_assign = "detect")`
-
-```{r test, include=FALSE}
-# hello
-jam <- "hi"
-```
 
 
 

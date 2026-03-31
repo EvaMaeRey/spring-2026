@@ -52,22 +52,33 @@ webpages %>%
 
   
 ```{r, eval=FALSE}
-new_xaringan <- function(name){
+new_document <- function(name, type = "xaringan"){
   
   dir <- paste0(Sys.Date(), "-", name)
   
-  dir.create(dir, recursive = F)
+  if(!exists(dir)){dir.create(dir, recursive = F)}
   
-  filepath <- paste0(dir, "/", name, ".Rmd")
+  extension = if(type == "xaringan"){".Rmd"}else{".qmd"}
   
-  readLines("0000-00-00-templates/xaringan_template.Rmd") |> 
+  filepath <- paste0(dir, "/", name, extension)
+  
+  if(type == "xaringan"){template <- "0000-00-00-templates/xaringan_template.Rmd"}
+  if(type == "quarto"){template <- "0000-00-00-templates/quarto_template.qmd"}
+  
+  if(!exists(filepath)){
+  readLines(template) |> 
     writeLines(filepath)
-
+  }
+    
   rstudioapi::documentOpen(filepath)
   
 }   
 
-new_xaringan(name = "introduction")
+new_xaringan <- function(...){new_document(..., type = "xaringan")}
+new_quarto <- function(...){new_document(..., type = "quarto")}
+
+
+new_quarto(name = "r_basics")
 
 ```
 

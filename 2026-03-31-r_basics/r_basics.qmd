@@ -1,0 +1,179 @@
+---
+title: "another exercise"
+author: "..."
+date: "`r Sys.Date()`"
+format: html
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(tidyverse.quiet = TRUE)
+```
+
+
+
+
+
+
+## Interactive session in R: Using the console
+
+### Use R like a calculator
+
+you can use r like a calculator
+
+```{r}
+# you can write comments that r won't read as commands
+
+# addition
+1 + 2
+# Multiplication and Division too of course
+1 * 2 + 3 / 3
+# And parentheses
+1 * (2 + 3) / 3
+```
+
+
+
+## And exponentials and logs
+
+
+```{r}
+5 ^ 2
+25 ^ .5
+```
+
+
+## Functions are important part of R
+
+```{r}
+sqrt(x = 25)
+log10(x = 1000)
+```
+
+
+
+## Assignment operator to creating objects
+
+```{r}
+# you can assign values to objects; check the global environment!
+x <- 1
+z <- 2
+# you can use these objects
+x + 4
+# and make new objects
+y <- x + 4
+y
+```
+
+
+
+<!-- ## Values in R -->
+
+<!-- ```{r} -->
+<!-- # Numeric -->
+<!-- 1 -->
+<!-- # Character -->
+<!-- "Hello, World!" -->
+<!-- # True false -->
+<!-- TRUE  -->
+<!-- FALSE -->
+
+
+
+
+<!-- # dates -->
+<!-- u <- as.Date("2018-12-31") -->
+
+<!-- u -->
+<!-- ``` -->
+
+<!--  -->
+
+<!-- ## Assignment and Objects -->
+
+<!-- "Object oriented programming language" -->
+
+<!-- Objects start with a character (A-Za-z)  -->
+
+<!-- No quotation marks -->
+
+<!-- ```{r} -->
+<!-- # and write over objects -->
+<!-- x <- 10 -->
+<!-- x # Wait a second. So what is the value of y now? -->
+<!-- y <- x + 4  # and now? -->
+<!-- ``` -->
+
+<!--  -->
+
+<!-- ## Coding Style (and using a style guide) -->
+
+<!-- ```{r} -->
+<!-- x_plus_z <- x + z # "snake case" is recommended for longer names -->
+
+<!-- # R is case sensitive -->
+<!-- y # Y returns an error -->
+<!-- ``` -->
+
+<!-- A bit more:  http://adv-r.had.co.nz/Style.html -->
+
+
+<!--  -->
+
+<!-- ## Other objects, vectors and data frames -->
+
+<!-- ```{r, message = F} -->
+<!-- # built in functions -->
+<!-- # objects can be vectors -->
+<!-- v <- c(1, 2, 4) -->
+
+<!-- # combining -->
+<!-- c(1:5, 8) -->
+
+<!-- library(tidyverse) # (contains data_frame function) -->
+<!-- df <- data_frame(place = c(1,2,3), -->
+<!--            names = c("Sarah", "Gina", "Robyn")) -->
+
+<!-- matrix(1:20, nrow = 4) -->
+
+<!-- ``` -->
+
+
+
+<!--  -->
+
+<!-- ## Base R and packages -->
+
+<!-- Many packages are available via The Comprehensive R Archive Network (CRAN) -->
+
+<!-- ```{r, message = F} -->
+<!-- # install.packages() -->
+<!-- library(tidyverse) -->
+<!-- library(gapminder) -->
+<!-- ``` -->
+
+
+<!--  -->
+
+<!-- ## Trouble shooting common problems -->
+
+<!-- - Errors -->
+<!-- - Parentheses paired? (use escape key)    -->
+<!-- - Plus sign or pipe in the right position?  -->
+
+
+<!-- ```{r, eval = F} -->
+<!-- sqrt(16)) -->
+<!-- ``` -->
+
+
+<!-- - getting help -->
+
+<!--     - help tab in RStudio files/plots/... pane -->
+<!--     - documentation -->
+<!--         - Example: https://cran.r-project.org/web/packages/gapminder/gapminder.pdf -->
+<!--     - ?function() in console -->
+<!--     - googling error messages -->
+
+<!--         - stackoverflow -->
