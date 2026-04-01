@@ -76,11 +76,9 @@ And being able to compose moves to create coherent, robust, reproducible data pr
 
 ## "Replication Crisis"
 
+![](../images/clipboard-926906303.png)
 
 
-```{r, out.width="90%", echo = F}
-# knitr::include_graphics("images_for_lecture/replication_crisis_psych.png")
-```
 
 
 ---
@@ -89,13 +87,16 @@ And being able to compose moves to create coherent, robust, reproducible data pr
 
 Klein, R. A. "Investigating Variation in Replicability: A 'Many Labs' Replication Project (vol 45, pg 142, 2014)." SOCIAL PSYCHOLOGY 50.3 (2019): 211-213.
 
+![](../images/clipboard-2473160817.png)
+
+
 ```{r, out.width="90%", echo = F}
 # knitr::include_graphics("images_for_lecture/many_labs_result.png")
 ```
 
 ---
 
-background-image: url(images_for_lecture/many_labs_result.png)
+background-image: url(../images/many_labs_result.png)
 background-size: contain
 
 
@@ -111,22 +112,20 @@ Replicable -> new subjects, new data
 
 --
 
-Reproducible -> same underlying data, reanalyzed
-
-
----
-
-background-image: url(images_for_lecture/cookies_good_joyfoodsunshine.jpg)
-background-size: cover 
-
-
+Reproducible -> same underlying data, exact same conclusions drawn, following the researchers instructions
 
 
 ---
 
 
-background-image: url(images_for_lecture/cookies_burnt.jpg)
-background-size: cover 
+
+![](../images/clipboard-2804641906.png)
+
+
+---
+
+
+![](../images/clipboard-3411260092.png)
 
 
 ---
@@ -153,11 +152,6 @@ background-size: cover
 
     - adding new data
     - making small modifications to analysis
-
-
-
-
-
 
 
 ---
@@ -190,7 +184,7 @@ Prose (plain text)
 \+ output
 
 
----
+
 
 
 

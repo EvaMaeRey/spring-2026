@@ -1,11 +1,8 @@
 ---
 output: github_document
 ---
-   
-<!-- README.md is generated from README.Rmd. Please edit that file --> 
- 
-   
-   
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(      
@@ -18,11 +15,12 @@ knitr::opts_chunk$set(
 ```
 
 # This repo is for our Spring 2026 stuff...
- 
-<!-- badges: start -->
-<!-- badges: end -->  
 
-The goal of spring-2026 is to hold our stuff.  
+<!-- badges: start -->
+
+<!-- badges: end -->
+
+The goal of spring-2026 is to hold our stuff.
 
 ```{r, results = 'asis', echo = F}
 library(magrittr)
@@ -44,13 +42,7 @@ webpages %>%
          ")**\n") %>% 
   cat()     
 ```
- 
- 
- 
- 
 
-
-  
 ```{r, eval=FALSE}
 new_document <- function(name, type = "xaringan"){
   
@@ -82,8 +74,5 @@ new_quarto(name = "r_basics")
 
 ```
 
-End.
-
-
-
+-End-
 
