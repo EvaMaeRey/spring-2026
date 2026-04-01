@@ -51,3 +51,5 @@ new_quarto <- function(...){new_document(..., type = "quarto")}
 
 new_quarto(name = "r_basics")
 ```
+
+End.
