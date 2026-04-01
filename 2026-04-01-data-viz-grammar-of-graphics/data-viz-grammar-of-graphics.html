@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Spring 2026 Slides</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Evangeline ‘Gina’ Reynolds" />
+    <script src="libs/header-attrs-2.30/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/ninjutsu.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: inverse, left, bottom
+background-image: url(../../../teaching/lecture_topics/images_for_lecture/data_viz_william_iven_unsplash.jpg)
+background-size: cover
+
+# .Large[Data Visualization]
+
+## .small[Welcome]
+#### .tiny[Dr. Evangeline Reynolds | DS4IR | 2026-04-01 |Image credit: William Iven, Upsplash]
+
+
+???
+
+Title slide
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;!-- &lt;img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Hinman_collator.jpg" width="150px"/&gt; --&gt;
+
+---
+
+# Agenda
+
+- The Promise of Data Visualization
+- ggplot2, what, why, and how (with gapminder data)?
+
+
+---
+
+Next week:
+
+- A chart that impacted you...
+- aesthetic mapping
+
+
+---
+
+&lt;!-- 1. Data Visualization - Tukey's quotation... --&gt;
+&lt;!-- 2. Grammar of Graphics --&gt;
+&lt;!--   - simple 3 components --&gt;
+&lt;!--   - history --&gt;
+&lt;!--   - more detail on the components --&gt;
+&lt;!-- 3. Example, what is a pie chart...  --&gt;
+&lt;!-- &gt; Discussion: Among the components, what is the hero of data viz.  What is the great communicator?  --&gt;
+&lt;!-- 4. Hadley's quotation... --&gt;
+&lt;!-- &gt; Point to ponder:  Are you more of a "glamour of graphics" person or a "grammar of graphics" person.   --&gt;
+
+&lt;!-- 5. Intro to R and RStudio - console and Rmarkdown --&gt;
+
+&lt;!-- 6. Intro to Tableau Desktop Public Edition --&gt;
+
+&lt;!-- &gt; Next week: What is a figure that has made an impact on you?  Articulate why...     --&gt;
+
+---
+
+Function of data vis:
+
+&gt; "The simple graph has brought more information to the data analyst’s mind than any other device" 
+
+
+---
+
+
+Fundamentals of Data Visualization: 
+
+&gt; The book is meant as a guide to making visualizations that accurately reflect the data, tell a story, and look professional.
+
+
+
+
+
+---
+
+![Roger Peng's schematic (EDA = Exploratory Data Analysis)](../../../teaching/lecture_topics/images_for_lecture/peng_hypothesis_testing.png)
+
+
+
+---
+
+
+![R for data science](../../../teaching/lecture_topics/images_for_lecture/data-science-steps.png)
+
+---
+
+  
+  
+- grammar of graphics
+- Discussion "Three waves"
+- Intro to R, RStudio, to ggplot(), w/ gapminder data
+
+
+
+---
+
+# Break out 1 - and introductions
+
+Which are you?
+
+--
+
+exploration &lt;--&gt; communication
+
+--
+
+data &lt;--&gt; vis
+
+--
+
+grammar of graphics &lt;--&gt; glamour of graphics
+
+--
+
+Quadratisch. Praktisch. Gut &lt;--&gt; Je suis un artist
+
+
+---
+
+![](../../../teaching/lecture_topics/images_for_lecture/ritter_sport.jpeg)
+
+
+
+
+---
+
+# The "Grammar of Graphics" - 1999 
+
+&lt;img src="../../../teaching/lecture_topics/images_for_lecture/wilkinson_grammar_of_graphics.png" width="40%" /&gt;
+
+
+---
+
+- non judgemental about
+  - what's a good or bad chart, chart that communicates well or not
+  - about beauty, thematic choices
+  - how to design a chart building API
+
+
+---
+
+
+# definition of a data visualization...
+
+
+---
+
+
+# A data visualization is made up of ...
+
+--
+
+### .left[... geometric objects ...]
+
+--
+
+### .center[...that take on aesthetics (color, line width, x-position) ...]
+
+--
+
+### .center[...which represent variables ...]
+
+--
+
+### .right[...from a dataset (dataframe)]
+
+---
+
+# colloquial:
+
+## "aesthetics representing variables"
+
+--
+
+# Term of art:
+
+## "variables mapped to aesthetics"
+
+---
+
+# colloquial:
+
+## "data visualization"
+
+--
+
+# Term of art:
+
+## "statistical graphic"
+
+
+---
+
+class: center, middle
+
+
+.large[A statistical graphic ...]
+
+--
+
+
+.large[maps variables of a data set] 
+
+--
+
+
+.large[to the aesthetics of geometric objects.]
+
+
+
+
+---
+
+## Elements of the Grammar of Graphics (choices)
+
+&lt;img src="../../../teaching/lecture_topics/images_for_lecture/wilkinson_layers_grammar_of_graphics.png" width="957" /&gt;
+
+---
+
+### A series of choices:
+
+- choose data
+
+--
+
+- choose aesthetic mapping (what aesthetics will represent what variables)
+
+--
+- choose geometric objects
+
+--
+
+- make decision to facet or not
+
+--
+
+- make choice to summarize data or not (statistics)
+
+--
+- choose a coordinate system
+
+--
+- make thematic choices
+
+
+---
+
+
+
+
+
+
+---
+
+# Hadley Wickham on grammar of graphics
+
+&gt; A grammar of graphics is a tool that enables us to concisely describe the components of a graphic. Such a grammar allows us to **move beyond named graphics** (e.g., the “scatterplot”) and gain insight into the **deep structure** that underlies statistical graphics.
+
+---
+
+# Hadley Wickham on grammar of graphics
+
+&gt; .large[A good grammar will allow us to gain insight into the composition of complicated graphics, and reveal **unexpected connections**
+between seemingly different graphics (Cox 1978).]
+
+---
+
+# if don't know the chart name...?
+
+&lt;img src="../../../teaching/lecture_topics/images_for_lecture/poster_vis_vocab.png" width="80%" /&gt;
+
+---
+
+background-image: url(images_for_lecture/poster_vis_vocab.png)
+background-size: contain
+
+---
+# what's a pie chart?
+
+
+
+https://evamaerey.github.io/flipbooks/pie_chart/pie_chart
+
+
+
+
+---
+class: center, middle
+
+# "Cleveland dot plot?"
+
+![example from https://uc-r.github.io/](https://uc-r.github.io/public/images/visual/cleveland-dotplots/icon.png)
+
+
+
+
+---
+
+# Implementations
+
+
+# Tableau 
+
+Polaris -&gt; Tableau - Acquired for 15.7 Billion dollars (salesforce)
+
+--
+
+Vega Lite... (dynamic, interactive data visualizations in web browsers)
+
+
+--
+
+ggplot2
+
+
+---
+
+background-image: url(images_for_lecture/ggplot2_skill_transfer.png)
+background-size: contain
+
+
+
+--
+
+.right[learning ggplot - transferable skill!]
+
+
+
+---
+background-image: url(images_for_lecture/ggplot_beautiful_examples.png)
+background-size: contain 
+ 
+ggplot2: and quickly explore data, and iterate on explorations
+
+
+---
+background-image: url(images_for_lecture/ggplot_beautiful_examples.png)
+background-size: contain
+
+A tool for making beautiful things...
+
+
+
+
+
+
+
+
+---
+
+# BBC on ggplot
+
+ [From "How the BBC Visual and Data Journalism team works with graphics in R":](https://medium.com/bbc-visual-and-data-journalism/how-the-bbc-visual-and-data-journalism-team-works-with-graphics-in-r-ed0b35693535)
+  
+On flexibility:  
+  
+&gt; ggplot2 gives you far more **control and creativity** than a chart tool and allows you to go **beyond a limited number of graphics**.
+
+
+---
+
+# BBC on ggplot
+
+  
+On reproducibility:  
+  
+&gt; Working with **scripts** saves a huge amount of time and effort, in particular when working with data that needs updating regularly, with reproducibility a key requirement of our workflow.
+
+--
+
+In sum:
+
+*In short, it was a **game changer**, so we quickly turned our attention to how best manage this newly-discovered power.*
+
+
+
+
+
+
+---
+
+# ggplot2's full name is:
+
+A "*Layered* grammar of graphics" ... 
+
+--
+
+
+so the promise of building up your plot step-by-step -- incrementally!
+
+
+
+
+
+---
+
+### Building up a plot: Layered presentation of graphics
+
+&lt;blockquote class="twitter-tweet" data-lang="en"&gt;&lt;p lang="en" dir="ltr"&gt;My best tip on how to give better quantitative presentations is to (a) use more plots and (b) build up your plots on multiple overlays, as in:&lt;br&gt;&lt;br&gt;- Just x-axis (explain it)&lt;br&gt;- Add y-axis (explain it)&lt;br&gt;- Add 1 data point (explain it)&lt;br&gt;- Plot the rest of the data (explain it)&lt;/p&gt;&amp;mdash; Matt Blackwell (@matt_blackwell) &lt;a href="https://twitter.com/matt_blackwell/status/991004129198854145?ref_src=twsrc%5Etfw"&gt;April 30, 2018&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src="https://platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+
+
+
+
+---
+
+&gt; `+` [the plus sign] is the key to constructing sophisticated ggplot2 graphics. It allows you to start simple, then get more and more complex, checking your work at each step.
+
+``` r
+ggplot() +
+  aes(x = 1) +
+  aes(y = n) +
+  geom_col(width = 2, col = "grey", ) + 
+  aes(fill = continent) +
+  geom_point(aes(y = text_pos_y, x = 2.3), 
+             color = "pink") +
+  aes(label = continent) +
+  geom_text(aes(y = text_pos_y, x = 2.3), 
+            color = "navy") +
+  geom_vline(xintercept = 0:2, lty = "dashed") +
+  scale_x_continuous(limits = c(-1, 3)) +
+  coord_polar(theta = "y")
+```
+
+
+
+---
+
+Very current relevance... Data Journalist's work ...
+
+https://twitter.com/jburnmurdoch/status/1237737352879112194
+
+What are some of the decisions that were made?
+
+List at least 6 in your group... 
+
+--
+
+Then try rank order as the most consequential vs. least
+
+--
+
+
+https://evamaerey.github.io/flipbooks/covid_19/covid_19_2
+
+
+
+---
+
+
+## Elements of the Grammar of Graphics (choices)
+
+What do you think is the key piece in terms of communication for creating graphs?  What makes visualization so effective anyway?  
+
+&lt;img src="../../../teaching/lecture_topics/images_for_lecture/wilkinson_layers_grammar_of_graphics.png" width="957" /&gt;
+
+
+
+---
+
+## Key Aesthetics
+
+
+&lt;img src="../../../teaching/lecture_topics/images_for_lecture/common-aesthetics-1.png" width="1536" /&gt;
+
+
+---
+class: center, middle
+# Prep for Demo
+
+
+
+# Hans Rosling
+
+
+https://www.youtube.com/watch?v=jbkSRLYSojo
+
+
+---
+
+What are the variables that are represented in the video?
+
+--
+
+What are the aesthetics used to represent variables?
+
+--
+
+What are the aesthetic mappings (variable aesthetic pairings)
+
+--
+
+
+---
+
+
+
+```
+# A tibble: 1,704 × 6
+   country     continent  year lifeExp      pop gdpPercap
+   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
+ 1 Afghanistan Asia       1952    28.8  8425333      779.
+ 2 Afghanistan Asia       1957    30.3  9240934      821.
+ 3 Afghanistan Asia       1962    32.0 10267083      853.
+ 4 Afghanistan Asia       1967    34.0 11537966      836.
+ 5 Afghanistan Asia       1972    36.1 13079460      740.
+ 6 Afghanistan Asia       1977    38.4 14880372      786.
+ 7 Afghanistan Asia       1982    39.9 12881816      978.
+ 8 Afghanistan Asia       1987    40.8 13867957      852.
+ 9 Afghanistan Asia       1992    41.7 16317921      649.
+10 Afghanistan Asia       1997    41.8 22227415      635.
+# ℹ 1,694 more rows
+```
+
+
+
+---
+
+
+Bit of a Break... 
+
+
+---
+
+ggplot2 "Layered grammar of graphics" 
+
+-- 
+
+building up your plots
+
+---
+
+# But ... the working backward paradigm pretty strong
+
+One rather savvy and experienced R described his experience with ggplot2:  “All good ggplots start like all good makefiles, by copying the last one you edited and deleting most of it.” 
+
+&lt;img src="../../../teaching/lecture_topics/images_for_lecture/copy_ggplots.png" width="796" /&gt;
+
+
+---
+
+"Hacker News" exchange about ggplot2: 	
+	
+sk5t 8 months ago [-]
+
+*I can't help but wonder--as someone who has flirted with R but certainly not committed--how much time and practice it takes to acquire decent fluency with these half-magical incantations to become productive.*
+
+---
+
+jhbadger 8 months ago [-]
+
+*Not that long. The trick is to really understand what each clause is doing. It's easy to just find some code on the Web for a graph similar to what you want and tweak it for your data, and I did that myself in the beginning, but then they will remain "half-magical incantations" as you put it. The thing about ggplot is nothing is there arbitrarily -- it is really describing how the plot is put together.*
+
+
+---
+
+
+"Discrete" and "Continous" data
+
+&lt;img src="../../../teaching/lecture_topics/images_for_lecture/common-aesthetics-1.png" width="1536" /&gt;
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "ratio": "16:9",
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

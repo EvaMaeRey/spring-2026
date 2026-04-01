@@ -1,0 +1,600 @@
+---
+title: "Spring 2026 Slides"
+author: "Evangeline 'Gina' Reynolds"
+output:
+  xaringan::moon_reader:
+    seal: FALSE
+    lib_dir: libs
+    css: [default, hygge, ninjutsu]
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+class: inverse, left, bottom
+background-image: url(../../../teaching/lecture_topics/images_for_lecture/data_viz_william_iven_unsplash.jpg)
+background-size: cover
+
+# .Large[Data Visualization]
+
+## .small[]
+#### .tiny[Dr. Evangeline Reynolds | DS4IR | 2026-04-01 |Image credit: William Iven, Upsplash]
+
+
+???
+
+Title slide
+
+---
+
+
+
+
+
+
+
+```{r xaringan-themer, include = FALSE}
+library(xaringanthemer)
+
+
+xaringanthemer::mono_light(
+  base_color = "#4c5253",
+  header_font_google = google_font("Josefin Sans"),
+  text_font_google   = google_font("Montserrat", "200", "200i"),
+  code_font_google   = google_font("Droid Mono"),
+  text_font_size = ".85cm",
+  code_font_size = ".35cm")
+  
+```
+
+```{r, echo = F}
+knitr::opts_chunk$set(message = F, warning = F, comment = "", fig.height = 4.5, echo = F)
+```
+
+
+<!-- <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Hinman_collator.jpg" width="150px"/> -->
+
+---
+
+# Agenda
+
+- The Promise of Data Visualization
+- ggplot2, what, why, and how (with gapminder data)?
+
+
+---
+
+Next week:
+
+- A chart that impacted you...
+- aesthetic mapping
+
+
+---
+
+<!-- 1. Data Visualization - Tukey's quotation... -->
+<!-- 2. Grammar of Graphics -->
+<!--   - simple 3 components -->
+<!--   - history -->
+<!--   - more detail on the components -->
+<!-- 3. Example, what is a pie chart...  -->
+<!-- > Discussion: Among the components, what is the hero of data viz.  What is the great communicator?  -->
+<!-- 4. Hadley's quotation... -->
+<!-- > Point to ponder:  Are you more of a "glamour of graphics" person or a "grammar of graphics" person.   -->
+
+<!-- 5. Intro to R and RStudio - console and Rmarkdown -->
+
+<!-- 6. Intro to Tableau Desktop Public Edition -->
+
+<!-- > Next week: What is a figure that has made an impact on you?  Articulate why...     -->
+
+---
+
+Function of data vis:
+
+> "The simple graph has brought more information to the data analyst’s mind than any other device" 
+
+
+---
+
+
+Fundamentals of Data Visualization: 
+
+> The book is meant as a guide to making visualizations that accurately reflect the data, tell a story, and look professional.
+
+
+
+
+
+---
+
+![Roger Peng's schematic (EDA = Exploratory Data Analysis)](../../../teaching/lecture_topics/images_for_lecture/peng_hypothesis_testing.png)
+
+
+
+---
+
+
+![R for data science](../../../teaching/lecture_topics/images_for_lecture/data-science-steps.png)
+
+---
+
+  
+  
+- grammar of graphics
+- Discussion "Three waves"
+- Intro to R, RStudio, to ggplot(), w/ gapminder data
+
+
+
+---
+
+# Break out 1 - and introductions
+
+Which are you?
+
+--
+
+exploration <--> communication
+
+--
+
+data <--> vis
+
+--
+
+grammar of graphics <--> glamour of graphics
+
+--
+
+Quadratisch. Praktisch. Gut <--> Je suis un artist
+
+
+---
+
+![](../../../teaching/lecture_topics/images_for_lecture/ritter_sport.jpeg)
+
+
+
+
+---
+
+# The "Grammar of Graphics" - 1999 
+
+```{r, out.width="40%"}
+knitr::include_graphics("../../../teaching/lecture_topics/images_for_lecture/wilkinson_grammar_of_graphics.png")
+```
+
+
+---
+
+- non judgemental about
+  - what's a good or bad chart, chart that communicates well or not
+  - about beauty, thematic choices
+  - how to design a chart building API
+
+
+---
+
+
+# definition of a data visualization...
+
+
+---
+
+
+# A data visualization is made up of ...
+
+--
+
+### .left[... geometric objects ...]
+
+--
+
+### .center[...that take on aesthetics (color, line width, x-position) ...]
+
+--
+
+### .center[...which represent variables ...]
+
+--
+
+### .right[...from a dataset (dataframe)]
+
+---
+
+# colloquial:
+
+## "aesthetics representing variables"
+
+--
+
+# Term of art:
+
+## "variables mapped to aesthetics"
+
+---
+
+# colloquial:
+
+## "data visualization"
+
+--
+
+# Term of art:
+
+## "statistical graphic"
+
+
+---
+
+class: center, middle
+
+
+.large[A statistical graphic ...]
+
+--
+
+
+.large[maps variables of a data set] 
+
+--
+
+
+.large[to the aesthetics of geometric objects.]
+
+
+
+
+---
+
+## Elements of the Grammar of Graphics (choices)
+
+```{r}
+knitr::include_graphics("../../../teaching/lecture_topics/images_for_lecture/wilkinson_layers_grammar_of_graphics.png")
+```
+
+---
+
+### A series of choices:
+
+- choose data
+
+--
+
+- choose aesthetic mapping (what aesthetics will represent what variables)
+
+--
+- choose geometric objects
+
+--
+
+- make decision to facet or not
+
+--
+
+- make choice to summarize data or not (statistics)
+
+--
+- choose a coordinate system
+
+--
+- make thematic choices
+
+
+---
+
+
+
+
+
+
+---
+
+# Hadley Wickham on grammar of graphics
+
+> A grammar of graphics is a tool that enables us to concisely describe the components of a graphic. Such a grammar allows us to **move beyond named graphics** (e.g., the “scatterplot”) and gain insight into the **deep structure** that underlies statistical graphics.
+
+---
+
+# Hadley Wickham on grammar of graphics
+
+> .large[A good grammar will allow us to gain insight into the composition of complicated graphics, and reveal **unexpected connections**
+between seemingly different graphics (Cox 1978).]
+
+---
+
+# if don't know the chart name...?
+
+```{r, out.width="80%"}
+knitr::include_graphics("../../../teaching/lecture_topics/images_for_lecture/poster_vis_vocab.png")
+```
+
+---
+
+background-image: url(images_for_lecture/poster_vis_vocab.png)
+background-size: contain
+
+---
+# what's a pie chart?
+
+
+
+https://evamaerey.github.io/flipbooks/pie_chart/pie_chart
+
+
+
+
+---
+class: center, middle
+
+# "Cleveland dot plot?"
+
+![example from https://uc-r.github.io/](https://uc-r.github.io/public/images/visual/cleveland-dotplots/icon.png)
+
+
+
+
+---
+
+# Implementations
+
+
+# Tableau 
+
+Polaris -> Tableau - Acquired for 15.7 Billion dollars (salesforce)
+
+--
+
+Vega Lite... (dynamic, interactive data visualizations in web browsers)
+
+
+--
+
+ggplot2
+
+
+---
+
+background-image: url(images_for_lecture/ggplot2_skill_transfer.png)
+background-size: contain
+
+
+
+--
+
+.right[learning ggplot - transferable skill!]
+
+
+
+---
+background-image: url(images_for_lecture/ggplot_beautiful_examples.png)
+background-size: contain 
+ 
+ggplot2: and quickly explore data, and iterate on explorations
+
+
+---
+background-image: url(images_for_lecture/ggplot_beautiful_examples.png)
+background-size: contain
+
+A tool for making beautiful things...
+
+
+
+
+
+
+
+
+---
+
+# BBC on ggplot
+
+ [From "How the BBC Visual and Data Journalism team works with graphics in R":](https://medium.com/bbc-visual-and-data-journalism/how-the-bbc-visual-and-data-journalism-team-works-with-graphics-in-r-ed0b35693535)
+  
+On flexibility:  
+  
+> ggplot2 gives you far more **control and creativity** than a chart tool and allows you to go **beyond a limited number of graphics**.
+
+
+---
+
+# BBC on ggplot
+
+  
+On reproducibility:  
+  
+> Working with **scripts** saves a huge amount of time and effort, in particular when working with data that needs updating regularly, with reproducibility a key requirement of our workflow.
+
+--
+
+In sum:
+
+*In short, it was a **game changer**, so we quickly turned our attention to how best manage this newly-discovered power.*
+
+
+
+
+
+
+---
+
+# ggplot2's full name is:
+
+A "*Layered* grammar of graphics" ... 
+
+--
+
+
+so the promise of building up your plot step-by-step -- incrementally!
+
+
+
+
+
+---
+
+### Building up a plot: Layered presentation of graphics
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">My best tip on how to give better quantitative presentations is to (a) use more plots and (b) build up your plots on multiple overlays, as in:<br><br>- Just x-axis (explain it)<br>- Add y-axis (explain it)<br>- Add 1 data point (explain it)<br>- Plot the rest of the data (explain it)</p>&mdash; Matt Blackwell (@matt_blackwell) <a href="https://twitter.com/matt_blackwell/status/991004129198854145?ref_src=twsrc%5Etfw">April 30, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+
+---
+
+> `+` [the plus sign] is the key to constructing sophisticated ggplot2 graphics. It allows you to start simple, then get more and more complex, checking your work at each step.
+
+``` r
+ggplot() +
+  aes(x = 1) +
+  aes(y = n) +
+  geom_col(width = 2, col = "grey", ) + 
+  aes(fill = continent) +
+  geom_point(aes(y = text_pos_y, x = 2.3), 
+             color = "pink") +
+  aes(label = continent) +
+  geom_text(aes(y = text_pos_y, x = 2.3), 
+            color = "navy") +
+  geom_vline(xintercept = 0:2, lty = "dashed") +
+  scale_x_continuous(limits = c(-1, 3)) +
+  coord_polar(theta = "y")
+```
+
+
+
+---
+
+Very current relevance... Data Journalist's work ...
+
+https://twitter.com/jburnmurdoch/status/1237737352879112194
+
+What are some of the decisions that were made?
+
+List at least 6 in your group... 
+
+--
+
+Then try rank order as the most consequential vs. least
+
+--
+
+
+https://evamaerey.github.io/flipbooks/covid_19/covid_19_2
+
+
+
+---
+
+
+## Elements of the Grammar of Graphics (choices)
+
+What do you think is the key piece in terms of communication for creating graphs?  What makes visualization so effective anyway?  
+
+```{r}
+knitr::include_graphics("../../../teaching/lecture_topics/images_for_lecture/wilkinson_layers_grammar_of_graphics.png")
+```
+
+
+
+---
+
+## Key Aesthetics
+
+
+```{r}
+knitr::include_graphics("../../../teaching/lecture_topics/images_for_lecture/common-aesthetics-1.png")
+```
+
+
+---
+class: center, middle
+# Prep for Demo
+
+
+
+# Hans Rosling
+
+
+https://www.youtube.com/watch?v=jbkSRLYSojo
+
+
+---
+
+What are the variables that are represented in the video?
+
+--
+
+What are the aesthetics used to represent variables?
+
+--
+
+What are the aesthetic mappings (variable aesthetic pairings)
+
+--
+
+
+---
+
+
+```{r}
+gapminder::gapminder
+```
+
+
+
+---
+
+
+Bit of a Break... 
+
+
+---
+
+ggplot2 "Layered grammar of graphics" 
+
+-- 
+
+building up your plots
+
+---
+
+# But ... the working backward paradigm pretty strong
+
+One rather savvy and experienced R described his experience with ggplot2:  “All good ggplots start like all good makefiles, by copying the last one you edited and deleting most of it.” 
+
+```{r}
+knitr::include_graphics("../../../teaching/lecture_topics/images_for_lecture/copy_ggplots.png")
+```
+
+
+---
+
+"Hacker News" exchange about ggplot2: 	
+	
+sk5t 8 months ago [-]
+
+*I can't help but wonder--as someone who has flirted with R but certainly not committed--how much time and practice it takes to acquire decent fluency with these half-magical incantations to become productive.*
+
+---
+
+jhbadger 8 months ago [-]
+
+*Not that long. The trick is to really understand what each clause is doing. It's easy to just find some code on the Web for a graph similar to what you want and tweak it for your data, and I did that myself in the beginning, but then they will remain "half-magical incantations" as you put it. The thing about ggplot is nothing is there arbitrarily -- it is really describing how the plot is put together.*
+
+
+---
+
+
+"Discrete" and "Continous" data
+
+```{r}
+knitr::include_graphics("../../../teaching/lecture_topics/images_for_lecture/common-aesthetics-1.png")
+```
+
+
+
