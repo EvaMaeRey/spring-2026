@@ -70,7 +70,9 @@ new_xaringan <- function(...){new_document(..., type = "xaringan")}
 new_quarto <- function(...){new_document(..., type = "quarto")}
 
 
-new_xaringan(name = "data-viz-grammar-of-graphics")
+# new_xaringan(name = "data-viz-grammar-of-graphics")
+
+new_quarto("more-data-viz")
 
 ```
 
