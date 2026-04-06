@@ -1,0 +1,30 @@
+---
+title: "gapminder data viz"
+format: html
+editor: visual
+---
+
+## Gapminder analysis
+
+We *watched* Hans Rosling **presenting** economic data...
+
+```{r}
+library(gapminder)
+library(ggplot2)
+library(dplyr)
+
+
+gap2002 = gapminder |>
+  filter(year == 2002)
+  
+
+gap2002 |>
+  ggplot() +
+  aes(y = lifeExp) +
+  aes(x = gdpPercap) +
+  geom_point() + 
+  aes(color = continent) +
+  aes(size = pop)
+
+```
+

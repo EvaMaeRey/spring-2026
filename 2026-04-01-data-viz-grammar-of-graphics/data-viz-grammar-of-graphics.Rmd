@@ -30,6 +30,28 @@ Title slide
 ---
 
 
+```{r, eval = F, echo = F}
+dir.create("images_for_lecture")
+
+
+readLines("data-viz-grammar-of-graphics.Rmd") |>
+  data.frame(x = _) |> 
+  filter(str_detect(x, "images_for_lecture")) |>
+  mutate(image_path = str_extract(x,"../../../teaching/lecture_topics/images_for_lecture.+") |> str_remove("\\)") |> str_remove("\\\"")) |> 
+  pull(image_path) ->
+files
+
+files <- files[!is.na(files)]
+
+# for(i in 1:length(files)){
+#   
+#   file.copy(from = files[i], to = files[i] |> str_remove("../../../teaching/lecture_topics/"))
+#   
+# }
+
+
+
+```
 
 
 
@@ -267,6 +289,7 @@ knitr::include_graphics("../../../teaching/lecture_topics/images_for_lecture/wil
 - choose aesthetic mapping (what aesthetics will represent what variables)
 
 --
+
 - choose geometric objects
 
 --
@@ -278,9 +301,11 @@ knitr::include_graphics("../../../teaching/lecture_topics/images_for_lecture/wil
 - make choice to summarize data or not (statistics)
 
 --
+
 - choose a coordinate system
 
 --
+
 - make thematic choices
 
 
@@ -381,9 +406,6 @@ background-image: url(images_for_lecture/ggplot_beautiful_examples.png)
 background-size: contain
 
 A tool for making beautiful things...
-
-
-
 
 
 
@@ -505,6 +527,8 @@ knitr::include_graphics("../../../teaching/lecture_topics/images_for_lecture/wil
 
 ## Key Aesthetics
 
+Channels for visually encoding information...
+
 
 ```{r}
 knitr::include_graphics("../../../teaching/lecture_topics/images_for_lecture/common-aesthetics-1.png")
@@ -535,7 +559,6 @@ What are the aesthetics used to represent variables?
 
 What are the aesthetic mappings (variable aesthetic pairings)
 
---
 
 
 ---
