@@ -13,18 +13,60 @@ library(gapminder)
 library(ggplot2)
 library(dplyr)
 
-
 gap2002 = gapminder |>
   filter(year == 2002)
   
-
 gap2002 |>
-  ggplot() +
+  ggplot(data = _) +
   aes(y = lifeExp) +
   aes(x = gdpPercap) +
   geom_point() + 
   aes(color = continent) +
-  aes(size = pop)
+  aes(size = pop) +
+  aes(shape = continent) +
+  aes(alpha = lifeExp) + # alpha is for transparency...
+  aes(color = NULL)
+  
+gap_continents = gapminder |> 
+  filter(year == 2002) |>
+  count(continent)
 
+
+ggplot(data = gap_continents) +
+  aes(x = continent) + 
+  aes(y = n) + 
+  geom_col() + 
+  # aes(color = continent) + 
+  aes(fill = continent) + 
+  aes(color = I("blue")) +
+  aes(alpha = n) + 
+  aes(linetype = continent) +
+  aes(linewidth = continent == "Europe") +
+  aes(linewidth = NULL)
+  
 ```
 
+
+```{r}
+gap2002 |>
+  ggplot(data = _) +
+  aes(y = lifeExp) +
+  aes(x = gdpPercap) +
+  geom_point() + 
+  aes(color = gdpPercap) + 
+  labs(y = "Life Expectancy (years)") +
+  labs(x = "GDP per Capita (dollars)") + 
+  labs(color = "GDP per Capita") + 
+  labs(title = "Gapminder Data in 2002") + 
+  labs(subtitle = "As presented by Hans Rosling") + 
+  labs(caption = "Source: gapminder package") +
+  facet_wrap(facets = vars(continent)) +
+  scale_color_viridis_c(option = "magma") + 
+  scale_x_log10() +
+  # facet_null() # just to have a quick look at x scale adjustment
+  theme_minimal(paper = "lightgrey",
+                ink = "midnightblue", 
+                base_size = 8) + 
+  scale_y_reverse()
+
+```
