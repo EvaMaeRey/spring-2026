@@ -13,25 +13,29 @@ The goal of spring-2026 is to hold our stuff.
     **[source](https://github.com/evamaerey/spring-2026/blob/master/hello_world.Rmd)**
 2.  [gapminder_exercise.html](https://evamaerey.github.io/spring-2026/gapminder_exercise.html)
     **[source](https://github.com/evamaerey/spring-2026/blob/master/gapminder_exercise.Rmd)**
-3.  [2026-04-03-more-data-viz/week-1-review.html](https://evamaerey.github.io/spring-2026/2026-04-03-more-data-viz/week-1-review.html)
+3.  [2026-04-08-first-lab-ggplot2/first-lab-ggplot2.html](https://evamaerey.github.io/spring-2026/2026-04-08-first-lab-ggplot2/first-lab-ggplot2.html)
+    **[source](https://github.com/evamaerey/spring-2026/blob/master/2026-04-08-first-lab-ggplot2/first-lab-ggplot2.Rmd)**
+4.  [2026-04-08-final-data-viz/final-data-viz.html](https://evamaerey.github.io/spring-2026/2026-04-08-final-data-viz/final-data-viz.html)
+    **[source](https://github.com/evamaerey/spring-2026/blob/master/2026-04-08-final-data-viz/final-data-viz.Rmd)**
+5.  [2026-04-03-more-data-viz/week-1-review.html](https://evamaerey.github.io/spring-2026/2026-04-03-more-data-viz/week-1-review.html)
     **[source](https://github.com/evamaerey/spring-2026/blob/master/2026-04-03-more-data-viz/week-1-review.Rmd)**
-4.  [2026-04-03-more-data-viz/more-data-viz.html](https://evamaerey.github.io/spring-2026/2026-04-03-more-data-viz/more-data-viz.html)
+6.  [2026-04-03-more-data-viz/more-data-viz.html](https://evamaerey.github.io/spring-2026/2026-04-03-more-data-viz/more-data-viz.html)
     **[source](https://github.com/evamaerey/spring-2026/blob/master/2026-04-03-more-data-viz/more-data-viz.Rmd)**
-5.  [2026-04-01-data-viz-grammar-of-graphics/data-viz-grammar-of-graphics.html](https://evamaerey.github.io/spring-2026/2026-04-01-data-viz-grammar-of-graphics/data-viz-grammar-of-graphics.html)
+7.  [2026-04-01-data-viz-grammar-of-graphics/data-viz-grammar-of-graphics.html](https://evamaerey.github.io/spring-2026/2026-04-01-data-viz-grammar-of-graphics/data-viz-grammar-of-graphics.html)
     **[source](https://github.com/evamaerey/spring-2026/blob/master/2026-04-01-data-viz-grammar-of-graphics/data-viz-grammar-of-graphics.Rmd)**
-6.  [2026-03-31-reproducibility/reproducibility.html](https://evamaerey.github.io/spring-2026/2026-03-31-reproducibility/reproducibility.html)
+8.  [2026-03-31-reproducibility/reproducibility.html](https://evamaerey.github.io/spring-2026/2026-03-31-reproducibility/reproducibility.html)
     **[source](https://github.com/evamaerey/spring-2026/blob/master/2026-03-31-reproducibility/reproducibility.Rmd)**
-7.  [2026-03-31-r_basics/r_basics.html](https://evamaerey.github.io/spring-2026/2026-03-31-r_basics/r_basics.html)
+9.  [2026-03-31-r_basics/r_basics.html](https://evamaerey.github.io/spring-2026/2026-03-31-r_basics/r_basics.html)
     **[source](https://github.com/evamaerey/spring-2026/blob/master/2026-03-31-r_basics/r_basics.Rmd)**
-8.  [2026-03-29-introduction/introduction.html](https://evamaerey.github.io/spring-2026/2026-03-29-introduction/introduction.html)
+10. [2026-03-29-introduction/introduction.html](https://evamaerey.github.io/spring-2026/2026-03-29-introduction/introduction.html)
     **[source](https://github.com/evamaerey/spring-2026/blob/master/2026-03-29-introduction/introduction.Rmd)**
-9.  [0000-00-00-templates/xaringan_template.html](https://evamaerey.github.io/spring-2026/0000-00-00-templates/xaringan_template.html)
+11. [0000-00-00-templates/xaringan_template.html](https://evamaerey.github.io/spring-2026/0000-00-00-templates/xaringan_template.html)
     **[source](https://github.com/evamaerey/spring-2026/blob/master/0000-00-00-templates/xaringan_template.Rmd)**
-10. [0000-00-00-templates/quarto_template.html](https://evamaerey.github.io/spring-2026/0000-00-00-templates/quarto_template.html)
+12. [0000-00-00-templates/quarto_template.html](https://evamaerey.github.io/spring-2026/0000-00-00-templates/quarto_template.html)
     **[source](https://github.com/evamaerey/spring-2026/blob/master/0000-00-00-templates/quarto_template.Rmd)**
-11. [0000-00-00-templates/quarto_revealjs_template_files/libs/revealjs/plugin/notes/speaker-view.html](https://evamaerey.github.io/spring-2026/0000-00-00-templates/quarto_revealjs_template_files/libs/revealjs/plugin/notes/speaker-view.html)
+13. [0000-00-00-templates/quarto_revealjs_template_files/libs/revealjs/plugin/notes/speaker-view.html](https://evamaerey.github.io/spring-2026/0000-00-00-templates/quarto_revealjs_template_files/libs/revealjs/plugin/notes/speaker-view.html)
     **[source](https://github.com/evamaerey/spring-2026/blob/master/0000-00-00-templates/quarto_revealjs_template_files/libs/revealjs/plugin/notes/speaker-view.Rmd)**
-12. [0000-00-00-templates/quarto_revealjs_template.html](https://evamaerey.github.io/spring-2026/0000-00-00-templates/quarto_revealjs_template.html)
+14. [0000-00-00-templates/quarto_revealjs_template.html](https://evamaerey.github.io/spring-2026/0000-00-00-templates/quarto_revealjs_template.html)
     **[source](https://github.com/evamaerey/spring-2026/blob/master/0000-00-00-templates/quarto_revealjs_template.Rmd)**
 
 ``` r
@@ -63,7 +67,7 @@ new_quarto <- function(...){new_document(..., type = "quarto")}
 
 # new_xaringan(name = "data-viz-grammar-of-graphics")
 
-new_quarto("more-data-viz")
+new_quarto("first-lab-ggplot2")
 ```
 
 -End-

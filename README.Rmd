@@ -72,7 +72,7 @@ new_quarto <- function(...){new_document(..., type = "quarto")}
 
 # new_xaringan(name = "data-viz-grammar-of-graphics")
 
-new_quarto("more-data-viz")
+new_quarto("first-lab-ggplot2")
 
 ```
 
