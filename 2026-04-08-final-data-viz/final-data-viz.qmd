@@ -39,12 +39,51 @@ language_levels |>
   # else we'll be alphabetical
   aes(x = language |> fct_inorder()) +
   aes(y = weeks) + 
-  geom_col()
+  geom_col() +
+  aes(fill = level) + 
+  labs(y = "Weeks") + 
+  labs(x = NULL) + 
+  labs(fill = "Level") + 
+  labs(title = "The Foreign Service Institute (FSI)'s lanugage Levels",
+       subtitle = "my subtitle",
+       caption = "my caption") + 
+  scale_fill_viridis_c() + 
+  scale_y_reverse() + 
+  theme_minimal(ink = "blue", 
+                paper = "blanchedalmond", 
+                base_size = 15)
+  
 
+colors()
 
 ```
 
 # Esperanto?
+
+
+
+```{r}
+library(tidyverse)
+
+tribble(~language, ~level, ~weeks,
+        "Spanish",    1,   23.5,
+        "Portuguese", 1,   23.5,
+        "German",     2,   30,
+        "Mandarin",   5,   88) ->
+  language_levels
+
+
+language_levels |> 
+  ggplot() + 
+  # order this variable as it appears in data
+  # else we'll be alphabetical
+  aes(x = language |> fct_inorder()) +
+  aes(y = weeks) +
+  geom_col() 
+
+
+```
+
 
 Esperanto is ***the most successful constructed international auxiliary language***, and the only such language with a sizable population of native speakers. <https://en.wikipedia.org/wiki/Esperanto>
 

@@ -21,11 +21,22 @@ gapminder <- gapminder |>
                                    gdpPercap < 3000  & lifeExp >= 10000 ~ "Medium Inncome",
                                    gdpPercap < 1000 ~ "Low Income"))
 
-gapminder_2007 <- gapminder |> filter(year == 2007)
-gapminder_1967 <- gapminder |> filter(year == 1967)
-gapminder_1967_2007 <- gapminder |> filter(year == 1967 | year == 2007)
+gapminder_2007 <- gapminder |> 
+  filter(year == 2007)
 
-gap_continents <- gapminder |> filter(year == 2007) |> count(continent)
+gapminder_1967 <- gapminder |> 
+  filter(year == 1967)
+
+gapminder_1967_2007 <- gapminder |> 
+  filter(year == 1967 | year == 2007)
+
+gap_continents <- gapminder |> 
+  filter(year == 2007) |> 
+  count(continent)
+
+gap_2007_american <- gapminder |> 
+  filter(year == 2007) |>
+  filter(continent == "Americas")
 
 ```
 
