@@ -41,6 +41,43 @@ gap_2007_american <- gapminder |>
 ```
 
 
+
+```{r}
+gapminder |> 
+  filter(year == 2002) |> 
+  ggplot() +
+  aes(y = lifeExp/100) + 
+  aes(x = gdpPercap/100000) + 
+  geom_point() +
+  geom_tile(color = "blue")
+
+
+library(gapminder)
+
+gapminder |> 
+  filter(year == 2002) |>
+  filter(continent == "Americas") |> 
+  ggplot() + 
+  aes(y = country) + 
+  aes(x = gdpPercap) + 
+  aes(yend = country,
+      xend = 0) +
+  geom_segment(color = "red", 
+               aes(xend = gdpPercap + 10000)) + 
+  geom_segment() + 
+  geom_point(size = 8) + 
+  aes(color = I("blue")) + 
+  aes(size = I(4))
+  
+
+
+
+
+
+```
+
+
+
 # Given your assigned 'geoms' from the cheat sheet or grammar guide we haven't already used, and create a plot and be prepared to describe it.  What are the 'required aesthetics'.  Use one optional aesthetic as well. 
 
 assignments
@@ -52,8 +89,13 @@ assignments
 - geom_dotplot
 
 ```{r}
+gapminder |> 
+  filter(year == 2002) |> 
+  ggplot()
+  
 
 
+?geom_line
 ```
 
 # Again Take one of the assigned 'geoms' from the cheat sheet or grammar guide we haven't already used, and create a plot and be prepared to describe it:
