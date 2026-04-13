@@ -66,12 +66,12 @@ library(gapminder)
 library(tidyverse)
 ```
 
---
+---
 
 
 # Remember: 'RC cola'
 
-![](images/clipboard-4177642000.png){width="560"}
+![](images/clipboard-2017109601.png)
 
 --
 
@@ -83,14 +83,14 @@ for tables: Rows X Columns
 
 
 
----
+--
 
 ```{r}
 gapminder
 ```
 
 
---
+--_
 
 Make sure to that the number of observations and columns in your result match the target outcome.  Let's recall the full dimensions of the gapminder data: 
 
@@ -110,12 +110,12 @@ Some other features to have in mind:
 ---
 class: center, inverse, middle
 
-# Wrangle to it. #`r i`
+# Wrangle to it. #1
 
 
 ---
 
-## Target #`r i` `r i <- i+1`
+## Target #1
 
 ```{r, echo = F, eval = T, code = knitr::knit_code$get("selection")}
 ```
@@ -130,19 +130,19 @@ class: center, middle
 `r chunk_reveal("selection", display_type = "output")`
 
 ```{r selection, include = F}
-gapminder %>% 
+gapminder |>
   select(country, year, lifeExp)
 ```
 
 ---
 class: center, inverse, middle
 
-# Wrangle to it. #`r i`
+# Wrangle to it. #2
 
 
 ---
 
-## Target #`r i` `r i <- i+1`
+## Target #2
 
 
 ```{r, echo = F, eval = T, code = knitr::knit_code$get("filter")}
@@ -158,19 +158,19 @@ class: center, middle
 `r chunk_reveal("filter", display_type = "output")`
 
 ```{r filter, include = F}
-gapminder %>% 
+gapminder |>
   filter(year == 2002)
 ```
 
 ---
 class: center, inverse, middle
 
-# Wrangle to it. #`r i`
+# Wrangle to it. #3
 
 
 ---
 
-## Target #`r i` `r i <- i+1`
+## Target #3
 
 
 ```{r, echo = F, eval = T, code = knitr::knit_code$get("filterselect")}
@@ -186,7 +186,7 @@ class: center, middle
 `r chunk_reveal("filterselect", display_type = "output")`
 
 ```{r filterselect, include = F}
-gapminder  %>% 
+gapminder  |>
   filter(country == "Belgium")
 ```
 
@@ -194,12 +194,12 @@ gapminder  %>%
 ---
 class: center, inverse, middle
 
-# Wrangle to it. #`r i`
+# Wrangle to it. #4
 
 
 ---
 
-## Target #`r i` `r i <- i+1`
+## Target #4
 
 
 ```{r, echo = F, eval = T, code = knitr::knit_code$get("filterarrselect")}
@@ -215,9 +215,9 @@ class: center, middle
 `r chunk_reveal("filterarrselect", display_type = "output")`
 
 ```{r filterarrselect, include = F}
-gapminder %>% 
-  select(country, year, pop) %>% 
-  filter(pop > 1000000000) %>% 
+gapminder |>
+  select(country, year, pop) |>
+  filter(pop > 1000000000) |>
   arrange(-pop) 
 ```
 
@@ -225,12 +225,12 @@ gapminder %>%
 ---
 class: center, inverse, middle
 
-# Wrangle to it. #`r i`
+# Wrangle to it. #5
 
 
 ---
 
-## Target #`r i` `r i <- i+1`
+## Target #5
 
 
 ```{r, echo = F, eval = T, code = knitr::knit_code$get("filterage")}
@@ -246,9 +246,9 @@ class: center, middle
 `r chunk_reveal("filterage", display_type = "output")`
 
 ```{r filterage, include = F}
-gapminder %>% 
-  select(country, lifeExp, year) %>% 
-  filter(lifeExp > 81) %>% 
+gapminder |>
+  select(country, lifeExp, year) |>
+  filter(lifeExp > 81) |>
   arrange(-lifeExp)
 ```
 
@@ -258,12 +258,12 @@ gapminder %>%
 ---
 class: center, inverse, middle
 
-# Wrangle to it. #`r i`
+# Wrangle to it. #6
 
 
 ---
 
-## Target #`r i` `r i <- i+1`
+## Target #6
 
 
 ```{r, echo = F, eval = T, code = knitr::knit_code$get("foursteps")}
@@ -279,10 +279,10 @@ class: center, middle
 `r chunk_reveal("foursteps", display_type = "output")`
 
 ```{r foursteps, include = F}
-gapminder %>% 
-  mutate(gdp = pop * gdpPercap) %>% 
-  filter(year == 1952) %>% 
-  filter(continent == "Oceania") %>% 
+gapminder |>
+  mutate(gdp = pop * gdpPercap) |>
+  filter(year == 1952) |>
+  filter(continent == "Oceania") |>
   select(country, gdp, year)
 ```
 
@@ -290,12 +290,12 @@ gapminder %>%
 ---
 class: center, inverse, middle
 
-# Wrangle to it. #`r i`
+# Wrangle to it. #7
 
 
 ---
 
-## Target #`r i` `r i <- i+1`
+## Target #7
 
 
 ```{r, echo = F, eval = T, code = knitr::knit_code$get("indicator")}
@@ -311,7 +311,7 @@ class: center, middle
 `r chunk_reveal("indicator", display_type = "output")`
 
 ```{r indicator, include = F}
-gapminder %>% 
+gapminder |>
   mutate(asia = continent == "Asia")
 ```
 
@@ -321,7 +321,7 @@ gapminder %>%
 ---
 class: center, inverse, middle
 
-# Summarizing (collapsing across rows)
+# Summarizing (collapsing across rows) 🚨😬
 
 
 
@@ -329,10 +329,10 @@ class: center, inverse, middle
 ---
 class: center, inverse, middle
 
-# Wrangle to it. #`r i`
+# Wrangle to it. #8
 ---
 
-## Target #`r i` `r i <- i+1`
+## Target #8
 
 ```{r, echo = F, eval = T, code = knitr::knit_code$get("collapse")}
 ```
@@ -347,7 +347,7 @@ class: center, middle
 `r chunk_reveal("collapse", display_type = "output")`
 
 ```{r collapse, include = F}
-gapminder %>% 
+gapminder |>
   distinct(continent)
 ```
 
@@ -358,10 +358,10 @@ gapminder %>%
 ---
 class: center, inverse, middle
 
-# Wrangle to it. #`r i`
+# Wrangle to it. #9
 ---
 
-## Target #`r i` `r i <- i+1`
+## Target #9
 
 ```{r, echo = F, eval = T, code = knitr::knit_code$get("count")}
 ```
@@ -376,8 +376,8 @@ class: center, middle
 `r chunk_reveal("count", display_type = "output")`
 
 ```{r count, include = F}
-gapminder %>% 
-  filter(year == 2002) %>% 
+gapminder |>
+  distinct(continent, country) |>
   count(continent)
 ```
 
@@ -388,10 +388,10 @@ gapminder %>%
 ---
 class: center, inverse, middle
 
-# Wrangle to it. #`r i`
+# Wrangle to it. #10
 ---
 
-## Target #`r i` `r i <- i+1`
+## Target #10
 
 ```{r, echo = F, eval = T, code = knitr::knit_code$get("distinctyear")}
 ```
@@ -406,7 +406,7 @@ class: center, middle
 `r chunk_reveal("distinctyear", display_type = "output")`
 
 ```{r distinctyear, include = F}
-gapminder %>% 
+gapminder |>
   distinct(year)
 ```
 
@@ -417,10 +417,10 @@ gapminder %>%
 ---
 class: center, inverse, middle
 
-# Wrangle to it. #`r i`
+# Wrangle to it. #11
 ---
 
-## Target #`r i` `r i <- i+1`
+## Target #11
 
 ```{r, echo = F, eval = T, code = knitr::knit_code$get("mean")}
 ```
@@ -435,8 +435,8 @@ class: center, middle
 `r chunk_reveal("mean", display_type = "output")`
 
 ```{r mean, include = F}
-gapminder %>% 
-  group_by(continent, year) %>% 
+gapminder |>
+  group_by(continent, year) |>
   summarise(mean_life_exp = mean(lifeExp))
 ```
 
@@ -446,10 +446,10 @@ gapminder %>%
 ---
 class: center, inverse, middle
 
-# Wrangle to it. #`r i`
+# Wrangle to it. #12
 ---
 
-## Target #`r i` `r i <- i+1`
+## Target #12
 
 ```{r, echo = F, eval = T, code = knitr::knit_code$get("countries")}
 ```
@@ -464,7 +464,7 @@ class: center, middle
 `r chunk_reveal("countries", display_type = "output")`
 
 ```{r countries, include = F}
-gapminder %>% 
+gapminder |>
   distinct(country)
 ```
 
@@ -474,10 +474,10 @@ gapminder %>%
 ---
 class: center, inverse, middle
 
-# Wrangle to it. #`r i`
+# Wrangle to it. #13
 ---
 
-## Target #`r i` `r i <- i+1`
+## Target #13
 
 ```{r, echo = F, eval = T, code = knitr::knit_code$get("median")}
 ```
@@ -492,8 +492,8 @@ class: center, middle
 `r chunk_reveal("median", display_type = "output")`
 
 ```{r median, include = F}
-gapminder %>% 
-  group_by(continent, year) %>% 
+gapminder |>
+  group_by(continent, year) |>
   summarise(median_life_exp = median(lifeExp))
 ```
 
@@ -503,7 +503,7 @@ gapminder %>%
 ---
 class: center, inverse, middle
 
-# Wrangle to it. #`r i`
+# Wrangle to it. #14
 ---
 
 ## Target #`r i` `r i <- i+1`
@@ -521,9 +521,9 @@ class: center, middle
 `r chunk_reveal("twosummaries", display_type = "output")`
 
 ```{r twosummaries, include = F}
-gapminder %>% 
-  filter(year == 2002) %>% 
-  group_by(continent) %>% 
+gapminder |>
+  filter(year == 2002) |>
+  group_by(continent) |>
   summarise(median_life_exp = median(lifeExp),
             mean_life_exp = mean(lifeExp))
 ```
@@ -534,10 +534,10 @@ gapminder %>%
 ---
 class: center, inverse, middle
 
-# Wrangle to it. #`r i`
+# Wrangle to it.15
 ---
 
-## Target #`r i` `r i <- i+1`
+## Target #15
 
 ```{r, echo = F, eval = T, code = knitr::knit_code$get("overall")}
 ```
@@ -552,8 +552,8 @@ class: center, middle
 `r chunk_reveal("overall", display_type = "output")`
 
 ```{r overall, include = F}
-gapminder %>% 
-  filter(year == 2002) %>% 
+gapminder |>
+  filter(year == 2002) |>
   summarise(median_life_exp = median(lifeExp),
             mean_life_exp = mean(lifeExp))
 ```
