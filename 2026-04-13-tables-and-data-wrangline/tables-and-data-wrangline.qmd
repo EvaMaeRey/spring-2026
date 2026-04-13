@@ -178,6 +178,8 @@ ggplot() +
 
 ```
 
+---
+
 # New agenda item: tables, and data manipulation ('wrangling')...
 
 *data cleaning, wrangling, tidydata*
@@ -217,7 +219,6 @@ like in kind?
 
 -   Also, no rows with summaries - 'raw' table
 
-
 Observational unit?
 
 ```{r}
@@ -238,15 +239,65 @@ uruk_3200bc |>
 
 ```
 
+### is the gapminder data tidy? 
+
+```{r}
+library(gapminder)
+gapminder
+
+```
 
 ![](images/clipboard-4177642000.png){width="560"}
 
-
-
 # Wrangling exploration...
 
-## In class... 
+## In class...
 
 [Wrangling 'moves'](wrangle_away.html)
 
+![](images/clipboard-2017109601.png)
+
+## Full data set, for reference
+
+```{r}
+library(gapminder)
+gapminder
+
+```
+
 [Wrangling syntax](https://evamaerey.github.io/data_manipulation/about)
+
+| function | action |
+| -------- | -------- | 
+| filter()	| keep rows (if true) |
+| select()	| keep variables (or drop them -var) |
+| mutate()	| create a new variable |
+| distinct() | keep unique |
+| case_when()	| is used for “recoding” variable, often used with mutate() |
+| rename()	| renaming variables |
+| arrange()	| order rows based on a variable |
+| slice()	  | *keep or drop rows based on row number |
+
+
+
+
+
+
+
+---
+
+
+
+---
+
+
+
+---
+
+
+<details>
+
+[Wrangling 'moves' answers....](wrangle_away_answers.html)
+
+</details>
+
