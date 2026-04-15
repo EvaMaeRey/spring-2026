@@ -75,24 +75,45 @@ gap_americas <- gapminder |>
   filter(continent == "Americas")
 
 # univariate continuous
-
+gap_2002 |> 
+  ggplot() + 
+  aes(x = gdpPercap) + 
+  geom_rug() 
+```
   
-
+```{r}
 # bivariate, 2 continuous
+gap_2002 |> 
+  ggplot() + 
+  aes(x = pop, y = lifeExp) + 
+  geom_point() +
+  # geom_density2d() + 
+  scale_x_log10() + 
+  # geom_bin2d() + 
+  geom_hex()
+  
 
 
 # multi series
+gap_americas <- gapminder |> 
+  filter(continent == "Americas")
 
+gap_americas |>
+  ggplot() + 
+  aes(x = year, 
+      y = gdpPercap, 
+      group = country) + 
+  geom_line()
 
 
 ```
 
 ### Again Take one of the assigned 'geoms' from the cheat sheet or grammar guide we haven't already used, and create a plot and be prepared to describe it:
 
--   geom_boxplot
--   geom_violin
+-   geom_boxplot  
+-   geom_violin - discrete X continuous
 -   geom_jitter
--   geom_count
+-   geom_count  
 -   geom_bin2d
 
 ```{r}
@@ -103,17 +124,26 @@ library(gapminder)
 gap_2002 <- gapminder |> 
   filter(year == 2002)
 
-
 # bivariate, continuous X discrete
+ggplot(gap_2002) + 
+  aes(x = continent) + 
+  aes(y = gdpPercap) + 
+  geom_violin() + 
+  geom_point()
 
 
+ggplot(gap_2002) + 
+  aes(x = continent) + 
+  aes(y = gdpPercap) + 
+  geom_boxplot() + 
+  # geom_point() + 
+  geom_jitter(width = .1, height = 0, alpha = .5)
 
 # bivariate, discrete X discrete
 
 
 
 # bivariate, continuous X continuous
-
 
 
 ```

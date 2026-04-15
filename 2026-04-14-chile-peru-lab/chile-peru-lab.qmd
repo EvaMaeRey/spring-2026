@@ -1,0 +1,376 @@
+---
+title: "Lab - Conflicts over resources: the case of Chile and Peru"
+author: "Angela Zoss & Eric Monson & Evangeline Reynolds"
+date: "`r Sys.Date()`"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    toc-title: Contents
+editor: source
+---
+
+```{r, echo = F}
+knitr::opts_chunk$set(message = F, warning = F)
+```
+
+# Overview
+
+In the following lab, you will answer some questions and create two new plots.
+
+# Background
+
+How do we feed so many people on this planet anyway? The Haber Process [5 min of podcast, 'how-do-you-solve-problem-fritz-haber'](https://radiolab.org/podcast/180132-how-do-you-solve-problem-fritz-haber)
+
+In 1879–1883, Chile and Peru fought a war a resource. What is the name of that war and what resource was involved? What other country was involved? Not sure? You can search the web for this answer.
+
+> Answers here...
+
+
+Why aren't these countries fighting over the same resource as they were in late 1800s?
+
+> Answer based on pod cast...
+
+More recently a case was brought to the ICJ again over resources. *In a few sentences summarize the dispute.* Reference: https://www.icj-cij.org/en/case/137
+
+> You answer here ...
+
+Now, check out the maps in the judgement: https://www.icj-cij.org/files/case-related/137/137-20140127-JUD-01-00-EN.pdf In these maps, the water is colored blue. *Now, what color is the land?*
+
+> Your answer here...
+
+*How are the maps used to illuminate the dispute and ICJ's resolution of the dispute? Which pages of the document contain these two maps?*
+
+> Your answer here...
+
+*Beyond fishing, name a one commodity for Chile's and one of Peru's of great importance for each state's economy.* You may search the web!
+
+> Your answer here ...
+
+### The data and existing plots
+
+Fisheries and Aquaculture Department of the Food and Agriculture Organization of the United Nations collects data on fisheries production of countries. [This Wikipedia page](https://en.wikipedia.org/wiki/Fishing_industry_by_country) lists fishery production of countries for 2005. For each country tonnage from capture and aquaculture are listed. Note that countries which harvested less than 100,000 tons are not included in the data. The source data can be found in the `fisheries` dataset in the **dsbox** package. The following plots were produced based off the data given on the Wikipedia page.
+
+Given below, are existing data visualizations that violate many data visualization best practices. *Describe some problems.*
+
+> Your answer here...
+
+![fisheries-plot](https://github.com/tidyverse/datascience-box/blob/f807e7835d456e63ab45a39c931003655dc5ce48/course-materials/lab-instructions/lab-06/img/fisheries.png?raw=true)
+
+### Reading in the data
+
+Your visualization will give important context to the ICJ case. You will use the same data as used in the visualizations above, but will create less problamatic visualizations!
+
+### Install packages
+
+```{r load libraries}
+library(tidyverse)
+options(scipen = 10)  # set scientific notation to turns on after more digits
+```
+
+### Importing data
+
+Some data cleaning has been done for you in the code below - from an html table. Check out the walk through [here](https://evamaerey.github.io/little_flipbooks_library/data_cleaning/data_cleaning#26):
+
+Describe one or two new-to-you data cleaning "moves" that you see done in this pipeline:
+
+> *your answer*
+
+Name a cleaning/manipulation move that we saw last class:
+
+> *your answer*
+
+# Some data manipulation groundword - adding regions with `countrycode`.
+
+
+
+
+
+```{r, warning=F}
+library(countrycode)
+
+clean_csv_url <- "https://raw.githubusercontent.com/tidyverse/datascience-box/f807e7835d456e63ab45a39c931003655dc5ce48/course-materials/lab-instructions/lab-06/data/fisheries.csv"
+
+read_csv(clean_csv_url) 
+
+fisheries <- read_csv(clean_csv_url) |>
+  mutate(region = countrycode(  
+             sourcevar = country,  
+             origin = "country.name",  
+             dest = "region")) |>
+  mutate(region = ifelse(country == "Jersey and Guernsey", 
+                         "Europe & Central Asia", 
+                         region)) |> 
+  select(country, region, everything())
+```
+
+What does the `countrycode()` function from the countrycode package seem to do when the input ('origin') is a country name and the output ('dest') is region? 
+
+> your answer here
+
+
+The countrycode function failed to classify every country into a region, so we use an `ifelse()` function to fill in the region manually.  Based on this last `mutate` move (or your previous knowledge), where in the world is Jersey and Guernsey?  
+
+> *your answer here*
+
+
+Consult the following chunk for questions that follow. 
+
+```{r}
+fisheries |> 
+  distinct(region)
+```
+
+Executing the code above, which uses `distinct`. How many regions are there?
+
+> *answer here*
+
+Now change out `distinct` with `count` above, and execute the code again. How many observations in our fisheries data are classified as being in "North America".  
+
+> *answer here*
+
+
+Mentally, guess what the *North American* countries those are, and modify the code below to check those assumptions.
+
+```{r}
+fisheries |> 
+  filter(region == "Europe & Central Asia")  ## Change the filtering to check on North America
+```
+
+What are the North American Countries?
+
+> *answer here*
+
+
+# Some wrangling practice...
+
+## Exercise #1  
+
+In the code chunk below, select only the `country` and `capture` variables
+
+
+```{r}
+fisheries
+
+```
+
+## Target #2: `filter()` to the rows where `total` is zero (remember `==` is for conditions, and `=` is for assignment.
+
+```{r}
+fisheries 
+
+
+```
+
+Which countries have zero fish production via aquaculture or capture?
+
+>  Your answer here
+
+
+
+## Target #3: Now, use `filter_out()` to drop cases where `total` is zero. (We didn't see this move on monday...)
+
+```{r}
+fisheries 
+```
+
+## Target #4: Using `mutate()`, create a new variable `my_total` that sums `aquaculture` and `capture`.  Inspect that this is the same as the fisheries dataset `total`.
+
+
+```{r}
+fisheries
+```
+
+
+Hint, refer to the following code, if you need help:
+
+```{r}
+fisheries |> 
+  mutate(capture_twice = capture + capture)
+```
+
+
+
+Target #5: Modify the code to calculate not only the min and max capture by region, but also the mean.
+
+```{r}
+fisheries |> 
+  group_by(region) |> 
+  summarise(
+    min_capture = min(capture),
+    max_capture = max(capture)
+            )
+```
+
+
+Target #6: Optional, construct the data manipulation pipeline that answers the question, considering only countries that have non-zero total capture or aquaculture, what is the regional mean total seafood production?
+
+
+### Univariate visualization...
+
+Use a univarariate visualization type to show the three continuous variables, capture, aquaculture, and total, e.g. geom_rug(), geom_histogram()... 
+
+
+
+```{r}
+ggplot(fisheries) + # add an appropriate univariate geom
+  aes(x = capture)
+
+
+ggplot(fisheries) + # add an appropriate univariate geom
+  aes(x = aquaculture)
+
+
+ggplot(fisheries) + # add an appropriate univariate geom
+  aes(x = total)
+```
+
+Chose one of these plots types, and apply it to the base plot below - which this time has regional facets.
+
+```{r}
+ggplot(fisheries) + # add an appropriate univariate geom
+  aes(x = total/1000000) + 
+  facet_wrap(facet = vars(region))
+
+
+
+```
+
+
+# discrete X continuous, add an apropriate geom: `geom_boxplot()`, `geom_violin()`, `geom_jitter(height = .2, width = 0)`
+
+```{r}
+ggplot(fisheries) + 
+  aes(y = region, # orientation changed
+      x = capture)
+
+
+ggplot(fisheries) + 
+  aes(y = region, # orientation changed
+      x = aquaculture)
+
+
+ggplot(fisheries) + 
+  aes(y = region, # orientation changed
+      x = total)
+
+```
+
+
+### Create a scatter plot
+
+To the plot below... 
+
+1. add the appropriate geom to create a scatter plot.
+2. add to the aesthetic mapping (x and y are now specified - )
+3. add `scale_x_log10()` to the plot 
+4. add`scale_y_log10()`
+4. adjust labels for your *plot* as needed (title, subtitle, caption, x, y, color)
+
+```{r}
+fisheries |>
+  mutate(peru_or_chile = 
+           country %in% c("Peru", "Chile")) |> 
+  ggplot() + 
+  aes(x = capture, 
+      y = aquaculture)
+  
+```
+
+# reshape data... Dumbbell chart
+
+```{r}
+fisheries_longer <- fisheries |>
+  select(-total) |>
+  pivot_longer(cols = capture:aquaculture, 
+               names_to = "type",
+               values_to = "amount")
+
+fisheries_longer
+```
+
+```{r}
+fisheries_longer |> 
+  filter(region == "Latin America & Caribbean") |>
+  ggplot() + 
+  geom_line(color = "plum3", show.legend = F) + 
+  aes(x = amount, 
+      y = country |> reorder(amount)) + 
+  geom_point() + 
+  aes(color = type) +
+  scale_color_manual(values = c("plum1", "plum4"))
+```
+
+### Plot 2
+
+Below you'll see code that creates a subset of the fisheries data only including the "Americas" (the variable continent is created for you below)
+
+*Add a comment after each pipe explaining what has been done.*
+
+```{r}
+library(countrycode)  # you will need to install the package "countrycode"
+fisheries |> 
+  mutate(continent = 
+           countrycode::countrycode(
+             sourcevar = country, 
+             origin = "country.name", 
+             destination = "continent" )) |> 
+  filter(continent == "Americas") ->
+fisheries_americas
+  
+```
+
+-   With `fisheries_americas`, create a column plot (`geom_col()`) where the capture for each country in the Americas is represented by a column.
+
+-   set the fill color aesthetic to represent variable peru_and_chile variable, aes(fill = ?)
+
+-   adjust labels for your *plot* as needed (title, subtitle, caption, x, y, color)
+
+```{r}
+# Make your plot here column plot
+
+```
+
+```{r}
+options(scipen = 10)
+ 
+
+fisheries |> 
+  filter(region == "Latin America & Caribbean") |>
+  ggplot() + 
+  aes(x = capture, y = aquaculture) + 
+  geom_point() + 
+  aes(label = country) + 
+  geom_label(hjust = "outward", 
+             yjust = "outward") +
+  geom_smooth(method = "lm") + 
+  scale_x_log10() + 
+  scale_y_log10()
+```
+
+-   Answer the question: How else might you modify this plot to improve it? (Your discussion doesn't need to be limited to your ggplot knowledge)
+
+> Your answer here ...
+
+## Getting help
+
+You are also welcomed to discuss the homework with each other broadly (no copy, paste code sharing!).
+
+## Grading
+
+In addition to accuracy of your answers to questions, your submission will be evaluated for
+
+-   coding style,
+-   document organization, and
+-   quality of writing and grammar.
+
+## More ugly charts
+
+Want to see more ugly charts?
+
+-   [Flowing Data - Ugly Charts](https://flowingdata.com/category/visualization/ugly-visualization/)
+-   [Reddit - Data is ugly](https://www.reddit.com/r/dataisugly/)
+
+## Acknowledgements
+
+These exercises were originally created by [Angela Zoss](https://library.duke.edu/about/directory/staff/6881) and [Eric Monson](https://library.duke.edu/about/directory/staff/7561); they have been substantial reworked to have an IR focus by Evangeline Reynolds.
