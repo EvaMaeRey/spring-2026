@@ -89,15 +89,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#purposeful-data-manipulation" id="toc-purposeful-data-manipulation" class="nav-link" data-scroll-target="#purposeful-data-manipulation">Purposeful data manipulation</a></li>
   <li><a href="#some-wrangling-practiceexercises" id="toc-some-wrangling-practiceexercises" class="nav-link" data-scroll-target="#some-wrangling-practiceexercises">Some wrangling practice/exercises</a>
   <ul class="collapse">
-  <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise #1</a></li>
-  <li><a href="#target-2-filter-to-the-rows-where-total-is-zero-remember-is-for-conditions-and-is-for-assignment." id="toc-target-2-filter-to-the-rows-where-total-is-zero-remember-is-for-conditions-and-is-for-assignment." class="nav-link" data-scroll-target="#target-2-filter-to-the-rows-where-total-is-zero-remember-is-for-conditions-and-is-for-assignment.">Target #2: <code>filter()</code> to the rows where <code>total</code> is zero (remember <code>==</code> is for conditions, and <code>=</code> is for assignment.</a></li>
-  <li><a href="#target-3-now-use-filter_out-to-drop-cases-where-total-is-zero.-note-we-didnt-see-filter_out-on-monday" id="toc-target-3-now-use-filter_out-to-drop-cases-where-total-is-zero.-note-we-didnt-see-filter_out-on-monday" class="nav-link" data-scroll-target="#target-3-now-use-filter_out-to-drop-cases-where-total-is-zero.-note-we-didnt-see-filter_out-on-monday">Target #3: Now, use <code>filter_out()</code> to drop cases where <code>total</code> is zero. (Note: We didn’t see filter_out on Monday…)</a></li>
-  <li><a href="#target-4-using-mutate-create-a-new-variable-my_total-that-sums-aquaculture-and-capture.-inspect-that-this-is-the-same-as-the-fisheries-dataset-total." id="toc-target-4-using-mutate-create-a-new-variable-my_total-that-sums-aquaculture-and-capture.-inspect-that-this-is-the-same-as-the-fisheries-dataset-total." class="nav-link" data-scroll-target="#target-4-using-mutate-create-a-new-variable-my_total-that-sums-aquaculture-and-capture.-inspect-that-this-is-the-same-as-the-fisheries-dataset-total.">Target #4: Using <code>mutate()</code>, create a new variable <code>my_total</code> that sums <code>aquaculture</code> and <code>capture</code>. Inspect that this is the same as the fisheries dataset <code>total</code>.</a></li>
+  <li><a href="#target-1" id="toc-target-1" class="nav-link" data-scroll-target="#target-1">Target #1</a></li>
+  <li><a href="#target-2" id="toc-target-2" class="nav-link" data-scroll-target="#target-2">Target #2</a></li>
+  <li><a href="#target-3" id="toc-target-3" class="nav-link" data-scroll-target="#target-3">Target #3</a></li>
+  <li><a href="#target-4" id="toc-target-4" class="nav-link" data-scroll-target="#target-4">Target #4</a></li>
   </ul></li>
-  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization">Visualization</a></li>
-  <li><a href="#discrete-x-continuous-add-an-apropriate-geom-geom_boxplot-geom_violin-geom_jitterheight-.2-width-0" id="toc-discrete-x-continuous-add-an-apropriate-geom-geom_boxplot-geom_violin-geom_jitterheight-.2-width-0" class="nav-link" data-scroll-target="#discrete-x-continuous-add-an-apropriate-geom-geom_boxplot-geom_violin-geom_jitterheight-.2-width-0">discrete X continuous, add an apropriate geom: <code>geom_boxplot()</code>, <code>geom_violin()</code>, <code>geom_jitter(height = .2, width = 0)</code></a></li>
-  <li><a href="#data-reshaping" id="toc-data-reshaping" class="nav-link" data-scroll-target="#data-reshaping">Data reshaping</a>
+  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization">Visualization</a>
   <ul class="collapse">
+  <li><a href="#univariate" id="toc-univariate" class="nav-link" data-scroll-target="#univariate">Univariate</a></li>
+  <li><a href="#bivariate-discrete-x-continuous" id="toc-bivariate-discrete-x-continuous" class="nav-link" data-scroll-target="#bivariate-discrete-x-continuous">Bivariate: discrete X continuous</a></li>
+  </ul></li>
+  <li><a href="#final-exercises-observations" id="toc-final-exercises-observations" class="nav-link" data-scroll-target="#final-exercises-observations">Final exercises: Observations</a>
+  <ul class="collapse">
+  <li><a href="#data-reshaping" id="toc-data-reshaping" class="nav-link" data-scroll-target="#data-reshaping">Data reshaping</a></li>
+  <li><a href="#using-text-to-label-points" id="toc-using-text-to-label-points" class="nav-link" data-scroll-target="#using-text-to-label-points">Using text to label points</a></li>
   <li><a href="#getting-help" id="toc-getting-help" class="nav-link" data-scroll-target="#getting-help">Getting help</a></li>
   <li><a href="#grading" id="toc-grading" class="nav-link" data-scroll-target="#grading">Grading</a></li>
   <li><a href="#more-ugly-charts" id="toc-more-ugly-charts" class="nav-link" data-scroll-target="#more-ugly-charts">More ugly charts</a></li>
@@ -197,8 +202,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="importing-data" class="level3">
 <h3 class="anchored" data-anchor-id="importing-data">Importing data</h3>
-<p>Some data cleaning has been done for you in the code below - from an html table. Check out the walk through <a href="https://evamaerey.github.io/little_flipbooks_library/data_cleaning/data_cleaning#26">here</a>:</p>
-<p>Describe one or two new-to-you data cleaning “moves” that you see done in this pipeline:</p>
+<p>Some data cleaning has been done for you in the code below - from an html table (data in the wild). Check out the walk through <a href="https://evamaerey.github.io/little_flipbooks_library/data_cleaning/data_cleaning#17">here</a>:</p>
+<p>Describe one or two new-to-you data cleaning “moves” that you see in this ‘pipeline’:</p>
 <blockquote class="blockquote">
 <p><em>your answer</em></p>
 </blockquote>
@@ -303,8 +308,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="some-wrangling-practiceexercises" class="level1">
 <h1>Some wrangling practice/exercises</h1>
-<section id="exercise-1" class="level2">
-<h2 class="anchored" data-anchor-id="exercise-1">Exercise #1</h2>
+<section id="target-1" class="level2">
+<h2 class="anchored" data-anchor-id="target-1">Target #1</h2>
 <p>In the code chunk below, select only the <code>country</code> and <code>capture</code> variables</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fisheries</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -326,8 +331,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="target-2-filter-to-the-rows-where-total-is-zero-remember-is-for-conditions-and-is-for-assignment." class="level2">
-<h2 class="anchored" data-anchor-id="target-2-filter-to-the-rows-where-total-is-zero-remember-is-for-conditions-and-is-for-assignment.">Target #2: <code>filter()</code> to the rows where <code>total</code> is zero (remember <code>==</code> is for conditions, and <code>=</code> is for assignment.</h2>
+<section id="target-2" class="level2">
+<h2 class="anchored" data-anchor-id="target-2">Target #2</h2>
+<p><code>filter()</code> to the rows where <code>total</code> is zero (remember <code>==</code> is for conditions, and <code>=</code> is for assignment.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fisheries </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -352,8 +358,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Your answer here</p>
 </blockquote>
 </section>
-<section id="target-3-now-use-filter_out-to-drop-cases-where-total-is-zero.-note-we-didnt-see-filter_out-on-monday" class="level2">
-<h2 class="anchored" data-anchor-id="target-3-now-use-filter_out-to-drop-cases-where-total-is-zero.-note-we-didnt-see-filter_out-on-monday">Target #3: Now, use <code>filter_out()</code> to drop cases where <code>total</code> is zero. (Note: We didn’t see filter_out on Monday…)</h2>
+<section id="target-3" class="level2">
+<h2 class="anchored" data-anchor-id="target-3">Target #3</h2>
+<p>Now, use <code>filter_out()</code> to drop cases where <code>total</code> is zero. (Note: We didn’t see filter_out on Monday…)</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fisheries </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -374,8 +381,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="target-4-using-mutate-create-a-new-variable-my_total-that-sums-aquaculture-and-capture.-inspect-that-this-is-the-same-as-the-fisheries-dataset-total." class="level2">
-<h2 class="anchored" data-anchor-id="target-4-using-mutate-create-a-new-variable-my_total-that-sums-aquaculture-and-capture.-inspect-that-this-is-the-same-as-the-fisheries-dataset-total.">Target #4: Using <code>mutate()</code>, create a new variable <code>my_total</code> that sums <code>aquaculture</code> and <code>capture</code>. Inspect that this is the same as the fisheries dataset <code>total</code>.</h2>
+<section id="target-4" class="level2">
+<h2 class="anchored" data-anchor-id="target-4">Target #4</h2>
+<p>Using <code>mutate()</code>, create a new variable <code>my_total</code> that sums <code>aquaculture</code> and <code>capture</code>. Inspect that this is the same as the fisheries dataset <code>total</code>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>fisheries</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -400,7 +408,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>fisheries <span class="sc">|&gt;</span> </span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">capture_twice =</span> capture <span class="sc">+</span> capture)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Target #5: Modify the code to calculate <em>not only</em> the min and max capture by region, but <em>also</em> the mean.</p>
+<p>Target #5</p>
+<p>Modify the code to calculate <em>not only</em> the min and max capture by region, but <em>also</em> the mean.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fisheries <span class="sc">|&gt;</span> </span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region) <span class="sc">|&gt;</span> </span>
@@ -426,8 +435,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="visualization" class="level1">
 <h1>Visualization</h1>
-<section id="univariate-visualization" class="level3">
-<h3 class="anchored" data-anchor-id="univariate-visualization">Univariate visualization…</h3>
+<section id="univariate" class="level2">
+<h2 class="anchored" data-anchor-id="univariate">Univariate</h2>
 <p><img src="https://github.com/EvaMaeRey/spring-2026/blob/main/2026-04-14-chile-peru-lab/images/clipboard-2415333583.png?raw=true" class="img-fluid"></p>
 <p>Use a univarariate visualization type to show the three continuous variables, capture, aquaculture, and total, e.g.&nbsp;geom_rug(), geom_histogram()…</p>
 <div class="cell">
@@ -473,9 +482,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-</section>
-<section id="discrete-x-continuous-add-an-apropriate-geom-geom_boxplot-geom_violin-geom_jitterheight-.2-width-0" class="level1">
-<h1>discrete X continuous, add an apropriate geom: <code>geom_boxplot()</code>, <code>geom_violin()</code>, <code>geom_jitter(height = .2, width = 0)</code></h1>
+<section id="bivariate-discrete-x-continuous" class="level2">
+<h2 class="anchored" data-anchor-id="bivariate-discrete-x-continuous">Bivariate: discrete X continuous</h2>
+<p>add an apropriate geom: <code>geom_boxplot()</code>, <code>geom_violin()</code>, <code>geom_jitter(height = .2, width = 0)</code></p>
 <p><img src="https://github.com/EvaMaeRey/spring-2026/blob/main/2026-04-14-chile-peru-lab/images/clipboard-3552380060.png?raw=true" class="img-fluid"></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fisheries) <span class="sc">+</span> </span>
@@ -509,8 +518,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<section id="create-a-scatter-plot" class="level3">
-<h3 class="anchored" data-anchor-id="create-a-scatter-plot">Create a scatter plot</h3>
+<section id="bivariate-continuous-x-continuous" class="level3">
+<h3 class="anchored" data-anchor-id="bivariate-continuous-x-continuous">Bivariate, Continuous X Continuous</h3>
 <p>To the plot below…</p>
 <ol type="1">
 <li>add the appropriate geom to create a scatter plot… (ask a neighbor if you don’t remember)</li>
@@ -539,8 +548,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="https://github.com/EvaMaeRey/spring-2026/blob/main/2026-04-14-chile-peru-lab/images/clipboard-3977227079.png?raw=true" class="img-fluid"></p>
 </section>
 </section>
-<section id="data-reshaping" class="level1">
-<h1>Data reshaping</h1>
+</section>
+<section id="final-exercises-observations" class="level1">
+<h1>Final exercises: Observations</h1>
+<section id="data-reshaping" class="level2">
+<h2 class="anchored" data-anchor-id="data-reshaping">Data reshaping</h2>
 <p>Look at the code below… How is the data transformed to get to <code>fisheries_longer</code>? What happened to the <code>total</code> column? What happened to the <code>capture</code> and <code>aquaculture</code> data?</p>
 <blockquote class="blockquote">
 <p><em>your response here</em></p>
@@ -601,10 +613,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<section id="plot-2" class="level3">
-<h3 class="anchored" data-anchor-id="plot-2">Plot 2</h3>
+</section>
+<section id="using-text-to-label-points" class="level2">
+<h2 class="anchored" data-anchor-id="using-text-to-label-points">Using text to label points</h2>
 <p>For specificity, we can also label points, using <code>geom_label()</code> or <code>geom_text()</code>, as in the plot that follows.</p>
-<p>Look at the plot and consider Chile and Peru. Which country is stronger in aquaculture (farmed fish), and which in capture (wild)?</p>
+<p>Look at the plot and consider Chile and Peru. Which country is stronger in aquaculture (farmed fish), and which in capture (wild)? &gt; <em>your response here</em></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>fisheries <span class="sc">|&gt;</span> </span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region <span class="sc">==</span> <span class="st">"Latin America &amp; Caribbean"</span>) <span class="sc">|&gt;</span></span>

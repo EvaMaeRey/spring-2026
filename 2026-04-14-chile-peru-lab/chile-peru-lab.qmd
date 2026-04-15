@@ -69,9 +69,9 @@ options(scipen = 10)  # set scientific notation to turns on after more digits
 
 ### Importing data
 
-Some data cleaning has been done for you in the code below - from an html table. Check out the walk through [here](https://evamaerey.github.io/little_flipbooks_library/data_cleaning/data_cleaning#26):
+Some data cleaning has been done for you in the code below - from an html table (data in the wild). Check out the walk through [here](https://evamaerey.github.io/little_flipbooks_library/data_cleaning/data_cleaning#17):
 
-Describe one or two new-to-you data cleaning "moves" that you see done in this pipeline:
+Describe one or two new-to-you data cleaning "moves" that you see in this 'pipeline':
 
 > *your answer*
 
@@ -135,7 +135,7 @@ What are the North American Countries?
 
 # Some wrangling practice/exercises
 
-## Exercise #1
+## Target #1
 
 In the code chunk below, select only the `country` and `capture` variables
 
@@ -144,7 +144,9 @@ fisheries
 
 ```
 
-## Target #2: `filter()` to the rows where `total` is zero (remember `==` is for conditions, and `=` is for assignment.
+## Target #2
+
+`filter()` to the rows where `total` is zero (remember `==` is for conditions, and `=` is for assignment.
 
 ```{r}
 fisheries 
@@ -156,13 +158,17 @@ Which countries have zero fish production via aquaculture or capture?
 
 > Your answer here
 
-## Target #3: Now, use `filter_out()` to drop cases where `total` is zero. (Note: We didn't see filter_out on Monday...)
+## Target #3 
+
+Now, use `filter_out()` to drop cases where `total` is zero. (Note: We didn't see filter_out on Monday...)
 
 ```{r}
 fisheries 
 ```
 
-## Target #4: Using `mutate()`, create a new variable `my_total` that sums `aquaculture` and `capture`. Inspect that this is the same as the fisheries dataset `total`.
+## Target #4
+
+Using `mutate()`, create a new variable `my_total` that sums `aquaculture` and `capture`. Inspect that this is the same as the fisheries dataset `total`.
 
 ```{r}
 fisheries
@@ -175,7 +181,9 @@ fisheries |>
   mutate(capture_twice = capture + capture)
 ```
 
-Target #5: Modify the code to calculate *not only* the min and max capture by region, but *also* the mean.
+Target #5
+
+Modify the code to calculate *not only* the min and max capture by region, but *also* the mean.
 
 ```{r}
 fisheries |> 
@@ -191,7 +199,7 @@ Target #6: Optional, construct the data manipulation pipeline that answers the q
 
 # Visualization
 
-### Univariate visualization...
+## Univariate
 
 ![](https://github.com/EvaMaeRey/spring-2026/blob/main/2026-04-14-chile-peru-lab/images/clipboard-2415333583.png?raw=true)
 
@@ -221,7 +229,9 @@ ggplot(fisheries) + # add an appropriate univariate geom
 
 ```
 
-# discrete X continuous, add an apropriate geom: `geom_boxplot()`, `geom_violin()`, `geom_jitter(height = .2, width = 0)`
+## Bivariate: discrete X continuous
+
+add an apropriate geom: `geom_boxplot()`, `geom_violin()`, `geom_jitter(height = .2, width = 0)`
 
 ![](https://github.com/EvaMaeRey/spring-2026/blob/main/2026-04-14-chile-peru-lab/images/clipboard-3552380060.png?raw=true)
 
@@ -242,7 +252,7 @@ ggplot(fisheries) +
 
 ```
 
-### Create a scatter plot
+### Bivariate, Continuous X Continuous
 
 To the plot below...
 
@@ -267,7 +277,9 @@ fisheries |>
 
 ![](https://github.com/EvaMaeRey/spring-2026/blob/main/2026-04-14-chile-peru-lab/images/clipboard-3977227079.png?raw=true)
 
-# Data reshaping
+# Final exercises: Observations
+
+## Data reshaping
 
 Look at the code below... How is the data transformed to get to `fisheries_longer`? What happened to the `total` column? What happened to the `capture` and `aquaculture` data?
 
@@ -304,12 +316,12 @@ last_plot() +
   scale_color_manual(values = c("plum1", "plum4"))
 ```
 
-### Plot 2
+## Using text to label points
 
 For specificity, we can also label points, using `geom_label()` or `geom_text()`, as in the plot that follows.  
 
 Look at the plot and consider Chile and Peru. Which country is stronger in aquaculture (farmed fish), and which in capture (wild)? 
-
+> *your response here*
 
 ```{r}
 

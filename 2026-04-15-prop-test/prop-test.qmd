@@ -1,0 +1,117 @@
+---
+title: "Statistics, hypothesis testing, and the prop.test"
+author: "..."
+date: "`r Sys.Date()`"
+format: html
+editor: visual
+---
+
+## The grittier the service-people, the better the defense.
+
+<https://angeladuckworth.com/grit-scale/>
+
+![](images/clipboard-1281119606.png)
+
+------------------------------------------------------------------------
+
+Probability and Statistics at West Point?
+
+--
+
+Chalkboards
+
+![](images/clipboard-3451157102.png)
+
+(and actually every class)
+
+------------------------------------------------------------------------
+
+> For survey of 161 individuals on willingness to serve as organ doners in the case of an accident, is there evidence that responses rate differs from a 50/50 split, when 53 individuals respond 'no' and 108 individuals respond 'yes'?
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+```{r, echo = F}
+library(tidyverse)
+
+isi_donor_url <- "https://www.isi-stats.com/isi/data/prelim/OrganDonor.txt"
+
+donor <- read_delim(isi_donor_url) %>%
+  select(Default, Choice) %>% 
+  dplyr::mutate(decision = ifelse(Choice == "donor", "donor (1)", "not (0)")) %>% 
+  dplyr::mutate(decision = fct_rev(decision)) 
+```
+
+# 
+
+### 
+
+```{r}
+library(ggplot2)
+library(ggprop.test)
+
+donor |>
+  ggplot() + 
+  aes(x = decision) 
+
+last_plot() +
+  geom_stack() 
+
+last_plot() + 
+  geom_stack_label() 
+
+last_plot() +
+  geom_support() 
+
+last_plot() +
+  geom_prop() 
+
+last_plot() +
+  geom_prop_label() 
+
+last_plot() +
+  stamp_prop() 
+
+last_plot() +
+  stamp_prop_label()
+
+
+
+last_plot() + 
+  stamp_eq_norm_prop()
+
+
+
+last_plot() +
+  geom_normal_prop_null() 
+
+
+
+last_plot() + 
+  geom_normal_prop_null_sds() 
+
+
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(tidyverse.quiet = TRUE)
+```
+
+## Intro Thoughts
+
+## Status Quo
+
+```{r}
+library(tidyverse)
+
+```
+
+## Experiment
+
+```{r}
+
+```
+
+## Closing remarks, Other Relevant Work, Caveats
