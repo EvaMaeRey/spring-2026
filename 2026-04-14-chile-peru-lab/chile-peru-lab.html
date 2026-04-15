@@ -86,16 +86,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
-  <li><a href="#some-data-manipulation-groundword---adding-regions-with-countrycode." id="toc-some-data-manipulation-groundword---adding-regions-with-countrycode." class="nav-link" data-scroll-target="#some-data-manipulation-groundword---adding-regions-with-countrycode.">Some data manipulation groundword - adding regions with <code>countrycode</code>.</a></li>
-  <li><a href="#some-wrangling-practice" id="toc-some-wrangling-practice" class="nav-link" data-scroll-target="#some-wrangling-practice">Some wrangling practice…</a>
+  <li><a href="#purposeful-data-manipulation" id="toc-purposeful-data-manipulation" class="nav-link" data-scroll-target="#purposeful-data-manipulation">Purposeful data manipulation</a></li>
+  <li><a href="#some-wrangling-practiceexercises" id="toc-some-wrangling-practiceexercises" class="nav-link" data-scroll-target="#some-wrangling-practiceexercises">Some wrangling practice/exercises</a>
   <ul class="collapse">
   <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise #1</a></li>
   <li><a href="#target-2-filter-to-the-rows-where-total-is-zero-remember-is-for-conditions-and-is-for-assignment." id="toc-target-2-filter-to-the-rows-where-total-is-zero-remember-is-for-conditions-and-is-for-assignment." class="nav-link" data-scroll-target="#target-2-filter-to-the-rows-where-total-is-zero-remember-is-for-conditions-and-is-for-assignment.">Target #2: <code>filter()</code> to the rows where <code>total</code> is zero (remember <code>==</code> is for conditions, and <code>=</code> is for assignment.</a></li>
-  <li><a href="#target-3-now-use-filter_out-to-drop-cases-where-total-is-zero.-we-didnt-see-this-move-on-monday" id="toc-target-3-now-use-filter_out-to-drop-cases-where-total-is-zero.-we-didnt-see-this-move-on-monday" class="nav-link" data-scroll-target="#target-3-now-use-filter_out-to-drop-cases-where-total-is-zero.-we-didnt-see-this-move-on-monday">Target #3: Now, use <code>filter_out()</code> to drop cases where <code>total</code> is zero. (We didn’t see this move on monday…)</a></li>
+  <li><a href="#target-3-now-use-filter_out-to-drop-cases-where-total-is-zero.-note-we-didnt-see-filter_out-on-monday" id="toc-target-3-now-use-filter_out-to-drop-cases-where-total-is-zero.-note-we-didnt-see-filter_out-on-monday" class="nav-link" data-scroll-target="#target-3-now-use-filter_out-to-drop-cases-where-total-is-zero.-note-we-didnt-see-filter_out-on-monday">Target #3: Now, use <code>filter_out()</code> to drop cases where <code>total</code> is zero. (Note: We didn’t see filter_out on Monday…)</a></li>
   <li><a href="#target-4-using-mutate-create-a-new-variable-my_total-that-sums-aquaculture-and-capture.-inspect-that-this-is-the-same-as-the-fisheries-dataset-total." id="toc-target-4-using-mutate-create-a-new-variable-my_total-that-sums-aquaculture-and-capture.-inspect-that-this-is-the-same-as-the-fisheries-dataset-total." class="nav-link" data-scroll-target="#target-4-using-mutate-create-a-new-variable-my_total-that-sums-aquaculture-and-capture.-inspect-that-this-is-the-same-as-the-fisheries-dataset-total.">Target #4: Using <code>mutate()</code>, create a new variable <code>my_total</code> that sums <code>aquaculture</code> and <code>capture</code>. Inspect that this is the same as the fisheries dataset <code>total</code>.</a></li>
   </ul></li>
+  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization">Visualization</a></li>
   <li><a href="#discrete-x-continuous-add-an-apropriate-geom-geom_boxplot-geom_violin-geom_jitterheight-.2-width-0" id="toc-discrete-x-continuous-add-an-apropriate-geom-geom_boxplot-geom_violin-geom_jitterheight-.2-width-0" class="nav-link" data-scroll-target="#discrete-x-continuous-add-an-apropriate-geom-geom_boxplot-geom_violin-geom_jitterheight-.2-width-0">discrete X continuous, add an apropriate geom: <code>geom_boxplot()</code>, <code>geom_violin()</code>, <code>geom_jitter(height = .2, width = 0)</code></a></li>
-  <li><a href="#reshape-data-dumbbell-chart" id="toc-reshape-data-dumbbell-chart" class="nav-link" data-scroll-target="#reshape-data-dumbbell-chart">reshape data… Dumbbell chart</a>
+  <li><a href="#data-reshaping" id="toc-data-reshaping" class="nav-link" data-scroll-target="#data-reshaping">Data reshaping</a>
   <ul class="collapse">
   <li><a href="#getting-help" id="toc-getting-help" class="nav-link" data-scroll-target="#getting-help">Getting help</a></li>
   <li><a href="#grading" id="toc-grading" class="nav-link" data-scroll-target="#grading">Grading</a></li>
@@ -207,8 +208,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 </section>
 </section>
-<section id="some-data-manipulation-groundword---adding-regions-with-countrycode." class="level1">
-<h1>Some data manipulation groundword - adding regions with <code>countrycode</code>.</h1>
+<section id="purposeful-data-manipulation" class="level1">
+<h1>Purposeful data manipulation</h1>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(countrycode)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -300,8 +301,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><em>answer here</em></p>
 </blockquote>
 </section>
-<section id="some-wrangling-practice" class="level1">
-<h1>Some wrangling practice…</h1>
+<section id="some-wrangling-practiceexercises" class="level1">
+<h1>Some wrangling practice/exercises</h1>
 <section id="exercise-1" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-1">Exercise #1</h2>
 <p>In the code chunk below, select only the <code>country</code> and <code>capture</code> variables</p>
@@ -351,8 +352,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Your answer here</p>
 </blockquote>
 </section>
-<section id="target-3-now-use-filter_out-to-drop-cases-where-total-is-zero.-we-didnt-see-this-move-on-monday" class="level2">
-<h2 class="anchored" data-anchor-id="target-3-now-use-filter_out-to-drop-cases-where-total-is-zero.-we-didnt-see-this-move-on-monday">Target #3: Now, use <code>filter_out()</code> to drop cases where <code>total</code> is zero. (We didn’t see this move on monday…)</h2>
+<section id="target-3-now-use-filter_out-to-drop-cases-where-total-is-zero.-note-we-didnt-see-filter_out-on-monday" class="level2">
+<h2 class="anchored" data-anchor-id="target-3-now-use-filter_out-to-drop-cases-where-total-is-zero.-note-we-didnt-see-filter_out-on-monday">Target #3: Now, use <code>filter_out()</code> to drop cases where <code>total</code> is zero. (Note: We didn’t see filter_out on Monday…)</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fisheries </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -398,31 +399,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>fisheries <span class="sc">|&gt;</span> </span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">capture_twice =</span> capture <span class="sc">+</span> capture)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 216 × 6
-   country             region           capture aquaculture  total capture_twice
-   &lt;chr&gt;               &lt;chr&gt;              &lt;dbl&gt;       &lt;dbl&gt;  &lt;dbl&gt;         &lt;dbl&gt;
- 1 Afghanistan         South Asia          1000        1200   2200          2000
- 2 Albania             Europe &amp; Centra…    7886         950   8836         15772
- 3 Algeria             Middle East &amp; N…   95000        1361  96361        190000
- 4 American Samoa      East Asia &amp; Pac…    3047          20   3067          6094
- 5 Andorra             Europe &amp; Centra…       0           0      0             0
- 6 Angola              Sub-Saharan Afr…  486490         655 487145        972980
- 7 Antigua and Barbuda Latin America &amp;…    3000          10   3010          6000
- 8 Argentina           Latin America &amp;…  755226        3673 758899       1510452
- 9 Armenia             Europe &amp; Centra…    3758       16381  20139          7516
-10 Aruba               Latin America &amp;…     142           0    142           284
-# ℹ 206 more rows</code></pre>
 </div>
-</div>
-<p>Target #5: Modify the code to calculate not only the min and max capture by region, but also the mean.</p>
+<p>Target #5: Modify the code to calculate <em>not only</em> the min and max capture by region, but <em>also</em> the mean.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fisheries <span class="sc">|&gt;</span> </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region) <span class="sc">|&gt;</span> </span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_capture =</span> <span class="fu">min</span>(capture),</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_capture =</span> <span class="fu">max</span>(capture)</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>            )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fisheries <span class="sc">|&gt;</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(region) <span class="sc">|&gt;</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_capture =</span> <span class="fu">min</span>(capture),</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_capture =</span> <span class="fu">max</span>(capture)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>            )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 3
   region                     min_capture max_capture
@@ -437,12 +422,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Target #6: Optional, construct the data manipulation pipeline that answers the question, considering only countries that have non-zero total capture or aquaculture, what is the regional mean total seafood production?</p>
+</section>
+</section>
+<section id="visualization" class="level1">
+<h1>Visualization</h1>
 <section id="univariate-visualization" class="level3">
 <h3 class="anchored" data-anchor-id="univariate-visualization">Univariate visualization…</h3>
+<p><img src="https://github.com/EvaMaeRey/spring-2026/blob/main/2026-04-14-chile-peru-lab/images/clipboard-2415333583.png?raw=true" class="img-fluid"></p>
 <p>Use a univarariate visualization type to show the three continuous variables, capture, aquaculture, and total, e.g.&nbsp;geom_rug(), geom_histogram()…</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fisheries) <span class="sc">+</span> <span class="co"># add an appropriate univariate geom</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> capture)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fisheries) <span class="sc">+</span> <span class="co"># add an appropriate univariate geom</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> capture)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -450,8 +440,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fisheries) <span class="sc">+</span> <span class="co"># add an appropriate univariate geom</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> aquaculture)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fisheries) <span class="sc">+</span> <span class="co"># add an appropriate univariate geom</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> aquaculture)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -459,8 +449,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fisheries) <span class="sc">+</span> <span class="co"># add an appropriate univariate geom</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> total)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fisheries) <span class="sc">+</span> <span class="co"># add an appropriate univariate geom</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> total)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -471,9 +461,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Chose one of these plots types, and apply it to the base plot below - which this time has regional facets.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fisheries) <span class="sc">+</span> <span class="co"># add an appropriate univariate geom</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> total<span class="sc">/</span><span class="dv">1000000</span>) <span class="sc">+</span> </span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="at">facet =</span> <span class="fu">vars</span>(region))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fisheries) <span class="sc">+</span> <span class="co"># add an appropriate univariate geom</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> total<span class="sc">/</span><span class="dv">1000000</span>) <span class="sc">+</span> </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="at">facet =</span> <span class="fu">vars</span>(region))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -484,13 +474,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-</section>
 <section id="discrete-x-continuous-add-an-apropriate-geom-geom_boxplot-geom_violin-geom_jitterheight-.2-width-0" class="level1">
 <h1>discrete X continuous, add an apropriate geom: <code>geom_boxplot()</code>, <code>geom_violin()</code>, <code>geom_jitter(height = .2, width = 0)</code></h1>
+<p><img src="https://github.com/EvaMaeRey/spring-2026/blob/main/2026-04-14-chile-peru-lab/images/clipboard-3552380060.png?raw=true" class="img-fluid"></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fisheries) <span class="sc">+</span> </span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> region, <span class="co"># orientation changed</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> capture)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fisheries) <span class="sc">+</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> region, <span class="co"># orientation changed</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> capture)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -498,9 +488,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fisheries) <span class="sc">+</span> </span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> region, <span class="co"># orientation changed</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> aquaculture)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fisheries) <span class="sc">+</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> region, <span class="co"># orientation changed</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> aquaculture)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -508,9 +498,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fisheries) <span class="sc">+</span> </span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> region, <span class="co"># orientation changed</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> total)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(fisheries) <span class="sc">+</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">y =</span> region, <span class="co"># orientation changed</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> total)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -523,19 +513,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="create-a-scatter-plot">Create a scatter plot</h3>
 <p>To the plot below…</p>
 <ol type="1">
-<li>add the appropriate geom to create a scatter plot.</li>
-<li>add to the aesthetic mapping (x and y are now specified - )</li>
+<li>add the appropriate geom to create a scatter plot… (ask a neighbor if you don’t remember)</li>
+<li>add to the aesthetic mapping (x and y are now specified, add color and map the variable ‘total’ to it)</li>
 <li>add <code>scale_x_log10()</code> to the plot</li>
 <li>add<code>scale_y_log10()</code></li>
-<li>adjust labels for your <em>plot</em> as needed (title, subtitle, caption, x, y, color)</li>
+<li>add <code>geom_smooth()</code></li>
+<li>add <code>geom_smooth(method = lm)</code></li>
 </ol>
+<p>How do the different smooth specifications differ?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>fisheries <span class="sc">|&gt;</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">peru_or_chile =</span> </span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>           country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Peru"</span>, <span class="st">"Chile"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> capture, </span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> aquaculture)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>fisheries <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">peru_or_chile =</span> </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>           country <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Peru"</span>, <span class="st">"Chile"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> capture, </span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> aquaculture)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -544,18 +536,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p><img src="https://github.com/EvaMaeRey/spring-2026/blob/main/2026-04-14-chile-peru-lab/images/clipboard-3977227079.png?raw=true" class="img-fluid"></p>
 </section>
 </section>
-<section id="reshape-data-dumbbell-chart" class="level1">
-<h1>reshape data… Dumbbell chart</h1>
+<section id="data-reshaping" class="level1">
+<h1>Data reshaping</h1>
+<p>Look at the code below… How is the data transformed to get to <code>fisheries_longer</code>? What happened to the <code>total</code> column? What happened to the <code>capture</code> and <code>aquaculture</code> data?</p>
+<blockquote class="blockquote">
+<p><em>your response here</em></p>
+</blockquote>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>fisheries_longer <span class="ot">&lt;-</span> fisheries <span class="sc">|&gt;</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>total) <span class="sc">|&gt;</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> capture<span class="sc">:</span>aquaculture, </span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"type"</span>,</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"amount"</span>)</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>fisheries_longer</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>fisheries_longer <span class="ot">&lt;-</span> fisheries <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>total) <span class="sc">|&gt;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> capture<span class="sc">:</span>aquaculture, </span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"type"</span>,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"amount"</span>)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>fisheries_longer</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 432 × 4
    country        region                     type        amount
@@ -573,16 +570,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 # ℹ 422 more rows</code></pre>
 </div>
 </div>
+<p>In the figure below, there are two ‘layers’ that compose the ‘dumbbell’ chart. What are they?</p>
+<blockquote class="blockquote">
+<p><em>your answer here</em></p>
+</blockquote>
+<p>Is the color “plum3” a local declaration or global. Ask a neighbor if you are not sure or if the question is unclear.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>fisheries_longer <span class="sc">|&gt;</span> </span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region <span class="sc">==</span> <span class="st">"Latin America &amp; Caribbean"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"plum3"</span>, <span class="at">show.legend =</span> F) <span class="sc">+</span> </span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> amount, </span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> country <span class="sc">|&gt;</span> <span class="fu">reorder</span>(amount)) <span class="sc">+</span> </span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">color =</span> type) <span class="sc">+</span></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"plum1"</span>, <span class="st">"plum4"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>fisheries_longer <span class="sc">|&gt;</span> </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region <span class="sc">==</span> <span class="st">"Latin America &amp; Caribbean"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"plum3"</span>, <span class="at">show.legend =</span> F) <span class="sc">+</span> </span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> amount, </span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> country <span class="sc">|&gt;</span> <span class="fu">reorder</span>(amount)) <span class="sc">+</span> </span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">color =</span> type)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -590,49 +591,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-</div>
-<section id="plot-2" class="level3">
-<h3 class="anchored" data-anchor-id="plot-2">Plot 2</h3>
-<p>Below you’ll see code that creates a subset of the fisheries data only including the “Americas” (the variable continent is created for you below)</p>
-<p><em>Add a comment after each pipe explaining what has been done.</em></p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(countrycode)  <span class="co"># you will need to install the package "countrycode"</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>fisheries <span class="sc">|&gt;</span> </span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">continent =</span> </span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>           countrycode<span class="sc">::</span><span class="fu">countrycode</span>(</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">sourcevar =</span> country, </span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">origin =</span> <span class="st">"country.name"</span>, </span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">destination =</span> <span class="st">"continent"</span> )) <span class="sc">|&gt;</span> </span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(continent <span class="sc">==</span> <span class="st">"Americas"</span>) <span class="ot">-&gt;</span></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>fisheries_americas</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<ul>
-<li><p>With <code>fisheries_americas</code>, create a column plot (<code>geom_col()</code>) where the capture for each country in the Americas is represented by a column.</p></li>
-<li><p>set the fill color aesthetic to represent variable peru_and_chile variable, aes(fill = ?)</p></li>
-<li><p>adjust labels for your <em>plot</em> as needed (title, subtitle, caption, x, y, color)</p></li>
-</ul>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make your plot here column plot</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">10</span>)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>fisheries <span class="sc">|&gt;</span> </span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region <span class="sc">==</span> <span class="st">"Latin America &amp; Caribbean"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> capture, <span class="at">y =</span> aquaculture) <span class="sc">+</span> </span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">label =</span> country) <span class="sc">+</span> </span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="at">hjust =</span> <span class="st">"outward"</span>, </span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">yjust =</span> <span class="st">"outward"</span>) <span class="sc">+</span></span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span> </span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span> </span>
-<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"plum1"</span>, <span class="st">"plum4"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="chile-peru-lab_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="chile-peru-lab_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="plot-2" class="level3">
+<h3 class="anchored" data-anchor-id="plot-2">Plot 2</h3>
+<p>For specificity, we can also label points, using <code>geom_label()</code> or <code>geom_text()</code>, as in the plot that follows.</p>
+<p>Look at the plot and consider Chile and Peru. Which country is stronger in aquaculture (farmed fish), and which in capture (wild)?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>fisheries <span class="sc">|&gt;</span> </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(region <span class="sc">==</span> <span class="st">"Latin America &amp; Caribbean"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> capture, <span class="at">y =</span> aquaculture) <span class="sc">+</span> </span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">label =</span> country) <span class="sc">+</span> </span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="at">hjust =</span> <span class="st">"outward"</span>,   <span class="co"># &lt;&lt; geom label</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">yjust =</span> <span class="st">"outward"</span>) <span class="sc">+</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span> </span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span> </span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>() <span class="sc">+</span> </span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Capture v. Aquaculture in Latin America &amp; Caribbean"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chile-peru-lab_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
