@@ -80,7 +80,7 @@ gap_2002 |>
   aes(x = gdpPercap) + 
   geom_rug() 
 ```
-  
+
 ```{r}
 # bivariate, 2 continuous
 gap_2002 |> 
@@ -110,10 +110,10 @@ gap_americas |>
 
 ### Again Take one of the assigned 'geoms' from the cheat sheet or grammar guide we haven't already used, and create a plot and be prepared to describe it:
 
--   geom_boxplot  
+-   geom_boxplot\
 -   geom_violin - discrete X continuous
 -   geom_jitter
--   geom_count  
+-   geom_count\
 -   geom_bin2d
 
 ```{r}
@@ -208,7 +208,7 @@ ggplot() +
 
 ```
 
----
+------------------------------------------------------------------------
 
 # New agenda item: tables, and data manipulation ('wrangling')...
 
@@ -269,7 +269,7 @@ uruk_3200bc |>
 
 ```
 
-### is the gapminder data tidy? 
+### is the gapminder data tidy?
 
 ```{r}
 library(gapminder)
@@ -297,37 +297,21 @@ gapminder
 
 [Wrangling syntax](https://evamaerey.github.io/data_manipulation/about)
 
-| function | action |
-| -------- | -------- | 
-| filter()	| keep rows (if true) |
-| select()	| keep variables (or drop them -var) |
-| mutate()	| create a new variable |
-| distinct() | keep unique |
-| case_when()	| is used for “recoding” variable, often used with mutate() |
-| rename()	| renaming variables |
-| arrange()	| order rows based on a variable |
-| slice()	  | *keep or drop rows based on row number |
+| function    | action                                                    |
+|-------------|-----------------------------------------------------------|
+| filter()    | keep rows (if true)                                       |
+| select()    | keep variables (or drop them -var)                        |
+| mutate()    | create a new variable                                     |
+| distinct()  | keep unique                                               |
+| case_when() | is used for “recoding” variable, often used with mutate() |
+| rename()    | renaming variables                                        |
+| arrange()   | order rows based on a variable                            |
+| slice()     | \*keep or drop rows based on row number                   |
 
+------------------------------------------------------------------------
 
+------------------------------------------------------------------------
 
+------------------------------------------------------------------------
 
-
-
-
----
-
-
-
----
-
-
-
----
-
-
-<details>
-
-[Wrangling 'moves' answers....](wrangle_away_answers.html)
-
-</details>
-
+<details>[Wrangling 'moves' answers....](wrangle_away_answers.html)</details>

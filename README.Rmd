@@ -16,6 +16,25 @@ knitr::opts_chunk$set(
 
 # This repo is for our Spring 2026 stuff...
 
+
+## Packages:
+
+- [ggprop.test](https://github.com/EvaMaeRey/ggprop.test)
+- [ggt.test](https://github.com/EvaMaeRey/ggt.test)
+- [ggregions](https://github.com/EvaMaeRey/ggregions)
+- [ggkmeans](https://github.com/EvaMaeRey/ggkmeans)
+
+Code for installation:
+
+```{r, eval = FALSE}
+remotes::install_github("EvaMaeRey/ggprop.test")
+
+remotes::install_github("EvaMaeRey/ggt.test")
+
+remotes::install_github("EvaMaeRey/ggregions")
+```
+
+
 <!-- badges: start -->
 
 <!-- badges: end -->
@@ -72,7 +91,7 @@ new_quarto <- function(...){new_document(..., type = "quarto")}
 
 # new_xaringan(name = "data-viz-grammar-of-graphics")
 
-new_quarto("chile-peru-lab")
+new_quarto("spatial")
 
 ```
 

@@ -4,7 +4,6 @@ author: "Angela Zoss & Eric Monson & Evangeline Reynolds"
 date: "`r Sys.Date()`"
 format:
   html:
-    embed-resources: true
     toc: true
     toc-depth: 2
     toc-title: Contents
@@ -112,7 +111,7 @@ Consult the following chunk for questions that follow.
 
 ```{r}
 fisheries |> 
-  count(region)
+  distinct(region)
 ```
 
 Executing the code above, which uses `distinct`. How many regions are there?
@@ -127,7 +126,7 @@ Mentally, guess what the *North American* countries those are, and modify the co
 
 ```{r}
 fisheries |> 
-  filter(region == "North America")  ## Change the filtering to check on North America
+  filter(region == "Europe & Central Asia")  ## Change the filtering to check on North America
 ```
 
 What are the North American Countries?
@@ -141,8 +140,7 @@ What are the North American Countries?
 In the code chunk below, select only the `country` and `capture` variables
 
 ```{r}
-fisheries |>
-  select(country, capture)
+fisheries
 
 ```
 
@@ -151,8 +149,7 @@ fisheries |>
 `filter()` to the rows where `total` is zero (remember `==` is for conditions, and `=` is for assignment.
 
 ```{r}
-fisheries |>
-  filter(total == 0)
+fisheries 
 
 
 ```
@@ -166,8 +163,7 @@ Which countries have zero fish production via aquaculture or capture?
 Now, use `filter_out()` to drop cases where `total` is zero. (Note: We didn't see filter_out on Monday...)
 
 ```{r}
-fisheries |>
-  filter_out(total == 0)
+fisheries 
 ```
 
 ## Target #4
@@ -175,8 +171,7 @@ fisheries |>
 Using `mutate()`, create a new variable `my_total` that sums `aquaculture` and `capture`. Inspect that this is the same as the fisheries dataset `total`.
 
 ```{r}
-fisheries |>
-  mutate(my_total = aquaculture + capture)
+fisheries
 ```
 
 Hint, refer to the following code, if you need help:
@@ -195,25 +190,11 @@ fisheries |>
   group_by(region) |> 
   summarise(
     min_capture = min(capture),
-    max_capture = max(capture),
-    mean_capture = mean(capture)
+    max_capture = max(capture)
             )
-
-fisheries |> 
-  group_by(region) |>
-  mutate(mean_capture = mean(capture)) 
 ```
 
 Target #6: Optional, construct the data manipulation pipeline that answers the question, considering only countries that have non-zero total capture or aquaculture, what is the regional mean total seafood production?
-
-```{r}
-fisheries |> 
-  filter_out(total <= 0) |>  #  considering only countries that have non-zero total
-  group_by(region) |>
-  summarise(mean_total = mean(total)) 
-
-
-```
 
 
 # Visualization
@@ -226,23 +207,15 @@ Use a univarariate visualization type to show the three continuous variables, ca
 
 ```{r}
 ggplot(fisheries) + # add an appropriate univariate geom
-  aes(x = capture) +
-  geom_rug() +
-  geom_freqpoly() + 
-  scale_x_log10()
+  aes(x = capture)
 
 
 ggplot(fisheries) + # add an appropriate univariate geom
-  aes(x = aquaculture) +
-  geom_histogram() + 
-  scale_x_log10()
+  aes(x = aquaculture)
 
 
 ggplot(fisheries) + # add an appropriate univariate geom
-  aes(x = total) +
-  geom_rug() +
-  geom_dotplot() + 
-  scale_x_log10()
+  aes(x = total)
 ```
 
 Chose one of these plots types, and apply it to the base plot below - which this time has regional facets.
@@ -250,9 +223,7 @@ Chose one of these plots types, and apply it to the base plot below - which this
 ```{r}
 ggplot(fisheries) + # add an appropriate univariate geom
   aes(x = total/1000000) + 
-  facet_wrap(facet = vars(region)) +
-  geom_histogram() + 
-  scale_x_log10()
+  facet_wrap(facet = vars(region))
 
 
 
@@ -260,7 +231,7 @@ ggplot(fisheries) + # add an appropriate univariate geom
 
 ## Bivariate: discrete X continuous
 
-add an appropriate geom: `geom_boxplot()`, `geom_violin()`, `geom_jitter(height = .2, width = 0)`
+add an apropriate geom: `geom_boxplot()`, `geom_violin()`, `geom_jitter(height = .2, width = 0)`
 
 ![](https://github.com/EvaMaeRey/spring-2026/blob/main/2026-04-14-chile-peru-lab/images/clipboard-3552380060.png?raw=true)
 
@@ -300,13 +271,7 @@ fisheries |>
            country %in% c("Peru", "Chile")) |> 
   ggplot() + 
   aes(x = capture, 
-      y = aquaculture) +
-  geom_point() +
-  scale_x_log10() +
-  scale_y_log10() + 
-  geom_smooth() + 
-  geom_smooth(method = lm, color = "orange")
-  
+      y = aquaculture)
   
 ```
 
@@ -340,9 +305,9 @@ Is the color "plum3" a local declaration or global. Ask a neighbor if you are no
 fisheries_longer |> 
   filter(region == "Latin America & Caribbean") |>
   ggplot() + 
+  geom_line(color = "plum3", show.legend = F) + 
   aes(x = amount, 
       y = country |> reorder(amount)) + 
-  geom_line(color = "plum3", show.legend = F) + 
   geom_point() + 
   aes(color = type)
 

@@ -1,0 +1,229 @@
+---
+title: "Some Spatial Basics"
+author: "..."
+date: "`r Sys.Date()`"
+format: html
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(tidyverse.quiet = TRUE)
+```
+
+
+
+## For your final project, we'll include some cartographic visualization.
+
+Background, sf objects ...
+
+> Simple Features (officially Simple Feature Access) is a set of standards that specify a common storage and access model of geographic features made of mostly two-dimensional geometries (point, line, polygon, multi-point, multi-line, etc.) used by geographic databases and geographic information systems. It is formalized by both the Open Geospatial Consortium (OGC) and the International Organization for Standardization (ISO). - Wikipedia en.wikipedia.org/wiki/Simple_Features
+
+
+
+![sf visual explanation](https://user-images.githubusercontent.com/520851/50280460-e35c1880-044c-11e9-9ed7-cc46754e49db.jpg)
+
+
+
+### Part 1. Some basics
+
+https://r-spatial.org/r/2018/10/25/ggplot2-sf.html
+
+```{r}
+options(scipen = 10)
+
+library(tidyverse)
+
+library("rnaturalearth")
+library("rnaturalearthdata")
+
+world <- ne_countries(scale = "medium", returnclass = "sf")
+
+world |> select(1:5, geometry)
+
+
+## classic usage..
+world |> 
+  ggplot() +
+  aes(geometry = geometry) +
+  geom_sf()
+```
+
+# Does ggplot2 stuff work? Change the labs to longitud and latitude
+
+```{r}
+last_plot() + 
+  labs(x = "Hello!",
+       y = "Yes!",
+       title = "I am told there are people who don't care for maps \n but I find that hard to believe",
+       subtitle = "Robert Louis Stevenson")
+```
+
+# Does *set* fill color work?  Change the color that's provided to one of your choosing
+
+```{r}
+last_plot() + 
+  aes(fill = I("green"))
+```
+
+
+# Does mapping fill color work? 
+
+```{r}
+last_plot() +
+  aes(fill = pop_est)
+```
+
+
+# Do scale adjustments work?  Change the scale to another one that you prefer, (cividis, inferno, magma, plasma)
+
+```{r}
+last_plot() + 
+  scale_fill_viridis_c(option = "viridis")
+
+
+```
+
+
+# Here we might also want to adjust color taking the log...
+
+
+```{r}
+last_plot() + 
+  aes(fill = pop_est |> log10())
+```
+
+
+# Here is another approach
+
+```{r}
+last_plot() + 
+  aes(fill = pop_est) + # back to 'straight' mapping
+  scale_fill_viridis_c(transform = scales::log10_trans()) 
+```
+
+
+## Part II. get your WDI data... map it?
+
+
+
+### Step 1 A. get data w/ WDI package
+
+```{r, cache=TRUE}
+library(WDI)
+wdi_binding <-  WDI(country= "all", 
+                 indicator= c("TM.TAX.TCOM.BC.ZS"),
+                 start=1996, end=1996, # choose a single year
+                 extra = T)
+
+head(wdi_binding)  
+```
+
+### B. Step 1 B. bit of cleaning
+
+```{r}
+wdi_binding_clean <- wdi_binding |> 
+  filter_out(region == "Aggregates") |>
+  rename(binding = TM.TAX.TCOM.BC.ZS)
+
+head(wdi_binding_clean)
+```
+
+
+### Step 2. A. declare reference data
+
+```{r}
+#######
+## in console:  remotes::install_github(EvaMaeRey/ggregions)
+######
+
+library(ggregions)
+
+# set up - declare your regions of interest with unique identifiers
+world_ref_data <- world |> select(sovereignt, iso_a3, iso_a2, geometry)
+
+world_ref_data
+
+options(ggregions.ref.regions = world_ref_data)
+```
+
+
+### Step 3: Map World bank indicators data...
+
+```{r}
+wdi_binding_clean |>
+  ggplot() + 
+  aes(region = country) + 
+  geom_region()
+
+last_plot() + 
+  aes(fill = binding)
+```
+
+# highlighting a particular country...
+
+```{r}
+last_plot() + 
+  stamp_region_border(keep = "Australia", color = "yellow")
+```
+
+
+
+
+
+# Part III. One more 'homemade dataset' exercise.  
+
+Change the collection of countries to illuminate a different question (here a map that supports security council expansion ideas.)
+
+How do the two maps differ? Which bit of syntax is responsible?
+
+>
+
+```{r, warning=F, fig.show='hold', out.width="49%" }
+
+# plot1
+tribble(~country, 
+        "Germany",
+        "India",
+        "Japan",
+        "Brazil") |> 
+  ggplot() + 
+  aes(region = country) + 
+  geom_region(fill = "darkblue")
+
+# plot2
+tribble(~country, 
+        "Germany",
+        "India",
+        "Japan",
+        "Brazil") |> 
+  ggplot() + 
+  aes(region = country) + 
+  stamp_region() + 
+  geom_region(fill = "darkblue") + 
+  labs(title = "Security Council Expansion?")
+```
+
+
+# Part IV.  Howe is the syntax different when we *don't* use ggregions? 
+
+> A couple of observations...
+
+```{r}
+wdi_binding_clean |> 
+  full_join(world, by = join_by(iso3c == iso_a3)) |> 
+  ggplot() + 
+  aes(geometry = geometry, 
+      fill = binding) +
+  geom_sf() + 
+  geom_sf(data = . %>% filter(country == "Australia"),
+          color = "goldenrod")
+
+
+# aes(filter = country == "Australia") - coming soon to ggplot2 
+```
+
+
+
+
+## Closing remarks, Other Relevant Work, Caveats

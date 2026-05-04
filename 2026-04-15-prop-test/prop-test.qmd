@@ -6,15 +6,21 @@ format: html
 editor: visual
 ---
 
-## The grittier the service-people, the better the defense.
+## The grittier the military service-people, the better the defense.
 
 <https://angeladuckworth.com/grit-scale/>
+
+> Angela Duckworth, PhD, is a 2013 MacArthur Fellow and professor of psychology at the University of Pennsylvania. An expert in non-I.Q. competencies, she has advised the White House, the World Bank, NBA and NFL teams, and Fortune 500 CEOs. Prior to her career in research, she taught children math and science and was the co-founder of a summer school for low-income children that won the Better Government Award from the state of Massachusetts. She completed her BA in neurobiology at Harvard, her MSc in neuroscience at Oxford, and her PhD in psychology at the University of Pennsylvania. More recently, she co-founded the Character Lab, a nonprofit whose mission is to advance the science and practice of character development in children.
 
 ![](images/clipboard-1281119606.png)
 
 ------------------------------------------------------------------------
 
-Probability and Statistics at West Point?
+![](images/clipboard-2700221900.png)
+
+## Probability and Statistics at West Point?
+
+pen-and-paper, blackboards, some data vis, some statistical compute.
 
 --
 
@@ -24,6 +30,15 @@ Chalkboards
 
 (and actually every class)
 
+> "Boards"
+
+------------------------------------------------------------------------
+
+```{r}
+#prop.test()
+
+```
+
 ------------------------------------------------------------------------
 
 > For survey of 161 individuals on willingness to serve as organ doners in the case of an accident, is there evidence that responses rate differs from a 50/50 split, when 53 individuals respond 'no' and 108 individuals respond 'yes'?
@@ -32,67 +47,7 @@ Chalkboards
 
 ------------------------------------------------------------------------
 
-```{r, echo = F}
-library(tidyverse)
 
-isi_donor_url <- "https://www.isi-stats.com/isi/data/prelim/OrganDonor.txt"
-
-donor <- read_delim(isi_donor_url) %>%
-  select(Default, Choice) %>% 
-  dplyr::mutate(decision = ifelse(Choice == "donor", "donor (1)", "not (0)")) %>% 
-  dplyr::mutate(decision = fct_rev(decision)) 
-```
-
-# 
-
-### 
-
-```{r}
-library(ggplot2)
-library(ggprop.test)
-
-donor |>
-  ggplot() + 
-  aes(x = decision) 
-
-last_plot() +
-  geom_stack() 
-
-last_plot() + 
-  geom_stack_label() 
-
-last_plot() +
-  geom_support() 
-
-last_plot() +
-  geom_prop() 
-
-last_plot() +
-  geom_prop_label() 
-
-last_plot() +
-  stamp_prop() 
-
-last_plot() +
-  stamp_prop_label()
-
-
-
-last_plot() + 
-  stamp_eq_norm_prop()
-
-
-
-last_plot() +
-  geom_normal_prop_null() 
-
-
-
-last_plot() + 
-  geom_normal_prop_null_sds() 
-
-
-```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
