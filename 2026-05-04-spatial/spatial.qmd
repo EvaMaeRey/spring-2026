@@ -2,7 +2,9 @@
 title: "Some Spatial Basics"
 author: "..."
 date: "`r Sys.Date()`"
-format: html
+format: 
+  html: 
+    embed-resources: true
 editor: visual
 ---
 
@@ -11,19 +13,13 @@ knitr::opts_chunk$set(echo = TRUE)
 options(tidyverse.quiet = TRUE)
 ```
 
-
-
 ## For your final project, we'll include some cartographic visualization.
 
 Background, sf objects ...
 
 > Simple Features (officially Simple Feature Access) is a set of standards that specify a common storage and access model of geographic features made of mostly two-dimensional geometries (point, line, polygon, multi-point, multi-line, etc.) used by geographic databases and geographic information systems. It is formalized by both the Open Geospatial Consortium (OGC) and the International Organization for Standardization (ISO). - Wikipedia en.wikipedia.org/wiki/Simple_Features
 
-
-
 ![sf visual explanation](https://user-images.githubusercontent.com/520851/50280460-e35c1880-044c-11e9-9ed7-cc46754e49db.jpg)
-
-
 
 ### Part 1. Some basics
 
@@ -59,23 +55,21 @@ last_plot() +
        subtitle = "Robert Louis Stevenson")
 ```
 
-# Does *set* fill color work?  Change the color that's provided to one of your choosing
+# Does *set* fill color work? Change the color that's provided to one of your choosing
 
 ```{r}
 last_plot() + 
   aes(fill = I("green"))
 ```
 
-
-# Does mapping fill color work? 
+# Does mapping fill color work?
 
 ```{r}
 last_plot() +
   aes(fill = pop_est)
 ```
 
-
-# Do scale adjustments work?  Change the scale to another one that you prefer, (cividis, inferno, magma, plasma)
+# Do scale adjustments work? Change the scale to another one that you prefer, (cividis, inferno, magma, plasma)
 
 ```{r}
 last_plot() + 
@@ -84,15 +78,12 @@ last_plot() +
 
 ```
 
-
 # Here we might also want to adjust color taking the log...
-
 
 ```{r}
 last_plot() + 
   aes(fill = pop_est |> log10())
 ```
-
 
 # Here is another approach
 
@@ -102,21 +93,36 @@ last_plot() +
   scale_fill_viridis_c(transform = scales::log10_trans()) 
 ```
 
-
 ## Part II. get your WDI data... map it?
-
-
 
 ### Step 1 A. get data w/ WDI package
 
 ```{r, cache=TRUE}
 library(WDI)
 wdi_binding <-  WDI(country= "all", 
-                 indicator= c("TM.TAX.TCOM.BC.ZS"),
-                 start=1996, end=1996, # choose a single year
+                 indicator= c("TM.TAX.TCOM.BC.ZS", 
+                              "NY.GDP.MKTP.CD"),
+                 start = 1996, end = 1996, # choose a single year
                  extra = T)
 
-head(wdi_binding)  
+library(tidyverse)
+
+wdi_binding |> 
+  remove_missing()
+
+
+wdi_binding |> 
+  ggplot() + 
+  aes(x = TM.TAX.TCOM.BC.ZS,  # my central explanatory var
+      y = NY.GDP.MKTP.CD) + # my variable to be explained
+  geom_point() + 
+  aes(color = TM.TAX.TCOM.BC.ZS, # another explanatory var
+      size = TM.TAX.TCOM.BC.ZS) + # another explanatory var
+  scale_x_log10() + 
+  scale_y_log10() + 
+  scale_size(range = c(.5, 2))
+
+  
 ```
 
 ### B. Step 1 B. bit of cleaning
@@ -128,7 +134,6 @@ wdi_binding_clean <- wdi_binding |>
 
 head(wdi_binding_clean)
 ```
-
 
 ### Step 2. A. declare reference data
 
@@ -146,7 +151,6 @@ world_ref_data
 
 options(ggregions.ref.regions = world_ref_data)
 ```
-
 
 ### Step 3: Map World bank indicators data...
 
@@ -167,17 +171,13 @@ last_plot() +
   stamp_region_border(keep = "Australia", color = "yellow")
 ```
 
-
-
-
-
-# Part III. One more 'homemade dataset' exercise.  
+# Part III. One more 'homemade dataset' exercise.
 
 Change the collection of countries to illuminate a different question (here a map that supports security council expansion ideas.)
 
 How do the two maps differ? Which bit of syntax is responsible?
 
->
+> 
 
 ```{r, warning=F, fig.show='hold', out.width="49%" }
 
@@ -204,8 +204,7 @@ tribble(~country,
   labs(title = "Security Council Expansion?")
 ```
 
-
-# Part IV.  Howe is the syntax different when we *don't* use ggregions? 
+# Part IV. Howe is the syntax different when we *don't* use ggregions?
 
 > A couple of observations...
 
@@ -223,7 +222,22 @@ wdi_binding_clean |>
 # aes(filter = country == "Australia") - coming soon to ggplot2 
 ```
 
+------------------------------------------------------------------------
+
+One more thing
+
+```{r}
+
+options(ggregions.ref.regions = ggswitzerland::muni_prod_geo)
 
 
+
+ggplot(ggswitzerland::muni_income_data) + 
+  aes(region = municipality) + 
+  geom_region()
+
+
+
+```
 
 ## Closing remarks, Other Relevant Work, Caveats

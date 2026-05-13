@@ -80,7 +80,7 @@ gapminder |>
 
 # Given your assigned 'geoms' from the cheat sheet or grammar guide we haven't already used, and create a plot and be prepared to describe it.  What are the 'required aesthetics'.  Use one optional aesthetic as well. 
 
-assignments
+assignments:
 
 - geom_line
 - geom_histogram
@@ -91,11 +91,9 @@ assignments
 ```{r}
 gapminder |> 
   filter(year == 2002) |> 
-  ggplot()
+  ggplot() 
   
 
-
-?geom_line
 ```
 
 # Again Take one of the assigned 'geoms' from the cheat sheet or grammar guide we haven't already used, and create a plot and be prepared to describe it:

@@ -57,7 +57,7 @@ webpages %>%
          "]",
          "(https://evamaerey.github.io/spring-2026/", ., 
          ") **[source](https://github.com/evamaerey/spring-2026/blob/master/",
-         file_name_wo_extension, ".Rmd",
+         file_name_wo_extension, ".qmd",
          ")**\n") %>% 
   cat()     
 ```
@@ -91,7 +91,7 @@ new_quarto <- function(...){new_document(..., type = "quarto")}
 
 # new_xaringan(name = "data-viz-grammar-of-graphics")
 
-new_quarto("spatial")
+new_quarto("statistics-review")
 
 ```
 

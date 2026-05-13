@@ -79,9 +79,12 @@ language_levels |>
   # else we'll be alphabetical
   aes(x = language |> fct_inorder()) +
   aes(y = weeks) +
-  geom_col() 
+  geom_col() +
+  coord_polar()
 
-
+last_plot() + 
+  coord_cartesian()
+  
 ```
 
 
